@@ -1,0 +1,14 @@
+<article class="concept-system-page">
+  <div class="container-page concept-prose">
+    <p>{{ article.published_at | date: format: 'date' }}</p>
+    <h1>{{ article.title }}</h1>
+    {% if article.image %}
+      <img src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.image.alt | escape }}" width="1400" height="800" loading="eager">
+    {% endif %}
+    {{ article.content }}
+  </div>
+</article>
+
+{% schema %}
+{"name":"Main article","settings":[]}
+{% endschema %}

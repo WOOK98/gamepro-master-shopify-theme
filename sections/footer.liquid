@@ -1,0 +1,101 @@
+<footer class="bg-primary-dark border-t border-gray-800">
+  <div class="container-page section-padding">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- Newsletter -->
+      <div>
+        <h4 class="font-serif text-lg font-semibold mb-4">
+          {{ 'layout.footer.newsletter_title' | t }}
+        </h4>
+        <p class="text-text-secondary text-sm mb-4">
+          {{ 'layout.footer.newsletter_desc' | t }}
+        </p>
+        {% form 'customer', class: 'flex gap-2' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            type="email"
+            name="contact[email]"
+            value="{{ form.email }}"
+            placeholder="{{ 'sections.newsletter.placeholder' | t }}"
+            class="flex-1 bg-bg-card border border-gray-700 rounded-lg px-4 py-3 text-sm text-white placeholder-text-muted focus:outline-none focus:border-accent-cyan"
+            required
+          >
+          <button type="submit" class="bg-accent-red hover:bg-opacity-90 p-3 rounded-lg transition-all">
+            {% render 'icon' with 'send' %}
+          </button>
+        {% endform %}
+      </div>
+
+      <!-- Company links -->
+      <div>
+        <h4 class="font-serif text-lg font-semibold mb-4">
+          {{ 'layout.footer.company' | t }}
+        </h4>
+        <ul class="space-y-3 text-sm text-text-secondary">
+          {% for link in linklists.footer.links %}
+            <li>
+              <a href="{{ link.url }}" class="hover:text-accent-cyan transition-colors">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Help + Social -->
+      <div>
+        <h4 class="font-serif text-lg font-semibold mb-4">
+          {{ 'layout.footer.help' | t }}
+        </h4>
+        <ul class="space-y-3 text-sm text-text-secondary">
+          <li><a href="{{ pages.contact.url | default: routes.root_url }}" class="hover:text-accent-cyan transition-colors">{{ 'layout.footer.contact' | t }}</a></li>
+          <li><a href="{{ shop.shipping_policy.url | default: routes.root_url }}" class="hover:text-accent-cyan transition-colors">{{ 'layout.footer.shipping_info' | t }}</a></li>
+          <li><a href="{{ shop.refund_policy.url | default: routes.root_url }}" class="hover:text-accent-cyan transition-colors">{{ 'layout.footer.returns' | t }}</a></li>
+        </ul>
+
+        <!-- Social icons -->
+        <div class="flex gap-4 mt-6">
+          {% if settings.social_instagram != blank %}
+            <a href="{{ settings.social_instagram }}" class="text-text-muted hover:text-accent-cyan transition-colors" target="_blank" rel="noopener">
+              {% render 'icon' with 'instagram' %}
+            </a>
+          {% endif %}
+          {% if settings.social_twitter != blank %}
+            <a href="{{ settings.social_twitter }}" class="text-text-muted hover:text-accent-cyan transition-colors" target="_blank" rel="noopener">
+              {% render 'icon' with 'twitter' %}
+            </a>
+          {% endif %}
+          {% if settings.social_youtube != blank %}
+            <a href="{{ settings.social_youtube }}" class="text-text-muted hover:text-accent-cyan transition-colors" target="_blank" rel="noopener">
+              {% render 'icon' with 'youtube' %}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-text-muted">
+      {% assign current_year = 'now' | date: '%Y' %}
+      <p>{{ 'layout.footer.copyright' | t: year: current_year, shop_name: shop.name }}</p>
+      <div class="flex gap-6">
+        <a href="{{ shop.privacy_policy.url | default: routes.root_url }}" class="hover:text-text-secondary transition-colors">{{ 'layout.footer.privacy' | t }}</a>
+        <a href="{{ shop.terms_of_service.url | default: routes.root_url }}" class="hover:text-text-secondary transition-colors">{{ 'layout.footer.terms' | t }}</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer menu",
+      "default": "footer"
+    }
+  ]
+}
+{% endschema %}

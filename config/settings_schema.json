@@ -1,0 +1,198 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "GamePro Master",
+    "theme_version": "1.0.0",
+    "theme_author": "GamePro Contributors",
+    "theme_documentation_url": "https://github.com/your-org/gamepro-shopify-theme",
+    "theme_support_url": "https://github.com/your-org/gamepro-shopify-theme/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_bg",
+        "label": "Primary background",
+        "default": "#0A192F"
+      },
+      {
+        "type": "color",
+        "id": "color_card_bg",
+        "label": "Card / section background",
+        "default": "#1E293B"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_cyan",
+        "label": "Accent (cyan / teal)",
+        "default": "#08D9D6"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_red",
+        "label": "Accent (red / sale)",
+        "default": "#FF2E63"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "label": "Primary text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Secondary text",
+        "default": "#94A3B8"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Muted text",
+        "default": "#64748B"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Fonts"
+      },
+      {
+        "type": "select",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "Playfair Display, serif",
+        "options": [
+          { "value": "Playfair Display, serif", "label": "Playfair Display (serif)" },
+          { "value": "Inter, sans-serif", "label": "Inter (sans-serif)" },
+          { "value": "Georgia, serif", "label": "Georgia (serif)" }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "Inter, sans-serif",
+        "options": [
+          { "value": "Inter, sans-serif", "label": "Inter (sans-serif)" },
+          { "value": "system-ui, sans-serif", "label": "System default" }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hero Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero Banner"
+      },
+      {
+        "type": "text",
+        "id": "hero_brand_name",
+        "label": "Brand name",
+        "default": "GAMEPRO"
+      },
+      {
+        "type": "text",
+        "id": "hero_tagline",
+        "label": "Tagline",
+        "default": "MASTER"
+      },
+      {
+        "type": "textarea",
+        "id": "hero_subtitle",
+        "label": "Subtitle",
+        "default": "Precision. Not Promises."
+      },
+      {
+        "type": "textarea",
+        "id": "hero_description",
+        "label": "Description",
+        "default": "Engineered for the competitive edge. Hall Effect joysticks, mechanical buttons, and relentless innovation."
+      },
+      {
+        "type": "text",
+        "id": "hero_cta_text",
+        "label": "CTA button text",
+        "default": "EXPLORE COLLECTION"
+      },
+      {
+        "type": "url",
+        "id": "hero_cta_link",
+        "label": "CTA link"
+      },
+      {
+        "type": "checkbox",
+        "id": "hero_particles_enabled",
+        "label": "Enable particle background",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Newsletter section"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Title",
+        "default": "Join the Pro Gaming Community"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_description",
+        "label": "Description",
+        "default": "Get early access to new releases, exclusive discounts, pro tips, and esports insights."
+      },
+      {
+        "type": "checkbox",
+        "id": "newsletter_enabled",
+        "label": "Show newsletter section",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Trust & Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      }
+    ]
+  }
+]

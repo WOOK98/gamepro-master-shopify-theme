@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none">
+  <!-- Left grip -->
+  <path d="M120 180 C90 180 60 200 60 230 L60 280 C60 300 80 310 100 310 L140 310 C160 310 170 290 170 270 L170 220 C170 200 150 180 120 180Z" stroke="#08D9D6" stroke-width="2" fill="none" opacity="0.6"/>
+  <line x1="170" y1="245" x2="190" y2="245" stroke="#08D9D6" stroke-width="2" opacity="0.6"/>
+  <!-- Left joystick -->
+  <circle cx="110" cy="240" r="20" stroke="#08D9D6" stroke-width="2" fill="none" opacity="0.4"/>
+  <circle cx="110" cy="240" r="8" fill="#08D9D6" opacity="0.3"/>
+  <!-- D-pad -->
+  <rect x="80" y="205" width="8" height="20" rx="1" stroke="#08D9D6" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <rect x="71" y="214" width="26" height="8" rx="1" stroke="#08D9D6" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+  <!-- Center body -->
+  <rect x="190" y="200" width="420" height="130" rx="20" stroke="#08D9D6" stroke-width="2" fill="none" opacity="0.3"/>
+  <!-- Center screen area -->
+  <rect x="260" y="215" width="280" height="100" rx="8" stroke="#08D9D6" stroke-width="1.5" fill="none" opacity="0.15"/>
+
+  <!-- Right grip -->
+  <path d="M680 180 C710 180 740 200 740 230 L740 280 C740 300 720 310 700 310 L660 310 C640 310 630 290 630 270 L630 220 C630 200 650 180 680 180Z" stroke="#08D9D6" stroke-width="2" fill="none" opacity="0.6"/>
+  <line x1="630" y1="245" x2="610" y2="245" stroke="#08D9D6" stroke-width="2" opacity="0.6"/>
+  <!-- Right joystick -->
+  <circle cx="690" cy="240" r="20" stroke="#08D9D6" stroke-width="2" fill="none" opacity="0.4"/>
+  <circle cx="690" cy="240" r="8" fill="#08D9D6" opacity="0.3"/>
+  <!-- Face buttons (ABXY) -->
+  <circle cx="720" cy="215" r="8" stroke="#FF2E63" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <circle cx="740" cy="235" r="8" stroke="#FFB800" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <circle cx="720" cy="255" r="8" stroke="#08D9D6" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <circle cx="700" cy="235" r="8" stroke="#08D9D6" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+  <!-- Shoulder buttons -->
+  <rect x="210" y="185" width="60" height="15" rx="5" stroke="#FF2E63" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <rect x="530" y="185" width="60" height="15" rx="5" stroke="#FF2E63" stroke-width="1.5" fill="none" opacity="0.3"/>
+
+  <!-- Decorative circuit lines -->
+  <path d="M260 230 L240 230 L230 220" stroke="#08D9D6" stroke-width="1" opacity="0.15"/>
+  <path d="M540 230 L560 230 L570 220" stroke="#08D9D6" stroke-width="1" opacity="0.15"/>
+  <path d="M400 215 L400 200" stroke="#08D9D6" stroke-width="1" opacity="0.1"/>
+  <path d="M350 315 L350 330" stroke="#08D9D6" stroke-width="1" opacity="0.1"/>
+  <path d="M450 315 L450 330" stroke="#08D9D6" stroke-width="1" opacity="0.1"/>
+
+  <!-- Subtle glow dots -->
+  <circle cx="400" cy="265" r="2" fill="#08D9D6" opacity="0.3"/>
+  <circle cx="400" cy="295" r="1.5" fill="#08D9D6" opacity="0.2"/>
+  <circle cx="390" cy="285" r="1" fill="#08D9D6" opacity="0.2"/>
+  <circle cx="410" cy="280" r="1" fill="#08D9D6" opacity="0.15"/>
+</svg>

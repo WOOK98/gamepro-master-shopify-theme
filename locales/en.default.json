@@ -1,0 +1,161 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close"
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext_html": "The page you were looking for doesn't exist.",
+      "back_home": "Back to home"
+    },
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "currency": {
+      "format": "money_format"
+    },
+    "search": {
+      "submit": "Search"
+    }
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is currently empty.",
+    "continue_shopping": "Continue shopping",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "taxes_included": "Taxes included where applicable.",
+    "update": "Update cart",
+    "checkout": "Checkout"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search products and pages",
+    "submit": "Search",
+    "results": "{{ count }} results",
+    "no_results": "No results found."
+  },
+  "contact": {
+    "success": "Thanks for contacting us. We will reply as soon as possible.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send message"
+  },
+  "collections": {
+    "title": "Collections",
+    "products": "products",
+    "sorting": {
+      "title": "Sort by"
+    }
+  },
+  "sections": {
+    "hero": {
+      "cta": "Explore Collection"
+    },
+    "platform_grid": {
+      "heading": "Choose Your Platform",
+      "subheading": "Engineered for Every Player",
+      "platform_1_name": "PRO CONTROLLERS",
+      "platform_1_desc": "Zero drift, maximum precision. Tournament-grade build quality.",
+      "platform_2_name": "MOBILE GAMING",
+      "platform_2_desc": "Low-latency connection for competitive mobile esports.",
+      "platform_3_name": "PC / STEAM",
+      "platform_3_desc": "Full button remapping and advanced macro programming.",
+      "platform_4_name": "CONSOLE",
+      "platform_4_desc": "Native platform support with seamless cross-play."
+    },
+    "featured_product": {
+      "badge": "Flagship Controller",
+      "cta": "ADD TO CART",
+      "in_stock": "In Stock · Ships in 24h",
+      "shipping": "Free Worldwide Shipping"
+    },
+    "product_grid": {
+      "heading": "Explore All Products",
+      "sort_by": "Sort by: Featured",
+      "sort_featured": "Featured",
+      "sort_price_low": "Price: Low to High",
+      "sort_price_high": "Price: High to Low",
+      "sort_rating": "Rating",
+      "filter": "Filter",
+      "view_all": "View All Products",
+      "add_to_cart": "Add to Cart",
+      "save": "SAVE"
+    },
+    "tech_specs": {
+      "heading": "Engineered for Performance",
+      "subheading": "Technical Excellence"
+    },
+    "trust_section": {
+      "stat_1_label": "Controllers Sold Worldwide",
+      "stat_2_label": "Countries Served",
+      "stat_3_label": "Positive Reviews",
+      "stat_4_label": "Technical Support",
+      "service_1_title": "Free Worldwide Shipping",
+      "service_1_desc": "On all orders over $50",
+      "service_2_title": "30-Day Return Policy",
+      "service_2_desc": "Hassle-free returns",
+      "service_3_title": "2-Year Warranty",
+      "service_3_desc": "Industry-leading coverage",
+      "service_4_title": "Secure Payment",
+      "service_4_desc": "SSL encrypted checkout"
+    },
+    "newsletter": {
+      "placeholder": "Your email address",
+      "button": "Subscribe Now",
+      "success_title": "Welcome to the Inner Circle!",
+      "success_text": "Check your email to confirm your subscription.",
+      "privacy": "By subscribing, you agree to our Privacy Policy. Unsubscribe anytime."
+    }
+  },
+  "products": {
+    "product": {
+      "new": "New",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to Cart",
+      "buy_now": "Buy Now",
+      "description": "Description",
+      "specifications": "Specifications"
+    },
+    "cart": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty",
+      "continue_shopping": "Continue Shopping",
+      "checkout": "Checkout",
+      "subtotal": "Subtotal",
+      "shipping_calculated": "Shipping calculated at checkout"
+    }
+  },
+  "layout": {
+    "navigation": {
+      "products": "Products",
+      "technology": "Technology",
+      "support": "Support",
+      "about": "About"
+    },
+    "footer": {
+      "newsletter_title": "Join the Inner Circle",
+      "newsletter_desc": "Get early access to new releases, exclusive discounts, and pro gaming tips.",
+      "company": "Company",
+      "about_us": "About Us",
+      "careers": "Careers",
+      "press": "Press & Media",
+      "affiliate": "Affiliate Program",
+      "help": "Help",
+      "support_center": "Support Center",
+      "shipping_info": "Shipping Info",
+      "returns": "Returns & Warranty",
+      "contact": "Contact Us",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "copyright": "{{ year }} {{ shop_name }}. All rights reserved."
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<section class="concept-category-section" data-section-type="platform-grid">
+  <div class="concept-section-heading">
+    <p>{{ section.settings.subheading }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+  </div>
+
+  <div class="concept-scene-grid">
+    <a class="concept-scene-card concept-scene-dark" href="{{ routes.all_products_collection_url }}">
+      <img src="{{ 'demo-controller-dock.png' | asset_url }}" width="900" height="900" loading="lazy" alt="Original controller charging dock set">
+      <div>
+        <p>BUILD YOUR SETUP</p>
+        <h3>Console-ready essentials</h3>
+        <span>Controllers, docks and accessories &rarr;</span>
+      </div>
+    </a>
+
+    <a class="concept-scene-card concept-scene-light" href="{{ routes.all_products_collection_url }}">
+      <img src="{{ 'demo-controller-split-pair.png' | asset_url }}" width="900" height="900" loading="lazy" alt="Original split wireless gaming controller pair">
+      <div>
+        <p>PLAY ANYWHERE</p>
+        <h3>Portable by design</h3>
+        <span>Compact gear for every session &rarr;</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial categories",
+  "tag": "section",
+  "class": "platform-grid-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built for every way you play"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "EXPLORE THE COLLECTION"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial categories",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

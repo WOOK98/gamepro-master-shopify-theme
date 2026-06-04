@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary_bg }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{ shop.name }}",
+      "url": "{{ shop.url }}",
+      "description": "{{ shop.description | escape }}"
+    }
+  </script>
+
+  <!-- Theme CSS -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'concept.css' | asset_url | stylesheet_tag }}
+
+  <!-- Header hook for plugins -->
+  {{ content_for_header }}
+</head>
+
+<body class="template-{{ template | handle }} concept-store">
+
+  {% section 'header' %}
+
+  <aside class="concept-social-rail" aria-label="Social media and promotion">
+    <a href="{{ settings.social_twitter | default: '#' }}" aria-label="X">X</a>
+    <a href="{{ settings.social_instagram | default: '#' }}" aria-label="Instagram">◎</a>
+    <a href="{{ settings.social_youtube | default: '#' }}" aria-label="YouTube">▶</a>
+    <span>GET 20% OFF</span>
+  </aside>
+
+  <main role="main" id="MainContent">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <!-- Theme JS -->
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+</body>
+</html>

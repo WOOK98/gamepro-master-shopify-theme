@@ -1,0 +1,66 @@
+<header class="site-header" id="siteHeader">
+  <div class="concept-header-inner">
+    <a href="{{ routes.root_url }}" class="concept-logo" aria-label="{{ shop.name }}">
+      <span class="concept-logo-mark"><i></i><i></i><i></i><i></i><i></i></span>
+      <span>{{ settings.hero_brand_name }}</span>
+    </a>
+
+    <nav class="concept-nav" role="navigation">
+      {% for link in linklists.main-menu.links %}
+        <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% else %}
+        <a href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ routes.all_products_collection_url }}">Collections</a>
+        <a href="#featured">Explore</a>
+        <a href="#compare">Compare</a>
+      {% endfor %}
+    </nav>
+
+    <div class="concept-header-actions">
+      <a href="{{ routes.search_url }}" aria-label="{{ 'general.search.submit' | t }}">{% render 'icon' with 'search' %}</a>
+      <shopify-account menu="account" aria-label="Account">
+        {% render 'icon' with 'user' %}
+      </shopify-account>
+      <a href="{{ routes.cart_url }}" aria-label="{{ 'products.cart.title' | t }}" class="concept-cart">
+        {% render 'icon' with 'shopping-cart' %}
+        {% if cart.item_count > 0 %}<b>{{ cart.item_count }}</b>{% endif %}
+      </a>
+      <button type="button" class="concept-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+        {% render 'icon' with 'menu' %}
+      </button>
+    </div>
+  </div>
+  <div class="concept-mobile-menu" id="mobileMenu">
+    {% for link in linklists.main-menu.links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {% else %}
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+      <a href="#featured">Explore</a>
+    {% endfor %}
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobileMenuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+{% comment %} Render star ratings (e.g. 4.5 → 4 full, 1 half, 0 empty) {% endcomment %}
+<div class="rating-stars flex items-center gap-0.5" aria-label="{{ rating }} out of 5 stars">
+  {% assign full_stars = rating | floor %}
+  {% assign half_star = rating | minus: full_stars %}
+  {% assign empty_stars = 5 | minus: full_stars %}
+
+  {% if half_star >= 0.5 %}
+    {% assign empty_stars = empty_stars | minus: 1 %}
+  {% endif %}
+
+  {% for i in (1..full_stars) %}
+    <span class="text-accent-cyan">{% render 'icon' with 'star' %}</span>
+  {% endfor %}
+
+  {% if half_star >= 0.5 %}
+    <span class="rating-half relative inline-block">
+      <span class="text-text-muted absolute inset-0 overflow-hidden">
+        {% render 'icon' with 'star-empty' %}
+      </span>
+      <span class="text-accent-cyan relative overflow-hidden" style="width: 8px; display: inline-block;">
+        <span class="block">{% render 'icon' with 'star' %}</span>
+      </span>
+    </span>
+  {% endif %}
+
+  {% for i in (1..empty_stars) %}
+    <span class="text-text-muted">{% render 'icon' with 'star-empty' %}</span>
+  {% endfor %}
+</div>

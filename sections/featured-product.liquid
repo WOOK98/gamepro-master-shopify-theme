@@ -1,0 +1,131 @@
+<section class="concept-product-slider section-padding" data-section-type="product-slider">
+  <div class="container-page">
+    <div class="concept-slider-heading">
+      <div>
+        <p>{{ section.settings.eyebrow }}</p>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="concept-slider-controls">
+        <button type="button" data-slider-prev aria-label="Previous products">&larr;</button>
+        <button type="button" data-slider-next aria-label="Next products">&rarr;</button>
+      </div>
+    </div>
+
+    <div class="concept-slider-track" data-product-slider>
+      {% assign slider_collection = section.settings.collection %}
+      {% if slider_collection != blank and slider_collection.products_count > 0 %}
+        {% for product in slider_collection.products %}
+          <article class="concept-slider-card">
+            <a href="{{ product.url }}" class="concept-slider-image">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 900 | image_tag:
+                  loading: 'lazy',
+                  widths: '360, 540, 720, 900',
+                  sizes: '(min-width: 990px) 32vw, 78vw',
+                  alt: product.featured_image.alt | default: product.title
+                }}
+              {% else %}
+                <img src="{{ 'controller-outline.svg' | asset_url }}" alt="" width="1200" height="720" loading="lazy">
+              {% endif %}
+            </a>
+            <div class="concept-slider-copy">
+              <p>{{ product.vendor | default: 'GAMEPRO' }}</p>
+              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <div>
+                <strong>{{ product.price | money }}</strong>
+                <a href="{{ product.url }}" aria-label="View {{ product.title | escape }}">{% render 'icon' with 'arrow-right' %}</a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% elsif section.settings.show_demo_products %}
+        {% assign demo_titles = 'Flagship Controller|Wireless Split Pair|Compact Pro Controller|Charging Dock Set|Tournament Controller|Travel Controller|Desktop Gaming Set' | split: '|' %}
+        {% assign demo_prices = '64.99|84.99|54.99|59.99|72.99|49.99|89.99' | split: '|' %}
+        {% assign demo_images = 'demo-controller-flagship.png|demo-controller-split-pair.png|demo-controller-compact.png|demo-controller-dock.png|demo-controller-flagship.png|demo-controller-compact.png|demo-controller-dock.png' | split: '|' %}
+        {% for demo_title in demo_titles %}
+          <article class="concept-slider-card">
+            <div class="concept-slider-image">
+              <img src="{{ demo_images[forloop.index0] | asset_url }}" alt="{{ demo_title }}" width="900" height="900" loading="lazy">
+            </div>
+            <div class="concept-slider-copy">
+              <p>DEMO PRODUCT</p>
+              <h3>{{ demo_title }}</h3>
+              <div>
+                <strong>${{ demo_prices[forloop.index0] }}</strong>
+                {% render 'icon' with 'arrow-right' %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <div class="concept-empty-state">
+          <p>Select a collection in the theme editor to show your products.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    var section = document.currentScript.closest('.featured-product-section');
+    if (!section) return;
+
+    var track = section.querySelector('[data-product-slider]');
+    var previous = section.querySelector('[data-slider-prev]');
+    var next = section.querySelector('[data-slider-next]');
+    if (!track || !previous || !next) return;
+
+    function scrollProducts(direction) {
+      track.scrollBy({ left: direction * Math.max(track.clientWidth * 0.8, 280), behavior: 'smooth' });
+    }
+
+    previous.addEventListener('click', function() { scrollProducts(-1); });
+    next.addEventListener('click', function() { scrollProducts(1); });
+
+    track.addEventListener('wheel', function(event) {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      track.scrollLeft += event.deltaY;
+    }, { passive: false });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product slider",
+  "tag": "section",
+  "class": "featured-product-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SHOP THE COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find your controller"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_demo_products",
+      "label": "Show generic demo products when no collection is selected",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product slider",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

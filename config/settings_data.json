@@ -1,0 +1,29 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_primary_bg": "#0A192F",
+      "color_card_bg": "#1E293B",
+      "color_accent_cyan": "#08D9D6",
+      "color_accent_red": "#FF2E63",
+      "color_text_primary": "#FFFFFF",
+      "color_text_secondary": "#94A3B8",
+      "color_text_muted": "#64748B",
+      "font_heading": "Playfair Display, serif",
+      "font_body": "Inter, sans-serif",
+      "hero_brand_name": "GAMEPRO",
+      "hero_tagline": "MASTER",
+      "hero_subtitle": "Precision. Not Promises.",
+      "hero_description": "Engineered for the competitive edge. Hall Effect joysticks, mechanical buttons, and relentless innovation.",
+      "hero_cta_text": "EXPLORE COLLECTION",
+      "hero_particles_enabled": true,
+      "newsletter_title": "Join the Pro Gaming Community",
+      "newsletter_description": "Get early access to new releases, exclusive discounts, pro tips, and esports insights.",
+      "newsletter_enabled": true,
+      "show_payment_icons": true,
+      "social_instagram": "",
+      "social_twitter": "",
+      "social_youtube": ""
+    }
+  }
+}

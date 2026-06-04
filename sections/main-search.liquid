@@ -1,0 +1,28 @@
+<section class="concept-system-page">
+  <div class="container-page">
+    <h1>{{ 'search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="concept-search-form">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}">
+      <button class="btn-primary" type="submit">{{ 'search.submit' | t }}</button>
+    </form>
+    {% if search.performed %}
+      <p>{{ 'search.results' | t: count: search.results_count }}</p>
+      <div class="concept-search-results">
+        {% for item in search.results %}
+          <a href="{{ item.url }}">
+            {% if item.featured_image %}
+              <img src="{{ item.featured_image | image_url: width: 480 }}" alt="{{ item.featured_image.alt | escape }}" width="240" height="240" loading="lazy">
+            {% endif %}
+            <h2>{{ item.title }}</h2>
+          </a>
+        {% else %}
+          <p>{{ 'search.no_results' | t }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{"name":"Main search","settings":[]}
+{% endschema %}

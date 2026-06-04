@@ -1,0 +1,23 @@
+{% comment %} Price display with compare-at discount badge {% endcomment %}
+<div class="price-wrapper flex items-center gap-2 flex-wrap">
+  {% if product.compare_at_price > product.price %}
+    <span class="price-sale font-mono font-bold text-accent-cyan">
+      {{ product.price | money }}
+    </span>
+    <span class="price-compare text-text-muted line-through text-sm">
+      {{ product.compare_at_price | money }}
+    </span>
+    {% assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round %}
+    <span class="price-badge bg-accent-red/90 text-white text-xs font-mono px-2 py-0.5 rounded">
+      -{{ discount }}%
+    </span>
+  {% else %}
+    <span class="price-regular font-mono font-bold text-accent-cyan">
+      {{ product.price | money }}
+    </span>
+  {% endif %}
+
+  {% if product.price_varies %}
+    <span class="text-text-muted text-xs">+</span>
+  {% endif %}
+</div>

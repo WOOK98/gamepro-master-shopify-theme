@@ -1,0 +1,10 @@
+{
+  "name": "GamePro Master",
+  "version": "1.0.0",
+  "role": "main",
+  "theme_author": "GamePro Contributors",
+  "theme_documentation_url": "https://github.com/your-org/gamepro-shopify-theme",
+  "theme_support_url": "https://github.com/your-org/gamepro-shopify-theme/issues",
+  "theme_support_email": "support@your-org.com",
+  "theme_store_handle": "gamepro-master"
+}

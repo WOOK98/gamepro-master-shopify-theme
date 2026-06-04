@@ -1,0 +1,70 @@
+<section class="concept-hero" data-section-type="hero">
+  <div class="concept-hero-media">
+    {% if section.settings.hero_image %}
+      {{ section.settings.hero_image | image_url: width: 1800 | image_tag: class: 'concept-hero-image', loading: 'eager', alt: section.settings.hero_title }}
+    {% else %}
+      <img src="{{ 'demo-controller-hero.png' | asset_url }}" width="1600" height="800" loading="eager" alt="Original wireless gaming controller" class="concept-hero-image">
+    {% endif %}
+  </div>
+  <div class="concept-hero-shade"></div>
+  <div class="concept-hero-copy">
+    <p>{{ section.settings.hero_overline }}</p>
+    <h1>{{ section.settings.hero_title }}</h1>
+    <div>{{ section.settings.hero_description }}</div>
+    <a href="{{ section.settings.hero_cta_link | default: routes.all_products_collection_url }}">
+      {{ section.settings.hero_cta }}
+      <span>&rarr;</span>
+    </a>
+  </div>
+  <button type="button" class="concept-hero-pause" aria-label="Pause slideshow">Ⅱ</button>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_overline",
+      "label": "Overline text",
+      "default": "MADE FOR THE MOMENT"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Title",
+      "default": "PLAY WITHOUT LIMITS"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Description",
+      "default": "Precision controls, effortless performance, and a new standard for every game."
+    },
+    {
+      "type": "text",
+      "id": "hero_cta",
+      "label": "CTA button text",
+      "default": "Shop controllers"
+    },
+    {
+      "type": "url",
+      "id": "hero_cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Hero"
+    }
+  ]
+}
+{% endschema %}

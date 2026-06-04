@@ -1,0 +1,55 @@
+{% if settings.newsletter_enabled %}
+<section class="concept-newsletter" data-section-type="newsletter">
+  <div class="container-page">
+    <div class="concept-newsletter-inner">
+      <div class="concept-newsletter-copy">
+        <p>STAY IN THE LOOP</p>
+        <h2>{{ settings.newsletter_title }}</h2>
+        <div>{{ settings.newsletter_description }}</div>
+      </div>
+
+      <div class="concept-newsletter-action">
+        {% form 'customer', class: 'concept-newsletter-form', id: 'NewsletterForm' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="sr-only" for="NewsletterEmail">{{ 'sections.newsletter.placeholder' | t }}</label>
+          <input
+            id="NewsletterEmail"
+            type="email"
+            name="contact[email]"
+            value="{{ form.email }}"
+            placeholder="{{ 'sections.newsletter.placeholder' | t }}"
+            autocomplete="email"
+            required
+          >
+          <button type="submit" aria-label="{{ 'sections.newsletter.button' | t }}">&rarr;</button>
+
+          {% if form.posted_successfully %}
+            <p class="concept-newsletter-message">{{ 'sections.newsletter.success_text' | t }}</p>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="concept-newsletter-message concept-newsletter-error">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+        {% endform %}
+
+        <p class="concept-newsletter-privacy">
+          {{ 'sections.newsletter.privacy' | t }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "newsletter-section",
+  "presets": [
+    { "name": "Newsletter", "category": "Promotional" }
+  ]
+}
+{% endschema %}
