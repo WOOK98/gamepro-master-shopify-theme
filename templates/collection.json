@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "collection-header": {
@@ -6,7 +15,19 @@
     },
     "product-grid": {
       "type": "product-grid",
-      "settings": {}
+      "settings": {
+        "heading": "Shop the collection",
+        "subheading": "Connect a Shopify collection to showcase your products.",
+        "collection": "frontpage",
+        "show_demo_catalog": true,
+        "products_to_show": 8,
+        "columns_desktop": "4",
+        "show_filter_tabs": true,
+        "show_vendor": true,
+        "show_rating": true,
+        "show_platforms": true,
+        "view_all_link": true
+      }
     }
   },
   "order": [
