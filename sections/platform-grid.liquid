@@ -5,23 +5,63 @@
   </div>
 
   <div class="concept-scene-grid">
-    <a class="concept-scene-card concept-scene-dark" href="{{ routes.all_products_collection_url }}">
-      <img src="{{ 'demo-controller-dock.png' | asset_url }}" width="900" height="900" loading="lazy" alt="Original controller charging dock set">
-      <div>
-        <p>BUILD YOUR SETUP</p>
-        <h3>Console-ready essentials</h3>
-        <span>Controllers, docks and accessories &rarr;</span>
-      </div>
-    </a>
+    {% assign product_1 = section.settings.product_1 %}
+    {% if product_1 == blank and collections.all.products.size > 0 %}
+      {% assign product_1 = collections.all.products[0] %}
+    {% endif %}
+    {% if product_1 != blank %}
+      <a class="concept-scene-card concept-scene-dark" href="{{ product_1.url }}">
+        {% if product_1.featured_image %}
+          {{ product_1.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product_1.title }}
+        {% else %}
+          <img src="{{ 'demo-controller-dock.png' | asset_url }}" width="900" height="900" loading="lazy" alt="{{ product_1.title }}">
+        {% endif %}
+        <div>
+          <p>{{ product_1.vendor | default: section.settings.product_1_label }}</p>
+          <h3>{{ product_1.title }}</h3>
+          <span>{{ product_1.price | money }} &rarr;</span>
+        </div>
+      </a>
+    {% else %}
+      <a class="concept-scene-card concept-scene-dark" href="{{ routes.all_products_collection_url }}">
+        <img src="{{ 'demo-controller-dock.png' | asset_url }}" width="900" height="900" loading="lazy" alt="Original controller charging dock set">
+        <div>
+          <p>{{ section.settings.product_1_label }}</p>
+          <h3>Console-ready essentials</h3>
+          <span>Controllers, docks and accessories &rarr;</span>
+        </div>
+      </a>
+    {% endif %}
 
-    <a class="concept-scene-card concept-scene-light" href="{{ routes.all_products_collection_url }}">
-      <img src="{{ 'demo-controller-split-pair.png' | asset_url }}" width="900" height="900" loading="lazy" alt="Original split wireless gaming controller pair">
-      <div>
-        <p>PLAY ANYWHERE</p>
-        <h3>Portable by design</h3>
-        <span>Compact gear for every session &rarr;</span>
-      </div>
-    </a>
+    {% assign product_2 = section.settings.product_2 %}
+    {% if product_2 == blank and collections.all.products.size > 1 %}
+      {% assign product_2 = collections.all.products[1] %}
+    {% elsif product_2 == blank and collections.all.products.size > 0 %}
+      {% assign product_2 = collections.all.products[0] %}
+    {% endif %}
+    {% if product_2 != blank %}
+      <a class="concept-scene-card concept-scene-light" href="{{ product_2.url }}">
+        {% if product_2.featured_image %}
+          {{ product_2.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product_2.title }}
+        {% else %}
+          <img src="{{ 'demo-controller-split-pair.png' | asset_url }}" width="900" height="900" loading="lazy" alt="{{ product_2.title }}">
+        {% endif %}
+        <div>
+          <p>{{ product_2.vendor | default: section.settings.product_2_label }}</p>
+          <h3>{{ product_2.title }}</h3>
+          <span>{{ product_2.price | money }} &rarr;</span>
+        </div>
+      </a>
+    {% else %}
+      <a class="concept-scene-card concept-scene-light" href="{{ routes.all_products_collection_url }}">
+        <img src="{{ 'demo-controller-split-pair.png' | asset_url }}" width="900" height="900" loading="lazy" alt="Original split wireless gaming controller pair">
+        <div>
+          <p>{{ section.settings.product_2_label }}</p>
+          <h3>Portable by design</h3>
+          <span>Compact gear for every session &rarr;</span>
+        </div>
+      </a>
+    {% endif %}
   </div>
 </section>
 
@@ -42,6 +82,28 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "EXPLORE THE COLLECTION"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Product card 1"
+    },
+    {
+      "type": "text",
+      "id": "product_1_label",
+      "label": "Fallback label 1",
+      "default": "BUILD YOUR SETUP"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product card 2"
+    },
+    {
+      "type": "text",
+      "id": "product_2_label",
+      "label": "Fallback label 2",
+      "default": "PLAY ANYWHERE"
     }
   ],
   "presets": [

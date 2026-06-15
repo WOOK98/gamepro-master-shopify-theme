@@ -1,8 +1,11 @@
 <header class="site-header" id="siteHeader">
   <div class="concept-header-inner">
     <a href="{{ routes.root_url }}" class="concept-logo" aria-label="{{ shop.name }}">
-      <span class="concept-logo-mark"><i></i><i></i><i></i><i></i><i></i></span>
-      <span>{{ settings.hero_brand_name }}</span>
+      {% if section.settings.logo_image %}
+        {{ section.settings.logo_image | image_url: width: 520 | image_tag: class: 'concept-logo-image', loading: 'eager', alt: shop.name }}
+      {% else %}
+        <img src="{{ 'logo-migflash.png' | asset_url }}" width="640" height="115" loading="eager" alt="{{ shop.name }}" class="concept-logo-image">
+      {% endif %}
     </a>
 
     <nav class="concept-nav" role="navigation">
@@ -60,6 +63,11 @@
       "id": "main_menu",
       "label": "Main menu",
       "default": "main-menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo image"
     }
   ]
 }

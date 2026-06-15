@@ -10,6 +10,8 @@
 - Redesigned the newsletter as a compact editorial signup panel
 - Simplified the home page rhythm with two editorial category scenes, one product slider, and a dark technology section
 - Compacted the technology section for narrow screens
+- Reworked the hero into a split ecommerce layout with rendered copy, features, CTA, and product imagery
+- Added a MIGFLASH logo asset and made the editorial homepage cards selectable products
 - Added cart, search, page, contact, 404, collections, blog, and article templates
 - Added Theme Check configuration and GitHub Actions workflow
 - Added open-source contribution, security, and roadmap documentation

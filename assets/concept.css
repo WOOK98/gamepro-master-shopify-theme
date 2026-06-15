@@ -56,6 +56,7 @@ body.concept-store {
 }
 
 .concept-logo { gap: 12px; font-weight: 800; letter-spacing: .08em; }
+.concept-logo-image { display: block; width: clamp(150px, 16vw, 220px); height: auto; object-fit: contain; }
 .concept-logo-mark { display: flex; align-items: center; gap: 4px; }
 .concept-logo-mark i { display: block; width: 6px; border-radius: 8px; background: #171717; }
 .concept-logo-mark i:nth-child(1), .concept-logo-mark i:nth-child(5) { height: 16px; }
@@ -93,20 +94,30 @@ body.concept-store {
   min-height: 660px;
   margin: 0 auto;
   overflow: hidden;
-  background: #d7d4ce;
+  display: grid;
+  grid-template-columns: minmax(360px, .9fr) minmax(420px, 1.1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 72px 6vw;
+  background: radial-gradient(circle at 78% 35%, #242933 0, #15181f 34%, #07080b 72%);
   color: #fff;
 }
-.concept-hero-media, .concept-hero-shade { position: absolute; inset: 0; }
-.concept-hero-shade { background: linear-gradient(90deg, rgba(0,0,0,.64), rgba(0,0,0,.18) 55%, rgba(0,0,0,.38)); }
 .concept-controller-art { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(135deg,#353a42,#a8a398); }
 .concept-controller-art img { width: min(1020px, 76vw); opacity: .75; filter: drop-shadow(0 28px 34px rgba(0,0,0,.35)); }
 .concept-hero-image { width: 100%; height: 100%; object-fit: cover; }
-.concept-hero-copy { position: relative; z-index: 2; width: min(680px, 76%); padding: 158px 7vw; }
-.concept-hero-copy p { margin-bottom: 15px; font-size: 13px; letter-spacing: .14em; font-weight: 700; }
-.concept-hero-copy h1 { max-width: 620px; margin-bottom: 18px; font-size: clamp(52px, 6vw, 88px); line-height: .96; letter-spacing: -.08em; font-family: var(--font-sans); }
-.concept-hero-copy div { max-width: 490px; margin-bottom: 32px; color: rgba(255,255,255,.86); font-size: 18px; }
-.concept-hero-copy a { display: inline-flex; align-items: center; gap: 18px; padding: 16px 28px; border-radius: 999px; background: #fff; color: #171717; font-weight: 700; }
-.concept-hero-copy a span { font-size: 21px; }
+.concept-hero-copy { position: relative; z-index: 2; max-width: 660px; }
+.concept-hero-copy p { margin-bottom: 18px; color: #ef2020; font-size: 20px; letter-spacing: -.02em; font-weight: 800; }
+.concept-hero-copy h1 { max-width: 680px; margin-bottom: 22px; font-size: clamp(50px, 5.5vw, 86px); line-height: .98; letter-spacing: -.07em; font-family: var(--font-sans); text-wrap: balance; }
+.concept-hero-copy div { max-width: 520px; margin-bottom: 34px; color: rgba(255,255,255,.72); font-size: 18px; line-height: 1.55; }
+.concept-hero-features { display: grid; gap: 18px; margin: 0 0 38px; padding: 0; list-style: none; }
+.concept-hero-features li { display: flex; align-items: center; gap: 16px; color: #fff; font-size: 22px; }
+.concept-hero-features svg { width: 31px; height: 31px; padding: 6px; border: 2px solid #e91515; border-radius: 50%; color: #e91515; }
+.concept-hero-cta { display: inline-flex; align-items: center; gap: 18px; padding: 18px 34px; border-radius: 999px; background: linear-gradient(135deg, #ff1d1d, #c90707); color: #fff; font-size: 20px; font-weight: 800; box-shadow: 0 16px 42px rgba(210, 10, 10, .22); }
+.concept-hero-cta span { font-size: 28px; line-height: 1; }
+.concept-hero-product { position: relative; z-index: 1; min-height: 560px; display: grid; place-items: center; overflow: hidden; border-radius: 36px; background: rgba(255,255,255,.025); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 34px 80px rgba(0,0,0,.28); }
+.concept-hero-product::before { content: ""; position: absolute; inset: 18% -8% 8% 22%; border-radius: 42px; background: rgba(239,32,32,.12); filter: blur(40px); }
+.concept-hero-product::after { content: ""; position: absolute; z-index: 2; inset: 0 auto 0 0; width: 50%; background: linear-gradient(90deg, #07090d 0%, rgba(7,9,13,.96) 48%, rgba(7,9,13,0) 100%); pointer-events: none; }
+.concept-hero-product-image { position: relative; z-index: 1; width: 100%; height: 100%; min-height: 560px; object-fit: cover; object-position: 90% center; transform: scale(1.38); transform-origin: 84% center; filter: saturate(1.04) contrast(1.04); }
 .concept-hero-pause { position: absolute; z-index: 4; right: 28px; bottom: 28px; width: 58px; height: 58px; border-radius: 50%; background: #fff; color: #171717; font-weight: 800; }
 
 .concept-category-section { padding: 92px 48px 110px; color: var(--concept-ink); background: var(--concept-paper); }
@@ -270,8 +281,16 @@ body.concept-store {
   .concept-mobile-menu.is-open { display: flex; flex-direction: column; gap: 16px; padding: 0 20px 22px; font-weight: 700; }
   .concept-social-rail { display: none; }
   .concept-hero { min-height: 560px; }
-  .concept-hero-copy { width: 100%; padding: 130px 30px; }
-  .concept-hero-copy h1 { font-size: 58px; }
+  .concept-hero { grid-template-columns: 1fr; padding: 64px 26px 34px; }
+  .concept-hero-copy { width: 100%; }
+  .concept-hero-copy h1 { font-size: 50px; }
+  .concept-hero-copy p { font-size: 16px; }
+  .concept-hero-copy div { font-size: 16px; }
+  .concept-hero-features { gap: 12px; margin-bottom: 26px; }
+  .concept-hero-features li { font-size: 17px; }
+  .concept-hero-product { width: 100%; min-height: 320px; border-radius: 26px; }
+  .concept-hero-product::after { width: 36%; }
+  .concept-hero-product-image { min-height: 320px; object-position: 90% center; transform: scale(1.2); }
   .concept-category-section { padding: 70px 20px; }
   .concept-category-track { grid-template-columns: repeat(4, 270px); }
   .concept-category-card { min-height: 370px; }

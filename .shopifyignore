@@ -1,5 +1,6 @@
 .DS_Store
-.git/
-.github/
-docs/
+.git/*
+.github/*
+docs/*
+assets/hero-mig-flash.png
 *.md

@@ -1,20 +1,24 @@
 <section class="concept-hero" data-section-type="hero">
-  <div class="concept-hero-media">
-    {% if section.settings.hero_image %}
-      {{ section.settings.hero_image | image_url: width: 1800 | image_tag: class: 'concept-hero-image', loading: 'eager', alt: section.settings.hero_title }}
-    {% else %}
-      <img src="{{ 'demo-controller-hero.png' | asset_url }}" width="1600" height="800" loading="eager" alt="Original wireless gaming controller" class="concept-hero-image">
-    {% endif %}
-  </div>
-  <div class="concept-hero-shade"></div>
   <div class="concept-hero-copy">
     <p>{{ section.settings.hero_overline }}</p>
     <h1>{{ section.settings.hero_title }}</h1>
     <div>{{ section.settings.hero_description }}</div>
-    <a href="{{ section.settings.hero_cta_link | default: routes.all_products_collection_url }}">
+    <ul class="concept-hero-features" aria-label="Hero features">
+      <li>{% render 'icon' with 'plug' %} <span>{{ section.settings.hero_feature_1 }}</span></li>
+      <li>{% render 'icon' with 'package' %} <span>{{ section.settings.hero_feature_2 }}</span></li>
+      <li>{% render 'icon' with 'xp' %} <span>{{ section.settings.hero_feature_3 }}</span></li>
+    </ul>
+    <a class="concept-hero-cta" href="{{ section.settings.hero_cta_link | default: routes.all_products_collection_url }}">
       {{ section.settings.hero_cta }}
       <span>&rarr;</span>
     </a>
+  </div>
+  <div class="concept-hero-product">
+    {% if section.settings.hero_image %}
+      {{ section.settings.hero_image | image_url: width: 1400 | image_tag: class: 'concept-hero-product-image', loading: 'eager', alt: section.settings.hero_title }}
+    {% else %}
+      <img src="{{ 'demo-controller-hero.png' | asset_url }}" width="1600" height="800" loading="eager" alt="Original wireless gaming controller" class="concept-hero-product-image">
+    {% endif %}
   </div>
   <button type="button" class="concept-hero-pause" aria-label="Pause slideshow">Ⅱ</button>
 </section>
@@ -29,25 +33,43 @@
       "type": "text",
       "id": "hero_overline",
       "label": "Overline text",
-      "default": "MADE FOR THE MOMENT"
+      "default": "MIG FLASH V2 & Dumper"
     },
     {
       "type": "text",
       "id": "hero_title",
       "label": "Title",
-      "default": "PLAY WITHOUT LIMITS"
+      "default": "YOUR ENTIRE LIBRARY. ONE CLICK AWAY."
     },
     {
       "type": "textarea",
       "id": "hero_description",
       "label": "Description",
-      "default": "Precision controls, effortless performance, and a new standard for every game."
+      "default": "Back up, organize, and switch your game library with a compact plug-and-play setup."
+    },
+    {
+      "type": "text",
+      "id": "hero_feature_1",
+      "label": "Feature 1",
+      "default": "Plug & Play"
+    },
+    {
+      "type": "text",
+      "id": "hero_feature_2",
+      "label": "Feature 2",
+      "default": "Easy Backup"
+    },
+    {
+      "type": "text",
+      "id": "hero_feature_3",
+      "label": "Feature 3",
+      "default": "Fast Game Switching"
     },
     {
       "type": "text",
       "id": "hero_cta",
       "label": "CTA button text",
-      "default": "Shop controllers"
+      "default": "Shop MIG Flash"
     },
     {
       "type": "url",
