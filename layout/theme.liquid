@@ -139,7 +139,7 @@
           <h2 id="ConceptDiscountTitle">Get 5% off your order</h2>
           <p class="concept-discount-note">Enter your email to receive the discount code. We use Shopify's form protection to reduce bot signups.</p>
           {% if form.errors %}
-            <div class="concept-discount-error" role="alert">
+            <div class="concept-discount-error" id="ConceptDiscountError" role="alert">
               {{ form.errors | default_errors }}
             </div>
           {% endif %}
@@ -149,13 +149,22 @@
             class="concept-discount-input"
             type="email"
             name="contact[email]"
+            value="{{ form.email }}"
+            aria-required="true"
             autocomplete="email"
             autocorrect="off"
             autocapitalize="off"
+            {% if form.errors %}
+              autofocus
+              aria-invalid="true"
+              aria-describedby="ConceptDiscountError"
+            {% elsif form.posted_successfully? %}
+              aria-describedby="ConceptDiscountTitle"
+            {% endif %}
             placeholder="Email"
             required
           >
-          <button class="concept-discount-submit" type="submit">Get discount code</button>
+          <button class="concept-discount-submit" type="submit" name="commit">Get discount code</button>
           <p class="concept-discount-legal">By signing up, you agree to receive marketing emails. You can unsubscribe anytime.</p>
         {% endif %}
       {% endform %}
