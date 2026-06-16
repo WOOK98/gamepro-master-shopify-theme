@@ -15,6 +15,7 @@
       {% assign slider_collection = section.settings.collection %}
       {% if slider_collection != blank and slider_collection.products_count > 0 %}
         {% for product in slider_collection.products %}
+          {% assign product_display_title = product.metafields.custom.short_title.value | default: product.title %}
           <article class="concept-slider-card">
             <a href="{{ product.url }}" class="concept-slider-image">
               {% if product.featured_image %}
@@ -30,7 +31,7 @@
             </a>
             <div class="concept-slider-copy">
               <p>{{ product.vendor | default: 'GAMEPRO' }}</p>
-              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <h3><a href="{{ product.url }}">{{ product_display_title | truncate: 68 }}</a></h3>
               <div>
                 <strong>{{ product.price | money }}</strong>
                 <a href="{{ product.url }}" aria-label="View {{ product.title | escape }}">{% render 'icon' with 'arrow-right' %}</a>

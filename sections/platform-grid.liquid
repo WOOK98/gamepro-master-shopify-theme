@@ -10,15 +10,16 @@
       {% assign product_1 = collections.all.products[0] %}
     {% endif %}
     {% if product_1 != blank %}
+      {% assign product_1_title = product_1.metafields.custom.short_title.value | default: product_1.title %}
       <a class="concept-scene-card concept-scene-dark" href="{{ product_1.url }}">
         {% if product_1.featured_image %}
-          {{ product_1.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product_1.title }}
+          {{ product_1.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product_1.featured_image.alt | default: product_1.title }}
         {% else %}
           <img src="{{ 'demo-controller-dock.png' | asset_url }}" width="900" height="900" loading="lazy" alt="{{ product_1.title }}">
         {% endif %}
         <div>
           <p>{{ product_1.vendor | default: section.settings.product_1_label }}</p>
-          <h3>{{ product_1.title }}</h3>
+          <h3>{{ product_1_title | truncate: 58 }}</h3>
           <span>{{ product_1.price | money }} &rarr;</span>
         </div>
       </a>
@@ -40,15 +41,16 @@
       {% assign product_2 = collections.all.products[0] %}
     {% endif %}
     {% if product_2 != blank %}
+      {% assign product_2_title = product_2.metafields.custom.short_title.value | default: product_2.title %}
       <a class="concept-scene-card concept-scene-light" href="{{ product_2.url }}">
         {% if product_2.featured_image %}
-          {{ product_2.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product_2.title }}
+          {{ product_2.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product_2.featured_image.alt | default: product_2.title }}
         {% else %}
           <img src="{{ 'demo-controller-split-pair.png' | asset_url }}" width="900" height="900" loading="lazy" alt="{{ product_2.title }}">
         {% endif %}
         <div>
           <p>{{ product_2.vendor | default: section.settings.product_2_label }}</p>
-          <h3>{{ product_2.title }}</h3>
+          <h3>{{ product_2_title | truncate: 58 }}</h3>
           <span>{{ product_2.price | money }} &rarr;</span>
         </div>
       </a>

@@ -1,6 +1,7 @@
 <div class="section-padding" data-section-type="product-main">
   <div class="container-page">
     {% if product %}
+    {% assign product_display_title = product.metafields.custom.short_title.value | default: product.title %}
     <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
       <!-- Product images gallery -->
       <div class="product-gallery">
@@ -8,9 +9,10 @@
           {% if product.featured_image %}
             <img
               src="{{ product.featured_image | image_url: width: 800 }}"
-              alt="{{ product.featured_image.alt | escape }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
               width="800"
               height="800"
+              loading="eager"
               class="w-full h-full object-cover object-center"
               id="product-main-image"
             >
@@ -25,7 +27,7 @@
                 class="product-thumb rounded-lg overflow-hidden bg-bg-card border-2 {% if forloop.first %}border-accent-cyan{% else %}border-transparent{% endif %} aspect-square"
                 data-image-src="{{ image | image_url: width: 800 }}"
               >
-                <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | escape }}" width="200" height="200" class="w-full h-full object-cover">
+                <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | default: product.title | escape }}" width="200" height="200" loading="lazy" class="w-full h-full object-cover">
               </button>
             {% endfor %}
           </div>
@@ -39,7 +41,7 @@
         {% endif %}
 
         <h1 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
-          {{ product.title }}
+          {{ product_display_title }}
         </h1>
 
         <!-- Rating -->

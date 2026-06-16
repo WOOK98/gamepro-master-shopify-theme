@@ -192,6 +192,22 @@
         "type": "text",
         "id": "social_youtube",
         "label": "YouTube URL"
+      },
+      {
+        "type": "header",
+        "content": "Floating promotion"
+      },
+      {
+        "type": "text",
+        "id": "promo_rail_text",
+        "label": "Promotion rail text",
+        "default": "GET 5% OFF"
+      },
+      {
+        "type": "text",
+        "id": "promo_discount_code",
+        "label": "Discount code",
+        "default": "F9VPVX2JG9KZ"
       }
     ]
   }

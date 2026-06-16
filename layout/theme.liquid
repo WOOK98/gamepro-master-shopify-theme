@@ -19,6 +19,28 @@
     <meta name="description" content="{{ page_description | escape }}">
   {% endif %}
 
+  <meta property="og:site_name" content="{{ shop.name | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:type" content="{% if request.page_type == 'product' %}product{% elsif request.page_type == 'article' %}article{% else %}website{% endif %}">
+  {% if page_description %}
+    <meta property="og:description" content="{{ page_description | escape }}">
+  {% endif %}
+  {% if request.page_type == 'product' and product.featured_image %}
+    {% assign seo_image_url = product.featured_image | image_url: width: 1200 %}
+    <meta property="og:image" content="{{ shop.url }}{{ seo_image_url }}">
+    <meta property="og:image:secure_url" content="{{ shop.url }}{{ seo_image_url }}">
+  {% elsif settings.share_image %}
+    {% assign seo_image_url = settings.share_image | image_url: width: 1200 %}
+    <meta property="og:image" content="{{ shop.url }}{{ seo_image_url }}">
+    <meta property="og:image:secure_url" content="{{ shop.url }}{{ seo_image_url }}">
+  {% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title | escape }}">
+  {% if page_description %}
+    <meta name="twitter:description" content="{{ page_description | escape }}">
+  {% endif %}
+
   <!-- Structured data -->
   <script type="application/ld+json">
     {
@@ -29,6 +51,37 @@
       "description": "{{ shop.description | escape }}"
     }
   </script>
+
+  {% if request.page_type == 'product' and product %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": {{ product.title | json }},
+        "description": {{ product.description | strip_html | truncate: 500 | json }},
+        "url": {{ canonical_url | json }},
+        {% if product.featured_image %}
+          {% assign seo_product_image_url = product.featured_image | image_url: width: 1200 %}
+          "image": [
+            "{{ shop.url }}{{ seo_product_image_url }}"
+          ],
+        {% endif %}
+        "brand": {
+          "@type": "Brand",
+          "name": {{ product.vendor | default: shop.name | json }}
+        },
+        "sku": {{ product.selected_or_first_available_variant.sku | default: product.selected_or_first_available_variant.id | json }},
+        "offers": {
+          "@type": "Offer",
+          "url": {{ canonical_url | json }},
+          "priceCurrency": {{ cart.currency.iso_code | json }},
+          "price": {{ product.selected_or_first_available_variant.price | divided_by: 100.0 | json }},
+          "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+          "itemCondition": "https://schema.org/NewCondition"
+        }
+      }
+    </script>
+  {% endif %}
 
   <!-- Theme CSS -->
   {{ 'theme.css' | asset_url | stylesheet_tag }}
@@ -42,11 +95,20 @@
 
   {% section 'header' %}
 
+  {% assign promo_discount_code = settings.promo_discount_code | default: 'F9VPVX2JG9KZ' %}
+  {% assign promo_rail_text = settings.promo_rail_text | default: 'GET 5% OFF' %}
+
   <aside class="concept-social-rail" aria-label="Social media and promotion">
-    <a href="{{ settings.social_twitter | default: '#' }}" aria-label="X">X</a>
+    <a href="{{ settings.social_twitter | default: 'https://x.com/migmastershop' }}" aria-label="X" target="_blank" rel="noopener">X</a>
     <a href="{{ settings.social_instagram | default: '#' }}" aria-label="Instagram">◎</a>
     <a href="{{ settings.social_youtube | default: '#' }}" aria-label="YouTube">▶</a>
-    <span>GET 20% OFF</span>
+    <a
+      class="concept-social-promo"
+      href="/discount/{{ promo_discount_code }}?redirect=/collections/all"
+      aria-label="{{ promo_rail_text }} discount"
+    >
+      {{ promo_rail_text }}
+    </a>
   </aside>
 
   <main role="main" id="MainContent">

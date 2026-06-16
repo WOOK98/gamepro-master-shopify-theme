@@ -12,6 +12,7 @@
 - Compacted the technology section for narrow screens
 - Reworked the hero into a split ecommerce layout with rendered copy, features, CTA, and product imagery
 - Added a MIGFLASH logo asset and made the editorial homepage cards selectable products
+- Improved product image alt text, product title display, Open Graph tags, and Product structured data
 - Added cart, search, page, contact, 404, collections, blog, and article templates
 - Added Theme Check configuration and GitHub Actions workflow
 - Added open-source contribution, security, and roadmap documentation

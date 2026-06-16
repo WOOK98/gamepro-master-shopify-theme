@@ -14,8 +14,9 @@
     </a>
   </div>
   <div class="concept-hero-product">
+    {% assign hero_image_alt = section.settings.hero_title | default: section.settings.hero_overline | default: shop.name %}
     {% if section.settings.hero_image %}
-      {{ section.settings.hero_image | image_url: width: 1400 | image_tag: class: 'concept-hero-product-image', loading: 'eager', alt: section.settings.hero_title }}
+      <img src="{{ section.settings.hero_image | image_url: width: 1400 }}" width="1400" height="933" loading="eager" alt="{{ hero_image_alt | escape }}" class="concept-hero-product-image">
     {% else %}
       <img src="{{ 'demo-controller-hero.png' | asset_url }}" width="1600" height="800" loading="eager" alt="Original wireless gaming controller" class="concept-hero-product-image">
     {% endif %}

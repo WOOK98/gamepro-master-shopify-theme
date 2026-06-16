@@ -1,5 +1,7 @@
 {% comment %} Product card used in collection/product grids {% endcomment %}
 {% assign image = product.featured_image | default: product.images.first %}
+{% assign product_card_title = product.metafields.custom.short_title.value | default: product.title %}
+{% assign product_image_alt = image.alt | default: product.title %}
 
 <div class="product-card group" data-product-handle="{{ product.handle }}">
   <a href="{{ product.url | within: collection }}" class="product-card-link block">
@@ -8,9 +10,10 @@
       {% if image %}
         <img
           src="{{ image | image_url: width: 600 }}"
-           alt="{{ image.alt | escape }}"
-           width="600"
-           height="600"
+          alt="{{ product_image_alt | escape }}"
+          width="600"
+          height="600"
+          loading="lazy"
           class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
         >
       {% else %}
@@ -54,7 +57,7 @@
       {% endif %}
 
       <h3 class="font-serif text-white font-bold text-base mb-2 group-hover:text-accent-cyan transition-colors line-clamp-2">
-        {{ product.title }}
+        {{ product_card_title | truncate: 78 }}
       </h3>
 
       {% if show_rating and product.metafields.reviews.rating.value %}

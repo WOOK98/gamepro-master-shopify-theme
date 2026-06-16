@@ -22,8 +22,10 @@
       "newsletter_enabled": true,
       "show_payment_icons": true,
       "social_instagram": "",
-      "social_twitter": "",
-      "social_youtube": ""
+      "social_twitter": "https://x.com/migmastershop",
+      "social_youtube": "",
+      "promo_rail_text": "GET 5% OFF",
+      "promo_discount_code": "F9VPVX2JG9KZ"
     }
   }
 }
