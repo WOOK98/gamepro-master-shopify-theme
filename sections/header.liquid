@@ -44,14 +44,16 @@
 </header>
 
 <script>
-  const toggle = document.getElementById('mobileMenuToggle');
-  const menu = document.getElementById('mobileMenu');
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', isOpen);
-    });
-  }
+  (() => {
+    const toggle = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('mobileMenu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  })();
 </script>
 
 {% schema %}
