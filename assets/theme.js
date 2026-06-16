@@ -304,7 +304,27 @@
   }
 
   // ============================================================
-  // 11. Shopify section load/unload
+  // 11. Hide floating rail near footer
+  // ============================================================
+  function initSocialRailVisibility() {
+    if (document.documentElement.dataset.socialRailVisibilityReady) return;
+    document.documentElement.dataset.socialRailVisibilityReady = 'true';
+
+    var rail = document.querySelector('.concept-social-rail');
+    var footer = document.querySelector('[data-hide-social-rail]');
+    if (!rail || !footer || !('IntersectionObserver' in window)) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        rail.classList.toggle('is-hidden-near-footer', entry.isIntersecting);
+      });
+    }, { rootMargin: '0px 0px -20% 0px' });
+
+    observer.observe(footer);
+  }
+
+  // ============================================================
+  // 12. Shopify section load/unload
   // ============================================================
   document.addEventListener('shopify:section:load', function () {
     initAll();
@@ -336,6 +356,7 @@
     initCollectionFilters();
     initSmoothScroll();
     initDiscountPopup();
+    initSocialRailVisibility();
   }
 
   // Run on DOM ready
