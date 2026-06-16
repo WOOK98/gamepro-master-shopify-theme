@@ -37,8 +37,8 @@
     "featured-product": {
       "type": "featured-product",
       "settings": {
-        "eyebrow": "SHOP THE COLLECTION",
-        "heading": "Find your controller",
+        "eyebrow": "MIG FLASH & ACCESSORIES",
+        "heading": "Shop MIG essentials",
         "collection": "frontpage",
         "show_demo_products": true
       }

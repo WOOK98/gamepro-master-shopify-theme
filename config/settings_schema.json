@@ -149,13 +149,13 @@
         "type": "text",
         "id": "newsletter_title",
         "label": "Title",
-        "default": "Join the Pro Gaming Community"
+        "default": "Get MIG updates and offers"
       },
       {
         "type": "textarea",
         "id": "newsletter_description",
         "label": "Description",
-        "default": "Get early access to new releases, exclusive discounts, pro tips, and esports insights."
+        "default": "Sign up for product restocks, setup notes, compatibility updates, and exclusive discounts."
       },
       {
         "type": "checkbox",

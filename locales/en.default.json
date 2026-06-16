@@ -71,7 +71,7 @@
       "platform_1_name": "PRO CONTROLLERS",
       "platform_1_desc": "Zero drift, maximum precision. Tournament-grade build quality.",
       "platform_2_name": "MOBILE GAMING",
-      "platform_2_desc": "Low-latency connection for competitive mobile esports.",
+      "platform_2_desc": "Compact accessories and connection gear for portable setups.",
       "platform_3_name": "PC / STEAM",
       "platform_3_desc": "Full button remapping and advanced macro programming.",
       "platform_4_name": "CONSOLE",
@@ -116,7 +116,7 @@
     "newsletter": {
       "placeholder": "Your email address",
       "button": "Subscribe Now",
-      "success_title": "Welcome to the Inner Circle!",
+      "success_title": "You're on the MIG list.",
       "success_text": "Check your email to confirm your subscription.",
       "privacy": "By subscribing, you agree to our Privacy Policy. Unsubscribe anytime."
     }
@@ -150,8 +150,8 @@
       "about": "About"
     },
     "footer": {
-      "newsletter_title": "Join the Inner Circle",
-      "newsletter_desc": "Get early access to new releases, exclusive discounts, and pro gaming tips.",
+      "newsletter_title": "Subscribe to MIG updates",
+      "newsletter_desc": "Get restock alerts, setup notes, compatibility updates, and exclusive discounts.",
       "company": "Company",
       "about_us": "About Us",
       "careers": "Careers",
@@ -163,8 +163,14 @@
       "returns": "Returns & Warranty",
       "contact": "Contact Us",
       "privacy": "Privacy Policy",
+      "refund_policy": "Refund Policy",
       "terms": "Terms of Service",
-      "copyright": "{{ year }} {{ shop_name }}. All rights reserved."
+      "contact_information": "Contact Information",
+      "shipping_policy": "Shipping Policy",
+      "country_region": "Country/region",
+      "payment_methods": "Accepted payment methods",
+      "policies": "Store policies",
+      "copyright": "© {{ year }}, {{ shop_name }} Powered by Shopify"
     }
   },
   "pagefly": {

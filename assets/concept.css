@@ -239,8 +239,36 @@ body.concept-store {
 .concept-store .product-info h1 { color: var(--concept-ink); font-family: var(--font-sans); letter-spacing: -.05em; }
 .concept-store .product-accordion { border: 1px solid var(--concept-line); background: #fff; }
 
-.concept-store footer { border-color: var(--concept-line); background: #f3f3f1; }
-.concept-store footer h4, .concept-store footer p, .concept-store footer a { color: var(--concept-ink); }
+.concept-store footer { border-color: var(--concept-line); background: #f3f6fb; }
+.concept-store footer h4, .concept-store footer p, .concept-store footer a { color: #4f876f; }
+.concept-footer { padding: 0; border-top: 1px solid var(--concept-line); }
+.concept-footer .container-page { padding: 58px 44px 38px; }
+.concept-footer-top { display: grid; grid-template-columns: minmax(320px, 560px) 1fr; align-items: center; gap: 48px; padding-bottom: 58px; }
+.concept-footer-newsletter h4 { margin-bottom: 24px; color: #4f876f; font-size: clamp(24px, 2.4vw, 34px); font-weight: 700; letter-spacing: .04em; }
+.concept-footer-newsletter p { max-width: 520px; margin-bottom: 18px; color: #759988; font-size: 15px; line-height: 1.55; }
+.concept-footer-newsletter-form { display: grid; grid-template-columns: 1fr 54px; gap: 8px; max-width: 520px; padding: 7px; border: 1.5px solid #4f876f; border-radius: 999px; background: transparent; }
+.concept-footer-newsletter-form input[type=email] { min-width: 0; width: 100%; padding: 0 18px; border: 0; background: transparent; color: #315d4b; font-size: 17px; letter-spacing: .08em; }
+.concept-footer-newsletter-form input[type=email]:focus { outline: 0; }
+.concept-footer-newsletter-form button { display: grid; width: 54px; height: 54px; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #4f876f; font-size: 28px; cursor: pointer; transition: transform .2s, background .2s, color .2s; }
+.concept-footer-newsletter-form button:hover { transform: translateX(2px); background: #4f876f; color: #fff; }
+.concept-footer-message { grid-column: 1 / -1; padding: 0 18px 6px; color: #3f684b; font-size: 13px; }
+.concept-footer-error { color: #a33737; }
+.concept-footer-social { display: flex; align-items: center; justify-content: flex-end; gap: 28px; font-size: 24px; font-weight: 800; }
+.concept-footer-social a { display: inline-flex; min-width: 30px; min-height: 30px; align-items: center; justify-content: center; color: #4f876f; }
+.concept-footer-middle { display: grid; grid-template-columns: minmax(280px, 420px) 1fr; align-items: end; gap: 48px; padding: 58px 0 48px; border-top: 1px solid #e2e8ef; }
+.concept-footer-localization p { margin-bottom: 16px; color: #6e9c8a; font-size: 17px; font-weight: 600; letter-spacing: .02em; }
+.concept-footer-localization-form select,
+.concept-footer-localization-static { min-width: min(100%, 300px); height: 58px; padding: 0 46px 0 22px; border: 1.5px solid #4f876f; border-radius: 999px; background: transparent; color: #4f876f; font: inherit; font-size: 16px; }
+.concept-footer-localization-form select { cursor: pointer; appearance: auto; }
+.concept-footer-localization-static { display: inline-flex; align-items: center; }
+.concept-footer-payments { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; }
+.concept-footer-payment-icon { width: 44px; height: auto; border-radius: 4px; }
+.concept-footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 22px; color: #6e9c8a; font-size: 13px; letter-spacing: .04em; }
+.concept-footer-bottom p { margin: 0; color: #6e9c8a; }
+.concept-footer-policies { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 0; }
+.concept-footer-policies a { color: #6e9c8a; }
+.concept-footer-policies a:hover { color: #315d4b; }
+.concept-footer-policies a + a::before { content: "·"; margin: 0 12px; color: #8fb0a2; }
 
 .concept-newsletter { padding: 42px 0 96px; background: #fff; color: var(--concept-ink); }
 .concept-newsletter-inner { display: grid; grid-template-columns: 1.08fr .92fr; gap: 42px; padding: 58px; overflow: hidden; border-radius: 26px; background: #e9e7e2; }
@@ -331,6 +359,16 @@ body.concept-store {
   .concept-newsletter-inner { grid-template-columns: 1fr; gap: 26px; padding: 32px 22px; border-radius: 20px; }
   .concept-newsletter-form { grid-template-columns: 1fr 50px; }
   .concept-newsletter-form button { width: 50px; height: 50px; }
+  .concept-footer .container-page { padding: 38px 24px 30px; }
+  .concept-footer-top,
+  .concept-footer-middle { grid-template-columns: 1fr; gap: 28px; }
+  .concept-footer-top { padding-bottom: 38px; }
+  .concept-footer-middle { padding: 38px 0 32px; }
+  .concept-footer-social,
+  .concept-footer-payments { justify-content: flex-start; }
+  .concept-footer-bottom { align-items: flex-start; flex-direction: column; }
+  .concept-footer-policies { justify-content: flex-start; }
+  .concept-footer-newsletter-form { max-width: 100%; }
   .concept-tech-section { padding: 58px 0 52px; }
   .concept-tech-intro { margin-bottom: 34px; }
   .concept-tech-intro > p { margin-bottom: 10px; font-size: 10px; }
