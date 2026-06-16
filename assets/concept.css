@@ -97,11 +97,18 @@ body.concept-store {
 .concept-discount-close { position: absolute; top: 18px; right: 20px; border: 0; background: transparent; color: #555; font-size: 34px; line-height: 1; cursor: pointer; }
 .concept-discount-eyebrow { margin: 0 0 10px; color: #6a6a6a; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .concept-discount-dialog h2 { margin: 0 0 18px; font-size: clamp(26px, 4vw, 32px); letter-spacing: -.04em; }
+.concept-discount-form { margin: 0; }
+.concept-discount-input { width: 100%; min-height: 58px; margin-bottom: 14px; padding: 0 18px; border: 1px solid rgba(0,0,0,.18); border-radius: 12px; background: #fff; color: #171717; font-size: 16px; }
+.concept-discount-input:focus { outline: 2px solid #2f72b7; outline-offset: 2px; }
+.concept-discount-submit { width: 100%; min-height: 58px; border: 0; border-radius: 12px; background: #171717; color: #fff; font-size: 16px; font-weight: 800; cursor: pointer; }
 .concept-discount-code { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 18px; border: 1px solid rgba(0,0,0,.12); border-radius: 14px; background: #f6f6f6; color: #2f72b7; cursor: pointer; }
 .concept-discount-code span { font-size: 24px; font-weight: 900; letter-spacing: .04em; }
 .concept-discount-code small { color: #5f5f5f; font-size: 12px; font-weight: 800; text-transform: uppercase; }
 .concept-discount-code.is-copied small { color: #108a4f; }
 .concept-discount-note { margin: 18px 0 24px; font-size: 15px; line-height: 1.5; }
+.concept-discount-error { margin-bottom: 14px; color: #a01818; font-size: 14px; text-align: left; }
+.concept-discount-error ul { margin: 0; padding-left: 18px; }
+.concept-discount-legal { margin: 14px 0 0; color: #555; font-size: 12px; line-height: 1.45; }
 .concept-discount-shop { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 54px; border-radius: 999px; background: #171717; color: #fff; font-size: 16px; font-weight: 800; }
 
 .concept-hero {

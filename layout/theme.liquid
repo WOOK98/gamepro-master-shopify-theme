@@ -122,13 +122,43 @@
     >
       <button class="concept-discount-close" type="button" data-discount-close aria-label="Close discount popup">×</button>
       <p class="concept-discount-eyebrow">{{ promo_rail_text }}</p>
-      <h2 id="ConceptDiscountTitle">Your discount code:</h2>
-      <button class="concept-discount-code" type="button" data-discount-copy data-code="{{ promo_discount_code }}">
-        <span>{{ promo_discount_code }}</span>
-        <small>Copy</small>
-      </button>
-      <p class="concept-discount-note">5% off entire order · One use per customer</p>
-      <a class="concept-discount-shop" href="{{ routes.all_products_collection_url }}">Shop now</a>
+      {% form 'customer', id: 'ConceptDiscountForm', class: 'concept-discount-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter, discount-5">
+        <input type="hidden" name="contact[accepts_marketing]" value="true">
+        <input type="hidden" name="return_to" value="{{ request.path }}#discount-code">
+
+        {% if form.posted_successfully? %}
+          <h2 id="ConceptDiscountTitle">Your discount code:</h2>
+          <button class="concept-discount-code" type="button" data-discount-copy data-code="{{ promo_discount_code }}">
+            <span>{{ promo_discount_code }}</span>
+            <small>Copy</small>
+          </button>
+          <p class="concept-discount-note">5% off entire order · One use per customer</p>
+          <a class="concept-discount-shop" href="{{ routes.all_products_collection_url }}">Shop now</a>
+        {% else %}
+          <h2 id="ConceptDiscountTitle">Get 5% off your order</h2>
+          <p class="concept-discount-note">Enter your email to receive the discount code. We use Shopify's form protection to reduce bot signups.</p>
+          {% if form.errors %}
+            <div class="concept-discount-error" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+          <label class="visually-hidden" for="ConceptDiscountEmail">Email</label>
+          <input
+            id="ConceptDiscountEmail"
+            class="concept-discount-input"
+            type="email"
+            name="contact[email]"
+            autocomplete="email"
+            autocorrect="off"
+            autocapitalize="off"
+            placeholder="Email"
+            required
+          >
+          <button class="concept-discount-submit" type="submit">Get discount code</button>
+          <p class="concept-discount-legal">By signing up, you agree to receive marketing emails. You can unsubscribe anytime.</p>
+        {% endif %}
+      {% endform %}
     </div>
   </div>
 

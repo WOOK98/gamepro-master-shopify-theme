@@ -246,11 +246,16 @@
     if (!modal) return;
 
     var copyButton = modal.querySelector('[data-discount-copy]');
+    var emailInput = modal.querySelector('.concept-discount-input');
 
     function openModal() {
       modal.hidden = false;
       document.body.classList.add('discount-modal-open');
-      if (copyButton) copyButton.focus();
+      if (copyButton) {
+        copyButton.focus();
+      } else if (emailInput) {
+        emailInput.focus();
+      }
     }
 
     function closeModal() {
@@ -294,6 +299,8 @@
         }
       });
     }
+
+    if (window.location.hash === '#discount-code') openModal();
   }
 
   // ============================================================
