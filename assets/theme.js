@@ -236,7 +236,68 @@
   }
 
   // ============================================================
-  // 10. Shopify section load/unload
+  // 10. Discount popup
+  // ============================================================
+  function initDiscountPopup() {
+    if (document.documentElement.dataset.discountPopupReady) return;
+    document.documentElement.dataset.discountPopupReady = 'true';
+
+    var modal = document.querySelector('[data-discount-modal]');
+    if (!modal) return;
+
+    var copyButton = modal.querySelector('[data-discount-copy]');
+
+    function openModal() {
+      modal.hidden = false;
+      document.body.classList.add('discount-modal-open');
+      if (copyButton) copyButton.focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove('discount-modal-open');
+    }
+
+    document.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-discount-trigger]');
+      if (trigger) {
+        event.preventDefault();
+        openModal();
+        return;
+      }
+
+      if (event.target.closest('[data-discount-close]')) {
+        event.preventDefault();
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
+    });
+
+    if (copyButton) {
+      copyButton.addEventListener('click', function () {
+        var code = copyButton.getAttribute('data-code');
+        if (!code) return;
+
+        function markCopied() {
+          copyButton.classList.add('is-copied');
+          var label = copyButton.querySelector('small');
+          if (label) label.textContent = 'Copied';
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(markCopied).catch(markCopied);
+        } else {
+          markCopied();
+        }
+      });
+    }
+  }
+
+  // ============================================================
+  // 11. Shopify section load/unload
   // ============================================================
   document.addEventListener('shopify:section:load', function () {
     initAll();
@@ -267,6 +328,7 @@
     initPlatformGrid();
     initCollectionFilters();
     initSmoothScroll();
+    initDiscountPopup();
   }
 
   // Run on DOM ready

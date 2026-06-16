@@ -104,12 +104,33 @@
     <a href="{{ settings.social_youtube | default: '#' }}" aria-label="YouTube">▶</a>
     <a
       class="concept-social-promo"
-      href="/discount/{{ promo_discount_code }}?redirect=/collections/all"
+      href="#discount-code"
+      data-discount-trigger
       aria-label="{{ promo_rail_text }} discount"
     >
       {{ promo_rail_text }}
     </a>
   </aside>
+
+  <div class="concept-discount-modal" data-discount-modal hidden>
+    <div class="concept-discount-backdrop" data-discount-close></div>
+    <div
+      class="concept-discount-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="ConceptDiscountTitle"
+    >
+      <button class="concept-discount-close" type="button" data-discount-close aria-label="Close discount popup">×</button>
+      <p class="concept-discount-eyebrow">{{ promo_rail_text }}</p>
+      <h2 id="ConceptDiscountTitle">Your discount code:</h2>
+      <button class="concept-discount-code" type="button" data-discount-copy data-code="{{ promo_discount_code }}">
+        <span>{{ promo_discount_code }}</span>
+        <small>Copy</small>
+      </button>
+      <p class="concept-discount-note">5% off entire order · One use per customer</p>
+      <a class="concept-discount-shop" href="{{ routes.all_products_collection_url }}">Shop now</a>
+    </div>
+  </div>
 
   <main role="main" id="MainContent">
     {{ content_for_layout }}
