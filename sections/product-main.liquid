@@ -1,19 +1,26 @@
-<div class="section-padding" data-section-type="product-main">
+<div class="section-padding" data-section-type="product-main" data-product-main-section>
   <div class="container-page">
     {% if product %}
     {% assign product_display_title = product.metafields.custom.short_title.value | default: product.title %}
-    <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    <div class="product-layout">
       <!-- Product images gallery -->
       <div class="product-gallery">
-        <div class="product-main-image rounded-2xl overflow-hidden bg-bg-card aspect-square mb-4">
+        <div class="product-main-image">
           {% if product.featured_image %}
             <img
-              src="{{ product.featured_image | image_url: width: 800 }}"
+              src="{{ product.featured_image | image_url: width: 1600 }}"
+              srcset="
+                {{ product.featured_image | image_url: width: 800 }} 800w,
+                {{ product.featured_image | image_url: width: 1200 }} 1200w,
+                {{ product.featured_image | image_url: width: 1600 }} 1600w
+              "
+              sizes="(min-width: 990px) 58vw, 100vw"
               alt="{{ product.featured_image.alt | default: product.title | escape }}"
-              width="800"
-              height="800"
+              width="{{ product.featured_image.width }}"
+              height="{{ product.featured_image.height }}"
               loading="eager"
-              class="w-full h-full object-cover object-center"
+              class="product-main-image-media"
               id="product-main-image"
             >
           {% endif %}
@@ -24,10 +31,11 @@
             {% for image in product.images %}
               <button
                 type="button"
-                class="product-thumb rounded-lg overflow-hidden bg-bg-card border-2 {% if forloop.first %}border-accent-cyan{% else %}border-transparent{% endif %} aspect-square"
-                data-image-src="{{ image | image_url: width: 800 }}"
+                class="product-thumb {% if forloop.first %}is-active{% endif %}"
+                data-image-src="{{ image | image_url: width: 1600 }}"
+                aria-label="View product image {{ forloop.index }}"
               >
-                <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | default: product.title | escape }}" width="200" height="200" loading="lazy" class="w-full h-full object-cover">
+                <img src="{{ image | image_url: width: 320 }}" alt="{{ image.alt | default: product.title | escape }}" width="320" height="320" loading="lazy">
               </button>
             {% endfor %}
           </div>
@@ -40,7 +48,7 @@
           <p class="text-text-muted text-xs uppercase tracking-widest mb-2">{{ product.vendor }}</p>
         {% endif %}
 
-        <h1 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+        <h1>
           {{ product_display_title }}
         </h1>
 
@@ -53,64 +61,53 @@
         {% endif %}
 
         <!-- Price -->
-        <div class="mb-6 pb-6 border-b border-gray-800">
+        <div class="product-price-block">
           {% render 'price', product: product %}
         </div>
 
         <!-- Variant selectors -->
         {% unless product.has_only_default_variant %}
-          {% for option in product.options_with_values %}
-            <div class="mb-5">
-              <label class="block text-sm text-text-muted uppercase tracking-wider mb-3">
-                {{ option.name }}: <span class="text-white font-semibold">{{ option.selected_value }}</span>
+          <div class="product-options" data-product-options>
+            {% for option in product.options_with_values %}
+            <div class="product-option-group" data-option-position="{{ option.position }}">
+              <label class="product-option-label">
+                {{ option.name }}: <span data-selected-option-label>{{ option.selected_value }}</span>
               </label>
-              {% if option.name == 'Color' or option.name == 'Colour' %}
-                <div class="flex flex-wrap gap-3">
-                  {% for value in option.values %}
-                    <button
-                      type="button"
-                      class="color-option w-10 h-10 rounded-full border-2 {% if value == option.selected_value %}border-accent-cyan{% else %}border-gray-700{% endif %} transition-colors"
-                      style="background-color: {{ value | handleize }}"
-                      data-variant-id=""
-                      data-option-value="{{ value | escape }}"
-                      title="{{ value }}"
-                    >
-                    </button>
-                  {% endfor %}
-                </div>
-              {% else %}
-                <div class="flex flex-wrap gap-2">
-                  {% for value in option.values %}
-                    <button
-                      type="button"
-                      class="variant-option px-5 py-2 rounded-lg border {% if value == option.selected_value %}border-accent-cyan text-accent-cyan bg-accent-cyan/5{% else %}border-gray-700 text-text-secondary{% endif %} hover:border-accent-cyan transition-colors text-sm font-mono"
-                      data-option-value="{{ value | escape }}"
-                    >
-                      {{ value }}
-                    </button>
-                  {% endfor %}
-                </div>
-              {% endif %}
+              <div class="product-option-values">
+                {% for value in option.values %}
+                  <button
+                    type="button"
+                    class="product-option-button {% if value == option.selected_value %}is-active{% endif %}"
+                    data-option-value="{{ value | escape }}"
+                  >
+                    {{ value }}
+                  </button>
+                {% endfor %}
+              </div>
             </div>
-          {% endfor %}
+            {% endfor %}
+          </div>
         {% endunless %}
 
         <!-- Add to cart -->
-        {% form 'product', product, id: 'ProductForm', class: 'flex items-center gap-4 mb-6 pt-4' %}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-          <div class="flex items-center border border-gray-700 rounded-xl">
-            <button type="button" class="qty-btn px-4 py-3 text-text-muted hover:text-accent-cyan transition-colors" data-action="decrease">-</button>
-            <input type="number" name="quantity" value="1" min="1" class="qty-input w-16 text-center border-0 bg-transparent text-white font-mono text-sm" readonly>
-            <button type="button" class="qty-btn px-4 py-3 text-text-muted hover:text-accent-cyan transition-colors" data-action="increase">+</button>
+        {% form 'product', product, id: 'ProductForm', class: 'product-form' %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-input>
+          <div class="product-quantity">
+            <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+            <input type="number" name="quantity" value="1" min="1" class="qty-input" readonly>
+            <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
           </div>
 
           <button
             type="submit"
-            class="btn-primary flex-1 add-to-cart-btn"
-            data-variant-id="{{ product.first_available_variant.id }}"
-            {% unless product.available %}disabled{% endunless %}
+            class="btn-primary add-to-cart-btn"
+            data-add-to-cart
+            data-add-text="{{ 'products.product.add_to_cart' | t }}"
+            data-sold-out-text="{{ 'products.product.sold_out' | t }}"
+            data-variant-id="{{ current_variant.id }}"
+            {% unless current_variant.available %}disabled{% endunless %}
           >
-            {% if product.available %}
+            {% if current_variant.available %}
               {% render 'icon' with 'shopping-cart' %}
               {{ 'products.product.add_to_cart' | t }}
             {% else %}
@@ -182,6 +179,9 @@
         </div>
       </div>
     </div>
+    <script type="application/json" data-product-variants>
+      {{ product.variants | json }}
+    </script>
     {% endif %}
   </div>
 </div>
@@ -199,25 +199,102 @@
 
 <script>
 (function() {
+  var section = document.querySelector('[data-product-main-section]');
+  if (!section) return;
+  var variantsNode = section.querySelector('[data-product-variants]');
+  var variants = [];
+  try {
+    variants = variantsNode ? JSON.parse(variantsNode.textContent) : [];
+  } catch (error) {
+    variants = [];
+  }
+  var optionGroups = Array.prototype.slice.call(section.querySelectorAll('.product-option-group'));
+  var selectedOptions = optionGroups.map(function(group) {
+    var active = group.querySelector('.product-option-button.is-active');
+    return active ? active.getAttribute('data-option-value') : '';
+  });
+  var variantInput = section.querySelector('[data-variant-input]');
+  var addBtn = section.querySelector('[data-add-to-cart]');
+  var mainImg = section.querySelector('#product-main-image');
+
+  function findVariant() {
+    return variants.find(function(variant) {
+      return selectedOptions.every(function(value, index) {
+        return variant.options[index] === value;
+      });
+    });
+  }
+
+  function imageFromVariant(variant) {
+    if (!variant || !variant.featured_image) return null;
+    return variant.featured_image.src || variant.featured_image.url || null;
+  }
+
+  function setButtonContent(button, text) {
+    if (!button) return;
+    button.innerHTML = text;
+  }
+
+  function updateVariant() {
+    var variant = findVariant();
+    if (!variant) {
+      if (addBtn) {
+        addBtn.disabled = true;
+        setButtonContent(addBtn, addBtn.getAttribute('data-sold-out-text') || 'Sold out');
+      }
+      return;
+    }
+
+    if (variantInput) variantInput.value = variant.id;
+    if (addBtn) {
+      addBtn.dataset.variantId = variant.id;
+      addBtn.disabled = !variant.available;
+      if (variant.available) {
+        setButtonContent(addBtn, addBtn.getAttribute('data-add-text') || 'Add to Cart');
+      } else {
+        setButtonContent(addBtn, addBtn.getAttribute('data-sold-out-text') || 'Sold out');
+      }
+    }
+
+    var variantImage = imageFromVariant(variant);
+    if (mainImg && variantImage) {
+      mainImg.src = variantImage;
+      mainImg.removeAttribute('srcset');
+    }
+  }
+
   // Thumbnail switcher
-  document.querySelectorAll('.product-thumb').forEach(function(btn) {
+  section.querySelectorAll('.product-thumb').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var src = btn.getAttribute('data-image-src');
-      var mainImg = document.getElementById('product-main-image');
       if (mainImg && src) mainImg.src = src;
 
-      document.querySelectorAll('.product-thumb').forEach(function(t) {
-        t.classList.remove('border-accent-cyan');
-        t.classList.add('border-transparent');
+      section.querySelectorAll('.product-thumb').forEach(function(t) {
+        t.classList.remove('is-active');
       });
-      btn.classList.add('border-accent-cyan');
-      btn.classList.remove('border-transparent');
+      btn.classList.add('is-active');
+    });
+  });
+
+  // Variant selector
+  optionGroups.forEach(function(group, groupIndex) {
+    var label = group.querySelector('[data-selected-option-label]');
+    group.querySelectorAll('.product-option-button').forEach(function(button) {
+      button.addEventListener('click', function() {
+        selectedOptions[groupIndex] = button.getAttribute('data-option-value');
+        group.querySelectorAll('.product-option-button').forEach(function(item) {
+          item.classList.remove('is-active');
+        });
+        button.classList.add('is-active');
+        if (label) label.textContent = selectedOptions[groupIndex];
+        updateVariant();
+      });
     });
   });
 
   // Quantity selector
-  var qtyInput = document.querySelector('.qty-input');
-  document.querySelectorAll('.qty-btn').forEach(function(btn) {
+  var qtyInput = section.querySelector('.qty-input');
+  section.querySelectorAll('.qty-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var val = parseInt(qtyInput.value) || 1;
       if (btn.dataset.action === 'increase') qtyInput.value = val + 1;
@@ -226,11 +303,10 @@
   });
 
   // Add to cart
-  var addBtn = document.querySelector('.add-to-cart-btn');
   if (addBtn) {
     addBtn.addEventListener('click', function(event) {
       event.preventDefault();
-      var variantId = addBtn.dataset.variantId;
+      var variantId = variantInput?.value || addBtn.dataset.variantId;
       var qty = parseInt(qtyInput?.value || 1);
       if (!variantId) return;
 
@@ -254,6 +330,8 @@
     });
     addBtn.dataset.originalText = addBtn.innerHTML;
   }
+
+  updateVariant();
 })();
 </script>
 
