@@ -1,48 +1,5 @@
 <footer class="concept-footer" data-hide-social-rail>
   <div class="container-page">
-    <div class="concept-footer-top">
-      <div class="concept-footer-newsletter">
-        <h4>{{ 'layout.footer.newsletter_title' | t }}</h4>
-        <p>{{ 'layout.footer.newsletter_desc' | t }}</p>
-        {% form 'customer', class: 'concept-footer-newsletter-form' %}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <label class="sr-only" for="FooterNewsletterEmail">{{ 'sections.newsletter.placeholder' | t }}</label>
-          <input
-            id="FooterNewsletterEmail"
-            type="email"
-            name="contact[email]"
-            value="{{ form.email }}"
-            placeholder="{{ 'sections.newsletter.placeholder' | t }}"
-            autocomplete="email"
-            required
-          >
-          <button type="submit" aria-label="{{ 'sections.newsletter.button' | t }}">&rarr;</button>
-
-          {% if form.posted_successfully? %}
-            <p class="concept-footer-message">{{ 'sections.newsletter.success_text' | t }}</p>
-          {% endif %}
-
-          {% if form.errors %}
-            <div class="concept-footer-message concept-footer-error">
-              {{ form.errors | default_errors }}
-            </div>
-          {% endif %}
-        {% endform %}
-      </div>
-
-      <div class="concept-footer-social">
-        {% if settings.social_twitter != blank %}
-          <a href="{{ settings.social_twitter }}" aria-label="X" target="_blank" rel="noopener">X</a>
-        {% endif %}
-        {% if settings.social_instagram != blank %}
-          <a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener">◎</a>
-        {% endif %}
-        {% if settings.social_youtube != blank %}
-          <a href="{{ settings.social_youtube }}" aria-label="YouTube" target="_blank" rel="noopener">▶</a>
-        {% endif %}
-      </div>
-    </div>
-
     <div class="concept-footer-middle">
       {% if localization.available_countries.size > 1 %}
         <div class="concept-footer-localization">
