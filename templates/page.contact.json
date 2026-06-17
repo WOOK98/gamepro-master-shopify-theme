@@ -1,1 +1,16 @@
-{"sections":{"main":{"type":"main-contact","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "settings": {}
+    },
+    "game_directory": {
+      "type": "game-directory",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "game_directory"
+  ]
+}

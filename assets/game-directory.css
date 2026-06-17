@@ -16,6 +16,25 @@
   box-sizing: border-box;
 }
 
+.mig-directory button,
+.mig-directory input,
+.mig-directory textarea {
+  appearance: none;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.mig-directory button {
+  margin: 0;
+}
+
+.mig-directory input[type='search']::-webkit-search-decoration,
+.mig-directory input[type='search']::-webkit-search-cancel-button,
+.mig-directory input[type='search']::-webkit-search-results-button,
+.mig-directory input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
+
 .mig-directory__shell {
   max-width: 1180px;
   margin: 0 auto;
@@ -104,6 +123,8 @@
 }
 
 .mig-directory__toolbar {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   padding: 22px clamp(22px, 5vw, 60px);
   background: #f0efeb;
   border-bottom: 1px solid var(--mig-directory-line);
@@ -126,6 +147,7 @@
   border: 0;
   cursor: pointer;
   font: inherit;
+  text-decoration: none;
 }
 
 .mig-directory__capacity-button {
@@ -151,6 +173,7 @@
 
 .mig-directory__search svg {
   position: absolute;
+  z-index: 2;
   left: 18px;
   width: 22px;
   height: 22px;
@@ -158,8 +181,11 @@
 }
 
 .mig-directory__search input {
+  display: block;
   width: 100%;
   min-height: 56px;
+  height: 56px;
+  margin: 0;
   padding: 0 102px 0 52px;
   border: 1px solid rgba(0, 0, 0, .08);
   border-radius: 18px;
@@ -167,6 +193,7 @@
   color: var(--mig-directory-ink);
   font: inherit;
   outline: none;
+  box-shadow: none;
 }
 
 .mig-directory__search input:focus {
@@ -176,6 +203,7 @@
 
 .mig-directory__search span:last-child {
   position: absolute;
+  z-index: 2;
   right: 14px;
   padding: 7px 10px;
   border-radius: 999px;
@@ -449,6 +477,10 @@
   .mig-directory__footer {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .mig-directory__toolbar {
+    display: flex;
   }
 
   .mig-directory__capacity {
