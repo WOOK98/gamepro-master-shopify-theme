@@ -18,6 +18,19 @@
 <!-- DeepLumen Bidirectional Canonical END -->
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
+  {% assign seo_description = page_description | default: shop.description | default: settings.seo_default_description %}
+  {% if seo_description == blank %}
+    {% assign seo_description = 'Shop MIG Flash V2, MIG Flash Dumper, Switch 2 accessories, controllers, chargers, adapters, and setup gear from MIG Master.' %}
+  {% endif %}
+  {% assign seo_image_url = blank %}
+  {% if request.page_type == 'product' and product.featured_image %}
+    {% assign seo_image_url = product.featured_image | image_url: width: 1200 | prepend: 'https:' %}
+  {% elsif settings.share_image %}
+    {% assign seo_image_url = settings.share_image | image_url: width: 1200 | prepend: 'https:' %}
+  {% else %}
+    {% assign seo_image_url = 'hero-mig-flash.png' | asset_url | prepend: 'https:' %}
+  {% endif %}
+
   <title>
     {{ page_title }}
     {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -25,31 +38,19 @@
     {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
   </title>
 
-  {% if page_description %}
-    <meta name="description" content="{{ page_description | escape }}">
-  {% endif %}
+  <meta name="description" content="{{ seo_description | strip_html | strip | truncate: 160 | escape }}">
 
   <meta property="og:site_name" content="{{ shop.name | escape }}">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:title" content="{{ page_title | escape }}">
   <meta property="og:type" content="{% if request.page_type == 'product' %}product{% elsif request.page_type == 'article' %}article{% else %}website{% endif %}">
-  {% if page_description %}
-    <meta property="og:description" content="{{ page_description | escape }}">
-  {% endif %}
-  {% if request.page_type == 'product' and product.featured_image %}
-    {% assign seo_image_url = product.featured_image | image_url: width: 1200 %}
-    <meta property="og:image" content="{{ shop.url }}{{ seo_image_url }}">
-    <meta property="og:image:secure_url" content="{{ shop.url }}{{ seo_image_url }}">
-  {% elsif settings.share_image %}
-    {% assign seo_image_url = settings.share_image | image_url: width: 1200 %}
-    <meta property="og:image" content="{{ shop.url }}{{ seo_image_url }}">
-    <meta property="og:image:secure_url" content="{{ shop.url }}{{ seo_image_url }}">
-  {% endif %}
+  <meta property="og:description" content="{{ seo_description | strip_html | strip | truncate: 200 | escape }}">
+  <meta property="og:image" content="{{ seo_image_url }}">
+  <meta property="og:image:secure_url" content="{{ seo_image_url }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ page_title | escape }}">
-  {% if page_description %}
-    <meta name="twitter:description" content="{{ page_description | escape }}">
-  {% endif %}
+  <meta name="twitter:description" content="{{ seo_description | strip_html | strip | truncate: 200 | escape }}">
+  <meta name="twitter:image" content="{{ seo_image_url }}">
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -58,7 +59,11 @@
       "@type": "Organization",
       "name": "{{ shop.name }}",
       "url": "{{ shop.url }}",
-      "description": "{{ shop.description | escape }}"
+      "logo": "{{ 'logo-migflash.png' | asset_url | prepend: 'https:' }}",
+      "description": {{ seo_description | strip_html | strip | json }},
+      "sameAs": [
+        {{ settings.social_twitter | default: 'https://x.com/migmastershop' | json }}
+      ]
     }
   </script>
 

@@ -166,6 +166,22 @@
     ]
   },
   {
+    "name": "SEO",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "seo_default_description",
+        "label": "Default meta description",
+        "default": "Shop MIG Flash V2, MIG Flash Dumper, Switch 2 accessories, controllers, chargers, adapters, and setup gear from MIG Master."
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default social sharing image"
+      }
+    ]
+  },
+  {
     "name": "Trust & Social",
     "settings": [
       {
