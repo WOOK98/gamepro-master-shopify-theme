@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "game-directory",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

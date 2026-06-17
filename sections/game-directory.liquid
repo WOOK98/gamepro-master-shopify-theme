@@ -1,0 +1,142 @@
+{% comment %}
+  MIG game directory section.
+  Renders a searchable, selectable compatibility list while keeping the large data set in game-directory.js.
+{% endcomment %}
+
+{{ 'game-directory.css' | asset_url | stylesheet_tag }}
+
+<section class="mig-directory" data-mig-game-directory>
+  <div class="mig-directory__shell">
+    <header class="mig-directory__hero">
+      <p class="mig-directory__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1 class="mig-directory__title">{{ section.settings.title | escape }}</h1>
+    </header>
+
+    <div class="mig-directory__dashboard" aria-live="polite">
+      <div class="mig-directory__usage-row">
+        <span>{{ section.settings.usage_label | escape }} <strong data-usage-gb>0.0</strong> GB</span>
+        <span><strong data-usage-percent>0</strong>%</span>
+      </div>
+      <div class="mig-directory__progress" aria-hidden="true"><span data-progress-bar></span></div>
+      <div class="mig-directory__stats">
+        <span>共 <strong data-total-games>0</strong> 款游戏</span>
+        <span>显示 <strong data-filtered-count>0</strong></span>
+        <span>已选 <strong data-selected-count>0</strong> 款</span>
+      </div>
+    </div>
+
+    <div class="mig-directory__toolbar">
+      <div class="mig-directory__capacity" role="group" aria-label="Storage capacity">
+        <button class="mig-directory__capacity-button is-active" type="button" data-capacity="128">128G</button>
+        <button class="mig-directory__capacity-button" type="button" data-capacity="256">256G</button>
+        <button class="mig-directory__capacity-button" type="button" data-capacity="512">512G</button>
+      </div>
+
+      <label class="mig-directory__search">
+        <span class="visually-hidden">Search games</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.8 18.1a7.3 7.3 0 1 1 5.2-2.2l4 4-1.7 1.7-4-4a7.2 7.2 0 0 1-3.5.5Zm0-2.4a4.9 4.9 0 1 0 0-9.8 4.9 4.9 0 0 0 0 9.8Z"/></svg>
+        <input type="search" data-search-input placeholder="{{ section.settings.search_placeholder | escape }}" autocomplete="off">
+        <span data-search-mode>搜索</span>
+      </label>
+    </div>
+
+    <div class="mig-directory__hint rte">
+      {{ section.settings.search_hint }}
+    </div>
+
+    <nav class="mig-directory__categories" data-category-tabs aria-label="Game categories"></nav>
+
+    <div class="mig-directory__sort" role="group" aria-label="Sort games">
+      <span>排序:</span>
+      <button class="mig-directory__sort-button is-active" type="button" data-sort="pinyin">按拼音</button>
+      <button class="mig-directory__sort-button" type="button" data-sort="size-desc">容量↓</button>
+      <button class="mig-directory__sort-button" type="button" data-sort="size-asc">容量↑</button>
+      <button class="mig-directory__sort-button" type="button" data-sort="name">名称</button>
+    </div>
+
+    <div class="mig-directory__list" data-game-list></div>
+
+    <footer class="mig-directory__footer">
+      <div>
+        <strong data-selected-count-secondary>0</strong> 款已选，合计 <strong data-usage-gb>0.0</strong> GB
+      </div>
+      <div class="mig-directory__actions">
+        <button class="mig-directory__button mig-directory__button--secondary" type="button" data-reset-button>清空选择</button>
+        <button class="mig-directory__button" type="button" data-generate-button>{{ section.settings.generate_button_label | escape }}</button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="mig-directory__overlay" data-list-overlay hidden>
+    <div class="mig-directory__modal" role="dialog" aria-modal="true" aria-labelledby="MigDirectoryModalTitle">
+      <button class="mig-directory__modal-close" type="button" data-close-button aria-label="Close">×</button>
+      <p class="mig-directory__eyebrow">{{ section.settings.modal_title | escape }}</p>
+      <h2 id="MigDirectoryModalTitle">{{ section.settings.modal_description | escape }}</h2>
+      <textarea data-result-output readonly></textarea>
+      <button class="mig-directory__button" type="button" data-copy-button>复制清单</button>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'game-directory.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Game directory",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Compatibility List"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "MIG 游戏库库管专家"
+    },
+    {
+      "type": "text",
+      "id": "usage_label",
+      "label": "Usage label",
+      "default": "存储占用"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "搜索游戏名，或输入序号：1,5,20-30"
+    },
+    {
+      "type": "richtext",
+      "id": "search_hint",
+      "label": "Search hint",
+      "default": "<p>输入 <strong>1,5,20-30</strong> 会只显示这些序号，并自动选中，方便按清单安装游戏。</p>"
+    },
+    {
+      "type": "text",
+      "id": "generate_button_label",
+      "label": "Generate button label",
+      "default": "生成安装清单"
+    },
+    {
+      "type": "text",
+      "id": "modal_title",
+      "label": "Modal eyebrow",
+      "default": "安装清单"
+    },
+    {
+      "type": "text",
+      "id": "modal_description",
+      "label": "Modal title",
+      "default": "已为您统计好序号及详细列表"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Game directory"
+    }
+  ]
+}
+{% endschema %}
