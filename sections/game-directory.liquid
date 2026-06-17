@@ -15,12 +15,12 @@
 
 <section class="mig-directory" data-mig-game-directory>
   <div class="mig-directory__shell">
-    <header class="mig-directory__hero">
-      <p class="mig-directory__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      <h1 class="mig-directory__title">{{ section.settings.title | escape }}</h1>
-    </header>
-
     <div class="mig-directory__dashboard" aria-live="polite">
+      <header class="mig-directory__hero">
+        <p class="mig-directory__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h1 class="mig-directory__title">{{ section.settings.title | escape }}</h1>
+      </header>
+
       <div class="mig-directory__usage-row">
         <span>{{ section.settings.usage_label | escape }} <strong data-usage-gb>0.0</strong> GB</span>
         <span><strong data-usage-percent>0</strong>%</span>
