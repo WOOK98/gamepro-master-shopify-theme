@@ -28,6 +28,7 @@
     game.size = Number(game.size || game.s || 0);
     game.id = Number(game.id);
   });
+  const gameById = new Map(games.map((game) => [game.id, game]));
 
   function parseIds(value) {
     const input = value.trim().replace(/[，；]/g, ',').replace(/[—–]/g, '-').replace(/#/g, '');
@@ -71,7 +72,8 @@
       searchInput: $(root, '[data-search-input]'),
       searchMode: $(root, '[data-search-mode]'),
       overlay: $(root, '[data-list-overlay]'),
-      resultOutput: $(root, '[data-result-output]')
+      resultOutput: $(root, '[data-result-output]'),
+      capacityNotice: $(root, '[data-capacity-notice]')
     };
 
     const state = {
@@ -98,6 +100,51 @@
       elements.progressBar.style.width = percent + "%";
       elements.selectedCount.textContent = String(state.selected.size);
       elements.selectedCountSecondary.textContent = String(state.selected.size);
+    }
+
+    function setNotice(message) {
+      if (!elements.capacityNotice) return;
+      if (!message) {
+        elements.capacityNotice.hidden = true;
+        elements.capacityNotice.textContent = "";
+        return;
+      }
+      elements.capacityNotice.textContent = message;
+      elements.capacityNotice.hidden = false;
+    }
+
+    function remainingCapacity() {
+      return Math.max(0, state.max - state.selectedSize);
+    }
+
+    function selectedGamesById() {
+      return games.filter((game) => state.selected.has(game.id)).sort((a, b) => a.id - b.id);
+    }
+
+    function addGameIfFits(game) {
+      if (!game || state.selected.has(game.id)) return true;
+      const nextSize = state.selectedSize + game.size;
+      if (nextSize > state.max + 0.001) return false;
+      state.selected.add(game.id);
+      state.selectedSize = nextSize;
+      return true;
+    }
+
+    function enforceCapacity() {
+      const currentSelection = selectedGamesById();
+      const kept = [];
+      const skipped = [];
+      state.selected.clear();
+      state.selectedSize = 0;
+      currentSelection.forEach((game) => {
+        if (addGameIfFits(game)) kept.push(game);
+        else skipped.push(game);
+      });
+      if (skipped.length) {
+        setNotice("当前容量只保留了 " + kept.length + " 款，已跳过超出容量的序号：" + skipped.map((game) => "#" + game.id).join(", ") + "。");
+      } else {
+        setNotice("");
+      }
     }
 
     function sorted(list) {
@@ -162,11 +209,24 @@
 
     function selectIds(ids) {
       state.selected.clear();
-      const wanted = new Set(ids);
-      games.forEach((game) => { if (wanted.has(game.id)) state.selected.add(game.id); });
-      recalculateSelectedSize();
-      const bigger = Object.keys(capacities).map(Number).find((capacity) => capacities[capacity] >= state.selectedSize);
-      if (bigger) setCapacity(bigger);
+      state.selectedSize = 0;
+      const skipped = [];
+      const missing = [];
+      ids.forEach((id) => {
+        const game = gameById.get(Number(id));
+        if (!game) {
+          missing.push(id);
+          return;
+        }
+        if (!addGameIfFits(game)) skipped.push(game);
+      });
+      if (skipped.length || missing.length) {
+        const skippedText = skipped.length ? "容量不足，已跳过：" + skipped.map((game) => "#" + game.id).join(", ") + "。" : "";
+        const missingText = missing.length ? "未找到序号：" + missing.map((id) => "#" + id).join(", ") + "。" : "";
+        setNotice([skippedText, missingText].filter(Boolean).join(" "));
+      } else {
+        setNotice("");
+      }
     }
 
     function setCapacity(capacity) {
@@ -174,6 +234,7 @@
       $$(root, "[data-capacity]").forEach((button) => {
         button.classList.toggle("is-active", Number(button.dataset.capacity) === Number(capacity));
       });
+      if (state.selectedSize > state.max) enforceCapacity();
       updateUsage();
     }
 
@@ -206,8 +267,16 @@
         const id = Number(row.dataset.gameId);
         const game = games.find((item) => item.id === id);
         if (!game) return;
-        if (state.selected.has(id)) state.selected.delete(id); else state.selected.add(id);
-        recalculateSelectedSize();
+        if (state.selected.has(id)) {
+          state.selected.delete(id);
+          recalculateSelectedSize();
+          setNotice("");
+        } else if (!addGameIfFits(game)) {
+          setNotice("容量不足：当前还剩 " + remainingCapacity().toFixed(2) + " GB，#" + game.id + " 需要 " + game.size.toFixed(2) + " GB。请先取消其他游戏，或切换到更大容量。");
+          return;
+        } else {
+          setNotice("");
+        }
         row.classList.toggle("is-selected", state.selected.has(id));
         updateUsage();
       }
