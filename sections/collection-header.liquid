@@ -24,6 +24,9 @@
         <!-- Filter bar -->
         <div class="flex flex-wrap items-center justify-between gap-4 mt-8 pt-8 border-t border-gray-800">
           <div class="flex flex-wrap gap-2">
+            <a class="concept-best-sellers-link" href="{{ collection.url }}?sort_by=best-selling">
+              Show best sellers
+            </a>
             {% if collection.all_tags.size > 0 %}
               {% for tag in collection.all_tags limit: 6 %}
                 <button

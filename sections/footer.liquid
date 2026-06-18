@@ -29,6 +29,12 @@
 
       {% if settings.show_payment_icons and shop.enabled_payment_types.size > 0 %}
         <div class="concept-footer-payments" aria-label="{{ 'layout.footer.payment_methods' | t }}">
+          {% if settings.shop_follow_enabled %}
+            <a class="concept-shop-follow concept-shop-follow--footer" href="{{ settings.shop_follow_url | default: shop.url }}" target="_blank" rel="noopener">
+              <span aria-hidden="true">♡</span>
+              Follow on Shop
+            </a>
+          {% endif %}
           {% for type in shop.enabled_payment_types %}
             {{ type | payment_type_svg_tag: class: 'concept-footer-payment-icon' }}
           {% endfor %}

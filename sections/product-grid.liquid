@@ -28,8 +28,11 @@
 
     <!-- Product grid -->
     <div class="product-grid-container grid grid-cols-2 lg:grid-cols-{{ section.settings.columns_desktop }} gap-4 lg:gap-6">
-      {% if section.settings.collection %}
+      {% assign selected_collection = collection %}
+      {% if section.settings.collection != blank %}
         {% assign selected_collection = collections[section.settings.collection] %}
+      {% endif %}
+      {% if selected_collection != blank %}
         {% for product in selected_collection.products limit: section.settings.products_to_show %}
           {% render 'product-card',
             product: product,
@@ -125,9 +128,9 @@
       "type": "range",
       "id": "products_to_show",
       "label": "Products to show",
-      "min": 4,
+      "min": 2,
       "max": 24,
-      "step": 4,
+      "step": 2,
       "default": 8
     },
     {

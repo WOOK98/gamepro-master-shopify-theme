@@ -12,7 +12,7 @@
 body.concept-store {
   background: var(--concept-shell);
   color: var(--concept-ink);
-  padding: 24px max(18px, calc((100vw - 1520px) / 2));
+  padding: clamp(12px, 1.25vw, 24px) max(12px, calc((100vw - 1520px) / 2));
   font-family: var(--font-sans);
 }
 
@@ -114,34 +114,34 @@ body.concept-store {
 
 .concept-hero {
   position: relative;
-  min-height: 660px;
+  min-height: clamp(560px, 42vw, 680px);
   margin: 0 auto;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(360px, .9fr) minmax(420px, 1.1fr);
+  grid-template-columns: minmax(360px, .86fr) minmax(480px, 1.14fr);
   align-items: center;
-  gap: 24px;
-  padding: 72px 6vw;
+  gap: clamp(28px, 4vw, 72px);
+  padding: clamp(52px, 5vw, 76px) clamp(44px, 6vw, 92px);
   background: radial-gradient(circle at 78% 35%, #242933 0, #15181f 34%, #07080b 72%);
   color: #fff;
 }
 .concept-controller-art { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(135deg,#353a42,#a8a398); }
 .concept-controller-art img { width: min(1020px, 76vw); opacity: .75; filter: drop-shadow(0 28px 34px rgba(0,0,0,.35)); }
 .concept-hero-image { width: 100%; height: 100%; object-fit: cover; }
-.concept-hero-copy { position: relative; z-index: 2; max-width: 660px; }
+.concept-hero-copy { position: relative; z-index: 3; max-width: 620px; }
 .concept-hero-copy p { margin-bottom: 18px; color: #ef2020; font-size: 20px; letter-spacing: -.02em; font-weight: 800; }
-.concept-hero-copy h1 { max-width: 680px; margin-bottom: 22px; font-size: clamp(50px, 5.5vw, 86px); line-height: .98; letter-spacing: -.07em; font-family: var(--font-sans); text-wrap: balance; }
+.concept-hero-copy h1 { max-width: 640px; margin-bottom: 22px; font-size: clamp(46px, 4.8vw, 78px); line-height: .98; letter-spacing: -.07em; font-family: var(--font-sans); text-wrap: balance; }
 .concept-hero-copy div { max-width: 520px; margin-bottom: 34px; color: rgba(255,255,255,.72); font-size: 18px; line-height: 1.55; }
 .concept-hero-features { display: grid; gap: 18px; margin: 0 0 38px; padding: 0; list-style: none; }
 .concept-hero-features li { display: flex; align-items: center; gap: 16px; color: #fff; font-size: 22px; }
 .concept-hero-features svg { width: 31px; height: 31px; padding: 6px; border: 2px solid #e91515; border-radius: 50%; color: #e91515; }
 .concept-hero-cta { display: inline-flex; align-items: center; gap: 18px; padding: 18px 34px; border-radius: 999px; background: linear-gradient(135deg, #ff1d1d, #c90707); color: #fff; font-size: 20px; font-weight: 800; box-shadow: 0 16px 42px rgba(210, 10, 10, .22); }
 .concept-hero-cta span { font-size: 28px; line-height: 1; }
-.concept-hero-product { position: relative; z-index: 1; min-height: 560px; display: grid; place-items: center; overflow: hidden; border-radius: 36px; background: rgba(255,255,255,.025); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 34px 80px rgba(0,0,0,.28); }
+.concept-hero-product { position: relative; z-index: 1; min-height: clamp(430px, 34vw, 560px); display: grid; place-items: center; overflow: hidden; border-radius: 36px; background: rgba(255,255,255,.025); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 34px 80px rgba(0,0,0,.28); }
 .concept-hero-product::before { content: ""; position: absolute; inset: 18% -8% 8% 22%; border-radius: 42px; background: rgba(239,32,32,.12); filter: blur(40px); }
-.concept-hero-product::after { content: ""; position: absolute; z-index: 2; inset: 0 auto 0 0; width: 50%; background: linear-gradient(90deg, #07090d 0%, rgba(7,9,13,.96) 48%, rgba(7,9,13,0) 100%); pointer-events: none; }
-.concept-hero-product-image { position: relative; z-index: 1; width: 100%; height: 100%; min-height: 560px; object-fit: cover; object-position: 90% center; transform: scale(1.38); transform-origin: 84% center; filter: saturate(1.04) contrast(1.04); }
-.concept-hero-pause { position: absolute; z-index: 4; right: 28px; bottom: 28px; width: 58px; height: 58px; border-radius: 50%; background: #fff; color: #171717; font-weight: 800; }
+.concept-hero-product::after { content: ""; position: absolute; z-index: 2; inset: 0 auto 0 0; width: 38%; background: linear-gradient(90deg, #07090d 0%, rgba(7,9,13,.72) 48%, rgba(7,9,13,0) 100%); pointer-events: none; }
+.concept-hero-product-image { position: relative; z-index: 1; width: 100%; height: 100%; min-height: clamp(430px, 34vw, 560px); object-fit: cover; object-position: 72% center; transform: scale(1.06); transform-origin: center; filter: saturate(1.04) contrast(1.04); }
+.concept-hero-pause { position: absolute; z-index: 4; right: 24px; bottom: 24px; width: 58px; height: 58px; border-radius: 50%; background: #fff; color: #171717; font-weight: 800; }
 
 .concept-category-section { padding: 92px 48px 110px; color: var(--concept-ink); background: var(--concept-paper); }
 .concept-section-heading p { margin-bottom: 10px; color: var(--concept-muted); font-size: 12px; letter-spacing: .14em; font-weight: 700; }
@@ -174,6 +174,17 @@ body.concept-store {
 
 .concept-store .product-grid-section { background: #fff; color: var(--concept-ink); }
 .concept-store .product-grid-section h2 { color: var(--concept-ink); font-family: var(--font-sans); font-size: clamp(38px, 5vw, 64px); letter-spacing: -.07em; }
+.concept-best-sellers-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #171717;
+  color: #fff !important;
+  font-size: 13px;
+  font-weight: 800;
+}
 .concept-scraped-product { overflow: hidden; border-radius: 20px; background: #f5f5f3; }
 .concept-scraped-image { min-height: 275px; display: grid; place-items: center; overflow: hidden; background: #f4f4f2; }
 .concept-scraped-image img { width: 100%; height: 100%; aspect-ratio: 1; object-fit: contain; padding: 18px; transition: transform .35s ease; }
@@ -251,6 +262,30 @@ body.concept-store {
 .product-price-block .price-regular { color: #171717; font-size: 22px; font-weight: 900; }
 .product-price-block .price-compare { color: #777; text-decoration: line-through; }
 .product-price-block .price-badge { padding: 4px 8px; border-radius: 999px; background: #171717; color: #fff; font-size: 12px; font-weight: 800; }
+.concept-sales-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: #5f5f5f;
+  font-size: 13px;
+  font-weight: 800;
+}
+.concept-sales-count span {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #171717;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.concept-sales-count--card {
+  display: flex;
+  margin-top: 10px;
+  color: #777;
+  font-size: 12px;
+}
 .product-options { display: grid; gap: 18px; margin-bottom: 26px; }
 .product-option-label { display: block; margin-bottom: 10px; color: #777; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .product-option-label span { color: #171717; }
@@ -315,6 +350,31 @@ body.concept-store {
 .concept-newsletter-message { grid-column: 1 / -1; padding: 4px 12px; color: #3f684b; font-size: 13px; }
 .concept-newsletter-error { color: #a33737; }
 .concept-newsletter-privacy { margin-top: 14px; color: #777; font-size: 12px; line-height: 1.5; }
+.concept-shop-follow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  margin-top: 18px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #5433e8;
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 12px 28px rgba(84, 51, 232, .18);
+}
+.concept-shop-follow span {
+  font-size: 18px;
+  line-height: 1;
+}
+.concept-shop-follow--footer {
+  margin: 0 10px 0 0;
+  min-height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+}
 
 .concept-tech-section { padding: 108px 0 88px; background: #171717; color: #fff; }
 .concept-tech-intro { max-width: 850px; margin-bottom: 64px; }

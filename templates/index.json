@@ -43,10 +43,6 @@
         "show_demo_products": true
       }
     },
-    "trust-section": {
-      "type": "trust-section",
-      "settings": {}
-    },
     "newsletter": {
       "type": "newsletter",
       "settings": {}
@@ -56,7 +52,6 @@
     "hero",
     "platform-grid",
     "featured-product",
-    "trust-section",
     "newsletter"
   ]
 }

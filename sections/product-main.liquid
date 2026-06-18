@@ -3,6 +3,7 @@
     {% if product %}
     {% assign product_display_title = product.metafields.custom.short_title.value | default: product.title %}
     {% assign current_variant = product.selected_or_first_available_variant %}
+    {% assign product_sales_count = product.metafields.custom.sales_count.value | default: settings.default_sales_count %}
     <div class="product-layout">
       <!-- Product images gallery -->
       <div class="product-gallery">
@@ -33,6 +34,8 @@
                 type="button"
                 class="product-thumb {% if forloop.first %}is-active{% endif %}"
                 data-image-src="{{ image | image_url: width: 1600 }}"
+                data-image-srcset="{{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1200 }} 1200w, {{ image | image_url: width: 1600 }} 1600w"
+                data-image-alt="{{ image.alt | default: product.title | escape }}"
                 aria-label="View product image {{ forloop.index }}"
               >
                 <img src="{{ image | image_url: width: 320 }}" alt="{{ image.alt | default: product.title | escape }}" width="320" height="320" loading="lazy">
@@ -63,6 +66,12 @@
         <!-- Price -->
         <div class="product-price-block">
           {% render 'price', product: product %}
+          {% if settings.show_sales_count and product_sales_count != blank %}
+            <p class="concept-sales-count concept-sales-count--product">
+              <span>Best seller</span>
+              {{ product_sales_count }} sold
+            </p>
+          {% endif %}
         </div>
 
         <!-- Variant selectors -->
@@ -267,7 +276,13 @@
   section.querySelectorAll('.product-thumb').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var src = btn.getAttribute('data-image-src');
-      if (mainImg && src) mainImg.src = src;
+      var srcset = btn.getAttribute('data-image-srcset');
+      var alt = btn.getAttribute('data-image-alt');
+      if (mainImg && src) {
+        mainImg.src = src;
+        if (srcset) mainImg.srcset = srcset;
+        if (alt) mainImg.alt = alt;
+      }
 
       section.querySelectorAll('.product-thumb').forEach(function(t) {
         t.classList.remove('is-active');

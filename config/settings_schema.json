@@ -162,6 +162,18 @@
         "id": "newsletter_enabled",
         "label": "Show newsletter section",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "shop_follow_enabled",
+        "label": "Show Follow on Shop button",
+        "default": true
+      },
+      {
+        "type": "url",
+        "id": "shop_follow_url",
+        "label": "Follow on Shop URL",
+        "info": "Paste your Shop app follow/store URL. Falls back to the storefront URL when blank."
       }
     ]
   },
@@ -224,6 +236,22 @@
         "id": "promo_discount_code",
         "label": "Discount code",
         "default": "F9VPVX2JG9KZ"
+      },
+      {
+        "type": "header",
+        "content": "Sales badges"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sales_count",
+        "label": "Show sales count on products",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "default_sales_count",
+        "label": "Default sales count",
+        "default": "100+"
       }
     ]
   }

@@ -37,6 +37,13 @@
         <p class="concept-newsletter-privacy">
           {{ 'sections.newsletter.privacy' | t }}
         </p>
+
+        {% if settings.shop_follow_enabled %}
+          <a class="concept-shop-follow" href="{{ settings.shop_follow_url | default: shop.url }}" target="_blank" rel="noopener">
+            <span aria-hidden="true">♡</span>
+            Follow on Shop
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>
