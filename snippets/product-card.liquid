@@ -2,7 +2,7 @@
 {% assign image = product.featured_image | default: product.images.first %}
 {% assign product_card_title = product.metafields.custom.short_title.value | default: product.title %}
 {% assign product_image_alt = image.alt | default: product.title %}
-{% assign product_sales_count = product.metafields.custom.sales_count.value | default: settings.default_sales_count %}
+{% assign product_sales_count = product.metafields.custom.sales_count.value %}
 
 <div class="product-card group" data-product-handle="{{ product.handle }}">
   <a href="{{ product.url | within: collection }}" class="product-card-link block">

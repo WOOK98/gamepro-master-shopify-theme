@@ -250,8 +250,9 @@
       {
         "type": "text",
         "id": "default_sales_count",
-        "label": "Default sales count",
-        "default": "100+"
+        "label": "Fallback sales count",
+        "info": "Leave blank to avoid showing unverified sales. Product metafield custom.sales_count is used first.",
+        "default": ""
       }
     ]
   }
