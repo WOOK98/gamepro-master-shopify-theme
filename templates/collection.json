@@ -17,16 +17,17 @@
       "type": "product-grid",
       "settings": {
         "heading": "Shop the collection",
-        "subheading": "Start with the best-selling picks from this collection.",
+        "subheading": "Browse every product available in this collection.",
         "collection": "",
         "show_demo_catalog": true,
-        "products_to_show": 2,
+        "products_to_show": 24,
+        "show_all_products": true,
         "columns_desktop": "3",
         "show_filter_tabs": false,
         "show_vendor": true,
         "show_rating": true,
         "show_platforms": true,
-        "view_all_link": true
+        "view_all_link": false
       }
     }
   },

@@ -67,7 +67,7 @@
     },
     "platform_grid": {
       "heading": "Choose Your Platform",
-      "subheading": "Engineered for Every Player",
+      "subheading": "Selected for MIG and Switch setups",
       "platform_1_name": "PRO CONTROLLERS",
       "platform_1_desc": "Zero drift, maximum precision. Tournament-grade build quality.",
       "platform_2_name": "MOBILE GAMING",
@@ -75,13 +75,13 @@
       "platform_3_name": "PC / STEAM",
       "platform_3_desc": "Full button remapping and advanced macro programming.",
       "platform_4_name": "CONSOLE",
-      "platform_4_desc": "Native platform support with seamless cross-play."
+      "platform_4_desc": "Accessories selected for current Switch and Switch 2 setups."
     },
     "featured_product": {
       "badge": "Flagship Controller",
       "cta": "ADD TO CART",
-      "in_stock": "In Stock · Ships in 24h",
-      "shipping": "Free Worldwide Shipping"
+      "in_stock": "In Stock · Shipping calculated at checkout",
+      "shipping": "Global Express shipping options"
     },
     "product_grid": {
       "heading": "Explore All Products",
@@ -100,16 +100,16 @@
       "subheading": "Technical Excellence"
     },
     "trust_section": {
-      "stat_1_label": "Controllers Sold Worldwide",
-      "stat_2_label": "Countries Served",
-      "stat_3_label": "Positive Reviews",
-      "stat_4_label": "Technical Support",
-      "service_1_title": "Free Worldwide Shipping",
-      "service_1_desc": "On all orders over $50",
-      "service_2_title": "30-Day Return Policy",
-      "service_2_desc": "Hassle-free returns",
-      "service_3_title": "2-Year Warranty",
-      "service_3_desc": "Industry-leading coverage",
+      "stat_1_label": "MIG Setup Essentials",
+      "stat_2_label": "Switch Accessories",
+      "stat_3_label": "Compatibility Notes",
+      "stat_4_label": "Customer Support",
+      "service_1_title": "Global Express Shipping",
+      "service_1_desc": "Rates are based on order value",
+      "service_2_title": "Order Support",
+      "service_2_desc": "Help before and after checkout",
+      "service_3_title": "Setup Guidance",
+      "service_3_desc": "Compatibility details for MIG gear",
       "service_4_title": "Secure Payment",
       "service_4_desc": "SSL encrypted checkout"
     },

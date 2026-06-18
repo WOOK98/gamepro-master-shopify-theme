@@ -27,31 +27,49 @@
     {% endif %}
 
     <!-- Product grid -->
+    {% assign selected_collection = collection %}
+    {% if section.settings.collection != blank %}
+      {% assign selected_collection = collections[section.settings.collection] %}
+    {% endif %}
+
     <div class="product-grid-container grid grid-cols-2 lg:grid-cols-{{ section.settings.columns_desktop }} gap-4 lg:gap-6">
-      {% assign selected_collection = collection %}
-      {% if section.settings.collection != blank %}
-        {% assign selected_collection = collections[section.settings.collection] %}
-      {% endif %}
       {% if selected_collection != blank %}
-        {% for product in selected_collection.products limit: section.settings.products_to_show %}
-          {% render 'product-card',
-            product: product,
-            show_vendor: section.settings.show_vendor,
-            show_rating: section.settings.show_rating,
-            show_platforms: section.settings.show_platforms
-          %}
-        {% else %}
-          {% for i in (1..section.settings.products_to_show) %}
-            <div class="product-card-placeholder rounded-2xl bg-bg-card aspect-[3/4] flex items-center justify-center">
-              <div class="text-center">
-                <div class="w-16 h-16 rounded-full bg-primary-blue/50 flex items-center justify-center mx-auto mb-4">
-                  {% render 'icon' with 'package' %}
-                </div>
-                <p class="text-text-muted text-sm">Add products to<br><span class="text-accent-cyan">{{ section.settings.collection | default: 'collection' }}</span></p>
+        {% if section.settings.show_all_products %}
+          {% paginate selected_collection.products by 250 %}
+            {% for product in selected_collection.products %}
+              {% render 'product-card',
+                product: product,
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating,
+                show_platforms: section.settings.show_platforms
+              %}
+            {% else %}
+              <div class="concept-empty-state">
+                <p>No products found in this collection.</p>
               </div>
-            </div>
+            {% endfor %}
+          {% endpaginate %}
+        {% else %}
+          {% for product in selected_collection.products limit: section.settings.products_to_show %}
+            {% render 'product-card',
+              product: product,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              show_platforms: section.settings.show_platforms
+            %}
+          {% else %}
+            {% for i in (1..section.settings.products_to_show) %}
+              <div class="product-card-placeholder rounded-2xl bg-bg-card aspect-[3/4] flex items-center justify-center">
+                <div class="text-center">
+                  <div class="w-16 h-16 rounded-full bg-primary-blue/50 flex items-center justify-center mx-auto mb-4">
+                    {% render 'icon' with 'package' %}
+                  </div>
+                  <p class="text-text-muted text-sm">Add products to<br><span class="text-accent-cyan">{{ section.settings.collection | default: 'collection' }}</span></p>
+                </div>
+              </div>
+            {% endfor %}
           {% endfor %}
-        {% endfor %}
+        {% endif %}
       {% elsif section.settings.show_demo_catalog %}
         {% assign demo_titles = 'Flagship Controller|Wireless Joy-Con Pair|USB-C Accessory Hub|Portable Charging Case|Display Adapter|Controller Travel Case|Pro Gaming Cable' | split: '|' %}
         {% assign demo_prices = '64.99|84.99|54.99|59.99|29.99|39.99|19.99' | split: '|' %}
@@ -79,7 +97,7 @@
     </div>
 
     <!-- View all link -->
-    {% if section.settings.view_all_link and selected_collection %}
+    {% if section.settings.view_all_link and selected_collection and section.settings.show_all_products == false %}
       <div class="text-center mt-12">
         <a href="{{ selected_collection.url }}" class="btn-outline">
           View All {% render 'icon' with 'arrow-right' %}
@@ -134,6 +152,12 @@
       "default": 8
     },
     {
+      "type": "checkbox",
+      "id": "show_all_products",
+      "label": "Show all products in the selected collection",
+      "default": false
+    },
+    {
       "type": "select",
       "id": "columns_desktop",
       "label": "Columns on desktop",
@@ -180,7 +204,7 @@
       "category": "Collection",
       "settings": {
         "heading": "Featured Controllers",
-        "subheading": "Precision-engineered gear trusted by competitive players worldwide.",
+        "subheading": "Selected MIG tools, Switch accessories, and setup gear.",
         "products_to_show": 8,
         "columns_desktop": "4"
       }
