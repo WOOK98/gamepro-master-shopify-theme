@@ -1,24 +1,23 @@
 <svg width="520" height="160" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">MIG MASTER logo</title>
-  <desc id="desc">A restrained black-and-white MIG MASTER logo with an abstract angular N mark.</desc>
-  <rect width="520" height="160" fill="#050505"/>
-  <rect width="520" height="160" fill="url(#grid)" opacity=".22"/>
+  <desc id="desc">A restrained monochrome MIG MASTER logo with an abstract angular N mark.</desc>
+  <rect width="520" height="160" fill="none"/>
   <g transform="translate(54 34)">
-    <path d="M0 90L34 0H62L28 90H0Z" fill="white"/>
-    <path d="M40 90L72 0H100L68 90H40Z" fill="white" opacity=".92"/>
-    <path d="M0 90H28L68 0H40L0 90Z" fill="url(#shine)" opacity=".42"/>
-    <path d="M28 90H40L62 30H50L28 90Z" fill="#050505" opacity=".7"/>
-    <path d="M0 90H28L34 73H6L0 90Z" fill="#9CA3AF"/>
+    <path d="M0 90L34 0H62L28 90H0Z" fill="#111111"/>
+    <path d="M40 90L72 0H100L68 90H40Z" fill="#111111" opacity=".92"/>
+    <path d="M0 90H28L68 0H40L0 90Z" fill="url(#shine)" opacity=".32"/>
+    <path d="M28 90H40L62 30H50L28 90Z" fill="#F7F7F4" opacity=".78"/>
+    <path d="M0 90H28L34 73H6L0 90Z" fill="#8B8F96"/>
   </g>
-  <g fill="white" font-family="Arial, Helvetica, sans-serif" font-weight="900" letter-spacing="2">
+  <g fill="#111111" font-family="Arial, Helvetica, sans-serif" font-weight="900" letter-spacing="2">
     <text x="178" y="72" font-size="46">MIG</text>
     <text x="178" y="118" font-size="46">MASTER</text>
   </g>
   <defs>
     <linearGradient id="shine" x1="0" y1="0" x2="92" y2="96" gradientUnits="userSpaceOnUse">
-      <stop stop-color="white"/>
-      <stop offset=".42" stop-color="#D1D5DB"/>
-      <stop offset="1" stop-color="#6B7280"/>
+      <stop stop-color="#111111"/>
+      <stop offset=".42" stop-color="#4B5563"/>
+      <stop offset="1" stop-color="#9CA3AF"/>
     </linearGradient>
     <pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse">
       <path d="M12 0H0V12" stroke="white" stroke-width=".45" opacity=".26"/>
