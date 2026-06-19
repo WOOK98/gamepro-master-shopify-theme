@@ -12,15 +12,15 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "hero_overline": "",
-        "hero_title": "",
-        "hero_description": "",
+        "hero_overline": "MIG FLASH V2 & DUMPER",
+        "hero_title": "BACKUP. SWITCH. KEEP PLAYING.",
+        "hero_description": "A clean setup for managing personal Switch game backups with fast card-based switching and fewer moving parts.",
         "hero_feature_1": "Plug & Play",
         "hero_feature_2": "Easy Backup",
         "hero_feature_3": "Fast Game Switching",
         "hero_cta": "Shop Mig Flash",
         "hero_cta_link": "",
-        "hero_image": "shopify://shop_images/ChatGPT_Image_2026_6_14_20_39_32.png"
+        "hero_image": ""
       }
     },
     "platform-grid": {
