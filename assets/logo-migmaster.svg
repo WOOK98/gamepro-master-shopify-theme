@@ -1,23 +1,27 @@
-<svg width="760" height="150" viewBox="0 0 760 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">MIGMASTER logo</title>
-  <desc id="desc">A restrained horizontal MIGMASTER logo with a D-pad inspired mark.</desc>
-  <rect width="760" height="150" fill="white"/>
-  <g transform="translate(42 28)" fill="#111111">
-    <path d="M50 0h44l14 14v25h25l14 14v44l-14 14h-25v25l-14 14H50l-14-14v-25H11L-3 97V53l14-14h25V14L50 0Zm8 22v40H18v26h40v40h28V88h40V62H86V22H58Z"/>
-    <path d="M58 66h28v18H58V66Z" fill="white"/>
-    <path d="M72 18l10 12H62l10-12ZM72 132l-10-12h20l-10 12ZM5 75l12-10v20L5 75ZM139 75l-12 10V65l12 10Z" fill="white"/>
-    <path d="M72 51l27 24-27 24-7-9 13-15-13-15 7-9Z"/>
+<svg width="520" height="160" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MIG MASTER logo</title>
+  <desc id="desc">A restrained black-and-white MIG MASTER logo with an abstract angular N mark.</desc>
+  <rect width="520" height="160" fill="#050505"/>
+  <rect width="520" height="160" fill="url(#grid)" opacity=".22"/>
+  <g transform="translate(54 34)">
+    <path d="M0 90L34 0H62L28 90H0Z" fill="white"/>
+    <path d="M40 90L72 0H100L68 90H40Z" fill="white" opacity=".92"/>
+    <path d="M0 90H28L68 0H40L0 90Z" fill="url(#shine)" opacity=".42"/>
+    <path d="M28 90H40L62 30H50L28 90Z" fill="#050505" opacity=".7"/>
+    <path d="M0 90H28L34 73H6L0 90Z" fill="#9CA3AF"/>
   </g>
-  <g fill="#111111">
-    <path d="M205 96V54h11l19 24 19-24h11v42h-12V72l-15 18h-6l-15-18v24h-12Z"/>
-    <path d="M279 96V54h13v42h-13Z"/>
-    <path d="M329 97c-17 0-29-9-29-22s12-22 30-22c13 0 23 5 27 13l-12 4c-3-4-8-6-15-6-10 0-17 4-17 11s7 11 17 11c7 0 12-2 15-6h-18v-9h31v25h-9l-2-6c-5 5-11 7-18 7Z"/>
-    <path d="M367 96V54h11l19 24 19-24h11v42h-12V72l-15 18h-6l-15-18v24h-12Z"/>
-    <path d="M431 96l24-42h14l24 42h-14l-4-8h-26l-4 8h-14Zm23-18h16l-8-15-8 15Z"/>
-    <path d="M515 97c-15 0-25-5-29-14l12-4c3 5 9 8 18 8 7 0 12-2 12-5 0-4-6-5-15-6-12-2-24-4-24-12 0-7 10-12 25-12 13 0 22 4 27 11l-11 5c-3-4-9-6-16-6s-11 1-11 4c0 3 5 4 15 6 13 2 24 4 24 13 0 8-11 12-27 12Z"/>
-    <path d="M561 96V65h-22V54h57v11h-22v31h-13Z"/>
-    <path d="M601 96V54h48v10h-35v6h31v9h-31v7h36v10h-49Z"/>
-    <path d="M659 96V54h34c13 0 21 6 21 15 0 6-4 11-10 13l12 14h-15l-10-12h-19v12h-13Zm13-22h20c6 0 9-2 9-6s-3-5-9-5h-20v11Z"/>
+  <g fill="white" font-family="Arial, Helvetica, sans-serif" font-weight="900" letter-spacing="2">
+    <text x="178" y="72" font-size="46">MIG</text>
+    <text x="178" y="118" font-size="46">MASTER</text>
   </g>
-  <path d="M205 111h512" stroke="#111111" stroke-width="3" stroke-linecap="round" opacity=".08"/>
+  <defs>
+    <linearGradient id="shine" x1="0" y1="0" x2="92" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white"/>
+      <stop offset=".42" stop-color="#D1D5DB"/>
+      <stop offset="1" stop-color="#6B7280"/>
+    </linearGradient>
+    <pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M12 0H0V12" stroke="white" stroke-width=".45" opacity=".26"/>
+    </pattern>
+  </defs>
 </svg>

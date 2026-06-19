@@ -4,7 +4,7 @@
       {% if section.settings.logo_image %}
         {{ section.settings.logo_image | image_url: width: 520 | image_tag: class: 'concept-logo-image', loading: 'eager', alt: shop.name }}
       {% else %}
-        <img src="{{ 'logo-migmaster.svg' | asset_url }}" width="760" height="150" loading="eager" alt="{{ shop.name }}" class="concept-logo-image">
+        <img src="{{ 'logo-migmaster.svg' | asset_url }}" width="520" height="160" loading="eager" alt="{{ shop.name }}" class="concept-logo-image">
       {% endif %}
     </a>
 
