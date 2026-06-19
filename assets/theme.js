@@ -207,6 +207,17 @@
   // ============================================================
   function initCollectionFilters() {
     var sortSelect = document.querySelector('.collection-sort-select');
+    var collectionHeader = document.querySelector('[data-section-type="collection-header"][data-default-sort]');
+
+    if (collectionHeader && !window.Shopify?.designMode) {
+      var currentUrl = new URL(window.location.href);
+      if (!currentUrl.searchParams.has('sort_by')) {
+        currentUrl.searchParams.set('sort_by', collectionHeader.dataset.defaultSort);
+        window.location.replace(currentUrl.toString());
+        return;
+      }
+    }
+
     if (sortSelect) {
       sortSelect.addEventListener('change', function () {
         var url = new URL(window.location.href);
