@@ -1,17 +1,17 @@
 <svg width="520" height="160" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">MIG MASTER logo</title>
-  <desc id="desc">A restrained monochrome MIG MASTER logo with an abstract angular N mark.</desc>
+  <desc id="desc">A restrained monochrome MIG MASTER logo with an abstract angular M mark.</desc>
   <rect width="520" height="160" fill="none"/>
-  <g transform="translate(54 34)">
-    <path d="M0 90L34 0H62L28 90H0Z" fill="#111111"/>
-    <path d="M40 90L72 0H100L68 90H40Z" fill="#111111" opacity=".92"/>
-    <path d="M0 90H28L68 0H40L0 90Z" fill="url(#shine)" opacity=".32"/>
-    <path d="M28 90H40L62 30H50L28 90Z" fill="#F7F7F4" opacity=".78"/>
-    <path d="M0 90H28L34 73H6L0 90Z" fill="#8B8F96"/>
+  <g transform="translate(46 38)">
+    <path d="M0 84V0H24L54 38L84 0H108V84H82V38L59 68H49L26 38V84H0Z" fill="#111111"/>
+    <path d="M26 0H46L54 38L24 0H26Z" fill="url(#shine)" opacity=".38"/>
+    <path d="M84 0H108L59 68L54 38L84 0Z" fill="url(#shine)" opacity=".42"/>
+    <path d="M0 84H26V66H0V84Z" fill="#8B8F96"/>
+    <path d="M82 84H108V66H82V84Z" fill="#8B8F96" opacity=".8"/>
   </g>
   <g fill="#111111" font-family="Arial, Helvetica, sans-serif" font-weight="900" letter-spacing="2">
-    <text x="178" y="72" font-size="46">MIG</text>
-    <text x="178" y="118" font-size="46">MASTER</text>
+    <text x="182" y="72" font-size="46">MIG</text>
+    <text x="182" y="118" font-size="46">MASTER</text>
   </g>
   <defs>
     <linearGradient id="shine" x1="0" y1="0" x2="92" y2="96" gradientUnits="userSpaceOnUse">
