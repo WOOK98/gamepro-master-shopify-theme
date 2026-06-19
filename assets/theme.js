@@ -311,7 +311,13 @@
       });
     }
 
-    if (window.location.hash === '#discount-code') openModal();
+    var discountReturn = new URLSearchParams(window.location.search);
+    var returnedFromDiscountForm =
+      window.location.hash === '#discount-code' ||
+      window.location.hash === '#ConceptDiscountForm' ||
+      discountReturn.get('customer_posted') === 'true';
+
+    if (returnedFromDiscountForm) openModal();
   }
 
   // ============================================================

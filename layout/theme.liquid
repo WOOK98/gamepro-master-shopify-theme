@@ -140,7 +140,6 @@
       {% form 'customer', id: 'ConceptDiscountForm', class: 'concept-discount-form' %}
         <input type="hidden" name="contact[tags]" value="newsletter, discount-5">
         <input type="hidden" name="contact[accepts_marketing]" value="true">
-        <input type="hidden" name="return_to" value="{{ request.path }}#discount-code">
 
         {% if form.posted_successfully? %}
           <h2 id="ConceptDiscountTitle">Your discount code:</h2>
