@@ -88,8 +88,32 @@ body.concept-store {
   transition: opacity .2s ease, transform .2s ease;
 }
 .concept-social-rail a { font-size: 18px; font-weight: 800; }
-.concept-social-promo { writing-mode: vertical-rl; transform: rotate(180deg); padding: 14px 4px; border-radius: 18px; background: #eee; font-size: 11px !important; font-weight: 700; letter-spacing: .08em; }
-.concept-social-promo:hover { background: var(--concept-ink); color: #fff; }
+.concept-social-promo {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 18px 7px;
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #e50914, #ff3038);
+  color: #fff;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  letter-spacing: .12em;
+  box-shadow: 0 10px 24px rgba(229,9,20,.34), inset 0 1px 0 rgba(255,255,255,.28);
+  animation: conceptPromoPulse 2.8s ease-in-out infinite;
+}
+.concept-social-promo:hover {
+  background: linear-gradient(180deg, #b80710, #e50914);
+  color: #fff;
+  box-shadow: 0 13px 30px rgba(229,9,20,.48), inset 0 1px 0 rgba(255,255,255,.28);
+}
+@keyframes conceptPromoPulse {
+  0%, 100% { box-shadow: 0 10px 24px rgba(229,9,20,.3), inset 0 1px 0 rgba(255,255,255,.28); }
+  50% { box-shadow: 0 12px 34px rgba(229,9,20,.52), inset 0 1px 0 rgba(255,255,255,.28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .concept-social-promo { animation: none; }
+}
 .concept-discount-modal[hidden] { display: none; }
 .discount-modal-open { overflow: hidden; }
 .concept-discount-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px; }
