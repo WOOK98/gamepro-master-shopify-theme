@@ -1,12 +1,23 @@
-<section class="concept-system-page concept-empty-state">
-  <div class="container-page">
-    <p>404</p>
-    <h1>{{ 'general.404.title' | t }}</h1>
-    <div>{{ 'general.404.subtext_html' | t }}</div>
-    <a class="btn-primary" href="{{ routes.root_url }}">{{ 'general.404.back_home' | t }}</a>
-  </div>
-</section>
+<style type="text/css">
+  .template-404 .title + * {
+    margin-top: 1rem;
+  }
 
-{% schema %}
-{"name":"Main 404","settings":[]}
-{% endschema %}
+  @media screen and (min-width: 750px) {
+    .template-404 .title + * {
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+<div class="template-404 page-width page-margin center">
+  <p>
+    {{ 'templates.404.subtext' | t }}
+  </p>
+  <h1 class="title">
+    {{ 'templates.404.title' | t }}
+  </h1>
+  <a href="{{ routes.all_products_collection_url }}" class="button">
+    {{ 'general.continue_shopping' | t }}
+  </a>
+</div>

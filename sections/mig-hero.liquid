@@ -1,0 +1,308 @@
+<section class="mig-hero" aria-labelledby="MigHeroTitle-{{ section.id }}">
+  <div class="mig-hero__glow" aria-hidden="true"></div>
+  <div class="mig-hero__content page-width">
+    <div class="mig-hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="mig-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 id="MigHeroTitle-{{ section.id }}" class="mig-hero__title">
+        {{ section.settings.heading | escape | newline_to_br }}
+      </h1>
+      {%- if section.settings.text != blank -%}
+        <div class="mig-hero__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      <ul class="mig-hero__features" aria-label="Product highlights">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            <span class="mig-hero__feature-mark" aria-hidden="true"></span>
+            {{ block.settings.text | escape }}
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="mig-hero__actions">
+        {%- if section.settings.primary_label != blank -%}
+          <a class="button button--primary" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">
+            {{ section.settings.primary_label | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_label != blank -%}
+          <a class="button button--secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">
+            {{ section.settings.secondary_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="mig-hero__media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            widths: '550, 750, 1100, 1500, 1800',
+            sizes: '(min-width: 990px) 52vw, 100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            class: 'mig-hero__image',
+            alt: section.settings.image.alt
+        }}
+      {%- else -%}
+        <div class="mig-hero__placeholder">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .mig-hero {
+    position: relative;
+    overflow: hidden;
+    color: #f8fafc;
+    background: linear-gradient(115deg, #050505 0%, #080d18 58%, #101b2e 100%);
+  }
+
+  .mig-hero__glow {
+    position: absolute;
+    inset: -30% -10% auto 44%;
+    height: 90%;
+    background: radial-gradient(circle, rgba(91, 157, 255, 0.2), transparent 68%);
+    pointer-events: none;
+  }
+
+  .mig-hero__content {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    align-items: center;
+    gap: clamp(3rem, 6vw, 9rem);
+    min-height: min(76rem, calc(100vh - 12rem));
+    padding-top: clamp(5rem, 8vw, 10rem);
+    padding-bottom: clamp(5rem, 8vw, 10rem);
+  }
+
+  .mig-hero__copy {
+    z-index: 1;
+  }
+
+  .mig-hero__eyebrow {
+    margin: 0 0 1.8rem;
+    color: #ff3838;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .mig-hero__title {
+    max-width: 10ch;
+    margin: 0;
+    color: inherit;
+    font-size: clamp(5rem, 7.2vw, 10.5rem);
+    font-weight: 700;
+    letter-spacing: -0.065em;
+    line-height: 0.88;
+  }
+
+  .mig-hero__text {
+    max-width: 58rem;
+    margin-top: 2.6rem;
+    color: rgba(248, 250, 252, 0.68);
+    font-size: clamp(1.6rem, 1.5vw, 2rem);
+    line-height: 1.55;
+  }
+
+  .mig-hero__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 2.4rem;
+    margin: 3rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mig-hero__features li {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: rgba(248, 250, 252, 0.88);
+    font-size: 1.5rem;
+  }
+
+  .mig-hero__feature-mark {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: #6ee7ff;
+    box-shadow: 0 0 1.2rem rgba(110, 231, 255, 0.8);
+  }
+
+  .mig-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 3.4rem;
+  }
+
+  .mig-hero .button--primary {
+    --color-button: 232, 26, 26;
+    --color-button-text: 255, 255, 255;
+  }
+
+  .mig-hero .button--secondary {
+    --color-button: 248, 250, 252;
+    --color-button-text: 248, 250, 252;
+    color: #f8fafc;
+    background: transparent;
+  }
+
+  .mig-hero__media {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3.2rem;
+    background: rgba(4, 7, 13, 0.72);
+    box-shadow: 0 4rem 10rem rgba(0, 0, 0, 0.38);
+  }
+
+  .mig-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(5, 5, 5, 0.26), transparent 34%);
+    pointer-events: none;
+  }
+
+  .mig-hero__image,
+  .mig-hero__placeholder {
+    display: block;
+    width: 100%;
+    min-height: 44rem;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+  }
+
+  .mig-hero__placeholder .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    fill: rgba(255, 255, 255, 0.08);
+  }
+
+  @media screen and (max-width: 989px) {
+    .mig-hero__content {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      gap: 4rem;
+    }
+
+    .mig-hero__title {
+      max-width: 12ch;
+      font-size: clamp(4.8rem, 14vw, 8rem);
+    }
+
+    .mig-hero__media {
+      order: -1;
+      border-radius: 2.4rem;
+    }
+
+    .mig-hero__image,
+    .mig-hero__placeholder {
+      min-height: 28rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mig-hero__image {
+      animation: mig-hero-reveal 800ms ease-out both;
+    }
+
+    @keyframes mig-hero-reveal {
+      from { opacity: 0; transform: scale(1.025); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MIG hero",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "MIG Flash for Switch"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "BACK UP. SWITCH. KEEP PLAYING."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Manage personal Switch game backups with a compact card-based setup designed for simpler switching.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Shop MIG Flash V2"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "View MIG Dumper"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Plug & play"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIG hero",
+      "blocks": [
+        { "type": "feature", "settings": { "text": "Plug & play" } },
+        { "type": "feature", "settings": { "text": "USB-C backup" } },
+        { "type": "feature", "settings": { "text": "Fast switching" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
