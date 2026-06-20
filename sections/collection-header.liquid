@@ -29,13 +29,12 @@
             </a>
             {% if collection.all_tags.size > 0 %}
               {% for tag in collection.all_tags limit: 6 %}
-                <button
-                  type="button"
+                <a
+                  href="{{ collection.url }}/{{ tag | handleize }}?sort_by={{ collection.sort_by | default: 'best-selling' }}"
                   class="filter-tag px-4 py-2 rounded-full text-sm border border-gray-700 text-text-secondary hover:border-accent-cyan hover:text-accent-cyan transition-colors"
-                  data-tag="{{ tag | handleize }}"
                 >
                   {{ tag }}
-                </button>
+                </a>
               {% endfor %}
             {% endif %}
           </div>

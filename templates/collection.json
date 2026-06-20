@@ -19,7 +19,7 @@
         "heading": "Shop the collection",
         "subheading": "Browse every product available in this collection.",
         "collection": "",
-        "show_demo_catalog": true,
+        "show_demo_catalog": false,
         "products_to_show": 24,
         "show_all_products": true,
         "columns_desktop": "3",

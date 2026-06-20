@@ -115,43 +115,6 @@
   }
 
   // ============================================================
-  // 5. Quick add to cart (product cards)
-  // ============================================================
-  function initQuickAdd() {
-    if (document.documentElement.dataset.quickAddReady) return;
-    document.documentElement.dataset.quickAddReady = 'true';
-
-    document.addEventListener('click', function (event) {
-      var btn = event.target.closest('.quick-add-btn');
-      if (!btn) return;
-
-      event.preventDefault();
-      var variantId = btn.getAttribute('data-variant-id');
-      if (!variantId) return;
-
-      btn.classList.add('loading');
-
-      fetch((window.Shopify?.routes?.root || '/') + 'cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: 1 })
-      })
-        .then(function (res) { return res.json(); })
-        .then(function () {
-          btn.classList.remove('loading');
-          btn.classList.add('added');
-          setTimeout(function () { btn.classList.remove('added'); }, 1500);
-          // Dispatch cart update event
-          document.dispatchEvent(new CustomEvent('cart:updated'));
-        })
-        .catch(function (err) {
-          console.error('Add to cart failed:', err);
-          btn.classList.remove('loading');
-        });
-    });
-  }
-
-  // ============================================================
   // 6. Cart drawer
   // ============================================================
   function initCartDrawer() {
@@ -367,7 +330,6 @@
     initNavbarScroll();
     initMobileMenu();
     initColorSelector();
-    initQuickAdd();
     initCartDrawer();
     initPlatformGrid();
     initCollectionFilters();

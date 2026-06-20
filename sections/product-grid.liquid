@@ -13,14 +13,14 @@
     <!-- Quick filter tabs -->
     {% if section.settings.show_filter_tabs %}
       <div class="flex flex-wrap justify-center gap-2 mb-12">
-        <button type="button" class="filter-tab active px-5 py-2 rounded-full text-sm font-mono border border-accent-cyan text-accent-cyan bg-accent-cyan/5 transition-colors" data-filter="all">
+        <a href="{{ collection.url }}?sort_by={{ collection.sort_by | default: 'best-selling' }}" class="filter-tab active px-5 py-2 rounded-full text-sm font-mono border border-accent-cyan text-accent-cyan bg-accent-cyan/5 transition-colors">
           All
-        </button>
+        </a>
         {% if collection %}
           {% for tag in collection.all_tags limit: 5 %}
-            <button type="button" class="filter-tab px-5 py-2 rounded-full text-sm font-mono border border-gray-700 text-text-muted hover:border-accent-cyan hover:text-accent-cyan transition-colors" data-filter="{{ tag | handleize }}">
+            <a href="{{ collection.url }}/{{ tag | handleize }}?sort_by={{ collection.sort_by | default: 'best-selling' }}" class="filter-tab px-5 py-2 rounded-full text-sm font-mono border border-gray-700 text-text-muted hover:border-accent-cyan hover:text-accent-cyan transition-colors">
               {{ tag }}
-            </button>
+            </a>
           {% endfor %}
         {% endif %}
       </div>
@@ -140,7 +140,7 @@
       "type": "checkbox",
       "id": "show_demo_catalog",
       "label": "Show generic demo catalog when no collection is selected",
-      "default": true
+      "default": false
     },
     {
       "type": "range",

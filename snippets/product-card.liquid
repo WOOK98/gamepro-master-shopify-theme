@@ -5,9 +5,8 @@
 {% assign product_sales_count = product.metafields.custom.sales_count.value %}
 
 <div class="product-card group" data-product-handle="{{ product.handle }}">
-  <a href="{{ product.url | within: collection }}" class="product-card-link block">
-    <!-- Image container -->
-    <div class="product-card-image relative overflow-hidden rounded-2xl bg-bg-card aspect-square mb-4">
+  <div class="product-card-image relative overflow-hidden rounded-2xl bg-bg-card aspect-square mb-4">
+    <a href="{{ product.url | within: collection }}" class="product-card-media-link block w-full h-full" aria-label="{{ product_card_title | escape }}">
       {% if image %}
         <img
           src="{{ image | image_url: width: 600 }}"
@@ -15,16 +14,17 @@
           width="600"
           height="600"
           loading="lazy"
-          class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          class="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
         >
       {% else %}
         <div class="w-full h-full flex items-center justify-center text-text-muted">
           {% render 'icon' with 'package' %}
         </div>
       {% endif %}
+    </a>
 
-      <!-- Product badges -->
-      <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+    <!-- Product badges -->
+    <div class="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none">
         {% if product.available == false %}
           <span class="badge badge-soldout">{{ 'products.product.sold_out' | t }}</span>
         {% elsif product.compare_at_price > product.price %}
@@ -34,23 +34,36 @@
         {% if product.tags contains 'new' %}
           <span class="badge badge-new">{{ 'products.product.new' | t }}</span>
         {% endif %}
-      </div>
-
-      <!-- Quick add button (visible on hover) -->
-      {% if product.available %}
-        <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button
-            type="button"
-            class="quick-add-btn bg-accent-cyan text-primary-blue p-3 rounded-xl hover:bg-white transition-colors"
-            data-variant-id="{{ product.first_available_variant.id }}"
-            title="{{ 'products.product.add_to_cart' | t }}"
-          >
-            {% render 'icon' with 'shopping-cart' %}
-          </button>
-        </div>
-      {% endif %}
     </div>
 
+    {% if product.available %}
+      <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity">
+        {% if product.has_only_default_variant %}
+          {% form 'product', product, class: 'product-card-form' %}
+            <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button
+              type="submit"
+              class="quick-add-btn bg-accent-cyan text-primary-blue p-3 rounded-xl hover:bg-white transition-colors"
+              aria-label="{{ 'products.product.add_to_cart' | t }}: {{ product_card_title | escape }}"
+            >
+              {% render 'icon' with 'shopping-cart' %}
+            </button>
+          {% endform %}
+        {% else %}
+          <a
+            href="{{ product.url | within: collection }}"
+            class="quick-add-btn bg-accent-cyan text-primary-blue px-4 py-3 rounded-xl hover:bg-white transition-colors text-xs font-bold"
+            aria-label="Choose options for {{ product_card_title | escape }}"
+          >
+            Choose options
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  <a href="{{ product.url | within: collection }}" class="product-card-link block">
     <!-- Product info -->
     <div class="product-card-info">
       {% if show_vendor and product.vendor %}

@@ -99,6 +99,7 @@
 
       let index = 0;
       let timer;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const show = (nextIndex) => {
         index = (nextIndex + slides.length) % slides.length;
@@ -110,7 +111,7 @@
 
       const restart = () => {
         window.clearInterval(timer);
-        timer = window.setInterval(() => show(index + 1), 5200);
+        if (!reduceMotion) timer = window.setInterval(() => show(index + 1), 6500);
       };
 
       prev?.addEventListener('click', () => {
@@ -125,6 +126,11 @@
 
       show(0);
       restart();
+
+      hero.addEventListener('mouseenter', () => window.clearInterval(timer));
+      hero.addEventListener('mouseleave', restart);
+      hero.addEventListener('focusin', () => window.clearInterval(timer));
+      hero.addEventListener('focusout', restart);
     });
   })();
 </script>

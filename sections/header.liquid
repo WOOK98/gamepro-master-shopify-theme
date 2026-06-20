@@ -9,7 +9,7 @@
     </a>
 
     <nav class="concept-nav" role="navigation">
-      {% for link in linklists.main-menu.links %}
+      {% for link in section.settings.main_menu.links %}
         <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
       {% else %}
         <a href="{{ routes.all_products_collection_url }}">Shop</a>
@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="concept-mobile-menu" id="mobileMenu">
-    {% for link in linklists.main-menu.links %}
+    {% for link in section.settings.main_menu.links %}
       <a href="{{ link.url }}">{{ link.title }}</a>
     {% else %}
       <a href="{{ routes.all_products_collection_url }}">Shop</a>

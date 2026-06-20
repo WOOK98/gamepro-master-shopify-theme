@@ -23,7 +23,10 @@ body.concept-store {
   background: var(--concept-paper);
 }
 
-.concept-store #MainContent { overflow: hidden; }
+.concept-store #MainContent {
+  overflow-x: clip;
+  overflow-y: visible;
+}
 .concept-store footer { color: var(--concept-ink); }
 
 .site-header {
@@ -74,26 +77,26 @@ body.concept-store {
 .concept-social-rail {
   position: fixed;
   z-index: 60;
-  left: max(34px, calc((100vw - 1520px) / 2 + 28px));
-  top: 38%;
+  left: max(16px, calc((100vw - 1520px) / 2 + 24px));
+  bottom: 24px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 26px;
-  padding: 22px 13px 12px;
+  gap: 14px;
+  padding: 9px 10px;
   color: var(--concept-ink);
   background: rgba(255,255,255,.94);
-  border-radius: 30px;
+  border-radius: 999px;
   box-shadow: 0 10px 30px rgba(0,0,0,.08);
   transition: opacity .2s ease, transform .2s ease;
 }
 .concept-social-rail a { font-size: 18px; font-weight: 800; }
 .concept-social-promo {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  padding: 18px 7px;
+  writing-mode: horizontal-tb;
+  transform: none;
+  padding: 11px 16px;
   border: 1px solid rgba(255,255,255,.42);
-  border-radius: 18px;
+  border-radius: 999px;
   background: linear-gradient(180deg, #e50914, #ff3038);
   color: #fff;
   font-size: 12px !important;
@@ -633,29 +636,12 @@ body.concept-store {
 .concept-newsletter-error { color: #a33737; }
 .concept-newsletter-privacy { margin-top: 14px; color: #777; font-size: 12px; line-height: 1.5; }
 .concept-shop-follow {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 9px;
-  min-height: 44px;
   margin-top: 18px;
-  padding: 0 18px;
-  border-radius: 999px;
-  background: #5433e8;
-  color: #fff !important;
-  font-size: 14px;
-  font-weight: 900;
-  box-shadow: 0 12px 28px rgba(84, 51, 232, .18);
-}
-.concept-shop-follow span {
-  font-size: 18px;
-  line-height: 1;
 }
 .concept-shop-follow--footer {
   margin: 0 10px 0 0;
-  min-height: 34px;
-  padding: 0 14px;
-  font-size: 13px;
 }
 
 .concept-tech-section { padding: 108px 0 88px; background: #171717; color: #fff; }

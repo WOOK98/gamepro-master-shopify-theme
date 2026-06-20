@@ -1,3 +1,8 @@
+{% assign show_shop_follow = false %}
+{% if settings.shop_follow_enabled and shop.features.follow_on_shop? %}
+  {% assign show_shop_follow = true %}
+{% endif %}
+
 <footer class="concept-footer" data-hide-social-rail>
   <div class="container-page">
     <div class="concept-footer-middle">
@@ -27,17 +32,22 @@
         </div>
       {% endif %}
 
+      {% assign show_payment_methods = false %}
       {% if settings.show_payment_icons and shop.enabled_payment_types.size > 0 %}
+        {% assign show_payment_methods = true %}
+      {% endif %}
+      {% if show_shop_follow or show_payment_methods %}
         <div class="concept-footer-payments" aria-label="{{ 'layout.footer.payment_methods' | t }}">
-          {% if settings.shop_follow_enabled %}
-            <a class="concept-shop-follow concept-shop-follow--footer" href="{{ settings.shop_follow_url | default: shop.url }}" target="_blank" rel="noopener">
-              <span aria-hidden="true">♡</span>
-              Follow on Shop
-            </a>
+          {% if show_shop_follow %}
+            <div class="concept-shop-follow concept-shop-follow--footer">
+              {{ shop | login_button: action: 'follow' }}
+            </div>
           {% endif %}
-          {% for type in shop.enabled_payment_types %}
-            {{ type | payment_type_svg_tag: class: 'concept-footer-payment-icon' }}
-          {% endfor %}
+          {% if show_payment_methods %}
+            {% for type in shop.enabled_payment_types %}
+              {{ type | payment_type_svg_tag: class: 'concept-footer-payment-icon' }}
+            {% endfor %}
+          {% endif %}
         </div>
       {% endif %}
     </div>

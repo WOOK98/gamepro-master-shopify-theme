@@ -168,12 +168,6 @@
         "id": "shop_follow_enabled",
         "label": "Show Follow on Shop button",
         "default": true
-      },
-      {
-        "type": "url",
-        "id": "shop_follow_url",
-        "label": "Follow on Shop URL",
-        "info": "Paste your Shop app follow/store URL. Falls back to the storefront URL when blank."
       }
     ]
   },
@@ -245,7 +239,7 @@
         "type": "checkbox",
         "id": "show_sales_count",
         "label": "Show sales count on products",
-        "default": true
+        "default": false
       },
       {
         "type": "text",

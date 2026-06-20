@@ -173,21 +173,24 @@
           </details>
         </div>
 
-        <!-- Compatibility badges -->
-        <div class="flex flex-wrap gap-3 mt-8 pt-6 border-t border-gray-800">
-          <span class="flex items-center gap-2 text-xs text-text-muted bg-primary-blue px-3 py-2 rounded-lg">
-            {% render 'icon' with 'monitor' %} PC
-          </span>
-          <span class="flex items-center gap-2 text-xs text-text-muted bg-primary-blue px-3 py-2 rounded-lg">
-            {% render 'icon' with 'gamepad' %} Xbox Series X|S
-          </span>
-          <span class="flex items-center gap-2 text-xs text-text-muted bg-primary-blue px-3 py-2 rounded-lg">
-            {% render 'icon' with 'gamepad' %} PS5
-          </span>
-          <span class="flex items-center gap-2 text-xs text-text-muted bg-primary-blue px-3 py-2 rounded-lg">
-            {% render 'icon' with 'gamepad' %} Switch
-          </span>
-        </div>
+        {% assign has_platform_tags = false %}
+        {% for tag in product.tags %}
+          {% if tag contains 'platform:' %}
+            {% assign has_platform_tags = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if has_platform_tags %}
+          <div class="flex flex-wrap gap-3 mt-8 pt-6 border-t border-gray-800" aria-label="Compatible platforms">
+            {% for tag in product.tags %}
+              {% if tag contains 'platform:' %}
+                <span class="flex items-center gap-2 text-xs text-text-muted bg-primary-blue px-3 py-2 rounded-lg">
+                  {% render 'icon' with 'gamepad' %} {{ tag | remove: 'platform:' | strip }}
+                </span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
     </div>
     <script type="application/json" data-product-variants>
@@ -318,35 +321,6 @@
       else if (btn.dataset.action === 'decrease' && val > 1) qtyInput.value = val - 1;
     });
   });
-
-  // Add to cart
-  if (addBtn) {
-    addBtn.addEventListener('click', function(event) {
-      event.preventDefault();
-      var variantId = variantInput?.value || addBtn.dataset.variantId;
-      var qty = parseInt(qtyInput?.value || 1);
-      if (!variantId) return;
-
-      addBtn.classList.add('loading');
-      fetch((window.Shopify?.routes?.root || '/') + 'cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: variantId, quantity: qty })
-      })
-      .then(function(res) { return res.json(); })
-      .then(function() {
-        addBtn.classList.remove('loading');
-        addBtn.innerHTML = '&#10003; Added to Cart';
-        setTimeout(function() { addBtn.innerHTML = addBtn.dataset.originalText || 'Add to Cart'; }, 2000);
-        document.dispatchEvent(new CustomEvent('cart:updated'));
-      })
-      .catch(function(err) {
-        console.error(err);
-        addBtn.classList.remove('loading');
-      });
-    });
-    addBtn.dataset.originalText = addBtn.innerHTML;
-  }
 
   updateVariant();
 })();
