@@ -26,7 +26,12 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
+    {%- if request.page_type == 'search' or request.page_type == 'cart' -%}
+      <meta name="robots" content="noindex,follow">
+    {%- endif -%}
+
     {% render 'meta-tags' %}
+    {% render 'seo-structured-data' %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
@@ -78,6 +83,7 @@
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
+      {% assign scheme_classes = '' %}
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
         {% if forloop.index == 1 -%}
@@ -339,6 +345,7 @@
       tabindex="-1"
       data-template="{{ template.name }}"
     >
+      {% render 'breadcrumbs' %}
       {{ content_for_layout }}
     </main>
 

@@ -1,0 +1,103 @@
+{% doc %}
+Renders visible breadcrumbs and matching BreadcrumbList structured data.
+{% enddoc %}
+
+{%- liquid
+  assign breadcrumb_title = blank
+  assign breadcrumb_parent_title = blank
+  assign breadcrumb_parent_url = blank
+
+  case request.page_type
+    when 'product'
+      assign breadcrumb_title = product.title
+      assign breadcrumb_collection = product.collections | first
+      if breadcrumb_collection != blank
+        assign breadcrumb_parent_title = breadcrumb_collection.title
+        assign breadcrumb_parent_url = breadcrumb_collection.url
+      endif
+    when 'collection'
+      assign breadcrumb_title = collection.title
+    when 'article'
+      assign breadcrumb_title = article.title
+      assign breadcrumb_parent_title = blog.title
+      assign breadcrumb_parent_url = blog.url
+    when 'blog'
+      assign breadcrumb_title = blog.title
+    when 'page'
+      assign breadcrumb_title = page.title
+  endcase
+-%}
+
+{%- if breadcrumb_title != blank -%}
+  <nav class="seo-breadcrumbs page-width" aria-label="{{ 'seo.breadcrumbs.label' | t }}">
+    <ol class="seo-breadcrumbs__list">
+      <li><a href="{{ routes.root_url }}">{{ 'seo.breadcrumbs.home' | t }}</a></li>
+      {%- if breadcrumb_parent_title != blank -%}
+        <li aria-hidden="true">/</li>
+        <li><a href="{{ breadcrumb_parent_url }}">{{ breadcrumb_parent_title | escape }}</a></li>
+      {%- endif -%}
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{{ breadcrumb_title | escape }}</li>
+    </ol>
+  </nav>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": {{ 'seo.breadcrumbs.home' | t | json }},
+          "item": {{ request.origin | append: routes.root_url | json }}
+        },
+        {%- if breadcrumb_parent_title != blank -%}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ breadcrumb_parent_title | json }},
+            "item": {{ request.origin | append: breadcrumb_parent_url | json }}
+          },
+        {%- endif -%}
+        {
+          "@type": "ListItem",
+          "position": {%- if breadcrumb_parent_title != blank -%}3{%- else -%}2{%- endif -%},
+          "name": {{ breadcrumb_title | json }},
+          "item": {{ canonical_url | json }}
+        }
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .seo-breadcrumbs {
+    padding-top: 1.4rem;
+    padding-bottom: 0.2rem;
+  }
+
+  .seo-breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    color: rgba(var(--color-foreground), 0.66);
+    font-size: 1.3rem;
+    list-style: none;
+  }
+
+  .seo-breadcrumbs__list a {
+    color: inherit;
+    text-underline-offset: 0.25rem;
+  }
+
+  .seo-breadcrumbs__list [aria-current='page'] {
+    overflow: hidden;
+    max-width: min(55rem, 60vw);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+{% endstylesheet %}

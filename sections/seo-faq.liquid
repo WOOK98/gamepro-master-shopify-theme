@@ -1,0 +1,111 @@
+{%- liquid
+  assign faq_count = 0
+  for block in section.blocks
+    if block.settings.question != blank and block.settings.answer != blank
+      assign faq_count = faq_count | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if faq_count > 0 -%}
+  <section class="seo-faq color-{{ section.settings.color_scheme }} gradient" aria-labelledby="SeoFaqTitle-{{ section.id }}">
+    <div class="seo-faq__inner page-width">
+      {%- if section.settings.heading != blank -%}
+        <h2 id="SeoFaqTitle-{{ section.id }}" class="seo-faq__heading {{ section.settings.heading_size }}">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {%- endif -%}
+      <div class="seo-faq__items">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.question != blank and block.settings.answer != blank -%}
+            <details class="seo-faq__item" {{ block.shopify_attributes }}>
+              <summary>
+                <span>{{ block.settings.question | escape }}</span>
+                <span class="seo-faq__icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="seo-faq__answer rte">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- assign faq_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.question != blank and block.settings.answer != blank -%}
+            {%- assign faq_index = faq_index | plus: 1 -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.answer | strip_html | strip_newlines | json }}
+              }
+            }{%- unless faq_index == faq_count -%},{%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .seo-faq { padding: 5rem 0; }
+  .seo-faq__inner { max-width: 92rem; }
+  .seo-faq__heading { margin: 0 0 2.4rem; text-align: center; }
+  .seo-faq__items { border-top: 0.1rem solid rgba(var(--color-foreground), 0.16); }
+  .seo-faq__item { border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.16); }
+  .seo-faq__item summary { display: flex; gap: 2rem; align-items: center; justify-content: space-between; padding: 2rem 0; font-weight: 700; cursor: pointer; list-style: none; }
+  .seo-faq__item summary::-webkit-details-marker { display: none; }
+  .seo-faq__icon { font-size: 2.4rem; font-weight: 400; transition: transform 180ms ease; }
+  .seo-faq__item[open] .seo-faq__icon { transform: rotate(45deg); }
+  .seo-faq__answer { padding: 0 4rem 2rem 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SEO FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEO FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" }
+      ]
+    }
+  ]
+}
+{% endschema %}

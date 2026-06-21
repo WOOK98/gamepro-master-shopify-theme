@@ -1,8 +1,4 @@
-<section class="mig-hero" aria-labelledby="MigHeroTitle-{{ section.id }}">
-  <div class="visually-hidden">
-    <h1 id="MigHeroTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
-  </div>
-
+<section class="mig-hero">
   <div class="mig-hero__desktop">
     <img
       class="mig-hero__desktop-image"
@@ -18,7 +14,7 @@
       {%- if section.settings.eyebrow != blank -%}
         <p class="mig-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
-      <div class="mig-hero__title" aria-hidden="true">{{ section.settings.heading | escape | replace: '. ', '.<br>' }}</div>
+      <h1 id="MigHeroDesktopTitle-{{ section.id }}" class="mig-hero__title">{{ section.settings.heading | escape | replace: '. ', '.<br>' }}</h1>
       {%- if section.settings.text != blank -%}
         <div class="mig-hero__text rte">{{ section.settings.text }}</div>
       {%- endif -%}
@@ -52,7 +48,7 @@
       {%- if section.settings.eyebrow != blank -%}
         <p class="mig-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
-      <div class="mig-hero__title" aria-hidden="true">{{ section.settings.heading | escape | replace: '. ', '.<br>' }}</div>
+      <h1 id="MigHeroMobileTitle-{{ section.id }}" class="mig-hero__title">{{ section.settings.heading | escape | replace: '. ', '.<br>' }}</h1>
       {%- if section.settings.text != blank -%}
         <div class="mig-hero__text rte">{{ section.settings.text }}</div>
       {%- endif -%}

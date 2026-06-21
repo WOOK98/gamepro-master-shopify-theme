@@ -1,0 +1,93 @@
+{% doc %}
+Renders store-level and collection-level structured data for search engines.
+{% enddoc %}
+
+{%- capture social_profiles -%}
+  {%- assign first_profile = true -%}
+  {%- if settings.social_twitter_link != blank -%}
+    {{- settings.social_twitter_link | json -}}
+    {%- assign first_profile = false -%}
+  {%- endif -%}
+  {%- if settings.social_facebook_link != blank -%}
+    {%- unless first_profile -%},{%- endunless -%}{{- settings.social_facebook_link | json -}}
+    {%- assign first_profile = false -%}
+  {%- endif -%}
+  {%- if settings.social_instagram_link != blank -%}
+    {%- unless first_profile -%},{%- endunless -%}{{- settings.social_instagram_link | json -}}
+    {%- assign first_profile = false -%}
+  {%- endif -%}
+  {%- if settings.social_tiktok_link != blank -%}
+    {%- unless first_profile -%},{%- endunless -%}{{- settings.social_tiktok_link | json -}}
+    {%- assign first_profile = false -%}
+  {%- endif -%}
+  {%- if settings.social_youtube_link != blank -%}
+    {%- unless first_profile -%},{%- endunless -%}{{- settings.social_youtube_link | json -}}
+  {%- endif -%}
+{%- endcapture -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": {{ request.origin | append: '#organization' | json }},
+    "name": {{ shop.name | json }},
+    "url": {{ request.origin | json }}
+    {%- if settings.logo != blank -%},
+      "logo": {
+        "@type": "ImageObject",
+        "url": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+        "width": {{ settings.logo.width | json }},
+        "height": {{ settings.logo.height | json }}
+      }
+    {%- endif -%}
+    {%- if social_profiles != blank -%},
+      "sameAs": [{{ social_profiles }}]
+    {%- endif -%}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {%- assign search_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": {{ request.origin | append: '#website' | json }},
+      "url": {{ request.origin | json }},
+      "name": {{ shop.name | json }},
+      "publisher": { "@id": {{ request.origin | append: '#organization' | json }} },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ search_target | json }},
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'collection' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": {{ canonical_url | append: '#collection' | json }},
+      "url": {{ canonical_url | json }},
+      "name": {{ collection.title | json }},
+      "description": {{ collection.description | strip_html | strip_newlines | json }},
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ collection.products_count | json }},
+        "itemListElement": [
+          {%- for item_product in collection.products limit: 50 -%}
+            {
+              "@type": "ListItem",
+              "position": {{ forloop.index | json }},
+              "name": {{ item_product.title | json }},
+              "url": {{ request.origin | append: item_product.url | json }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    }
+  </script>
+{%- endif -%}
