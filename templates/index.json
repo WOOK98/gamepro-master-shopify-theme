@@ -6,21 +6,18 @@
         "feature_plug": {
           "type": "feature",
           "settings": {
-            "icon": "plug",
             "text": "Plug & play"
           }
         },
         "feature_backup": {
           "type": "feature",
           "settings": {
-            "icon": "box",
             "text": "USB-C backup"
           }
         },
         "feature_switch": {
           "type": "feature",
           "settings": {
-            "icon": "zap",
             "text": "Fast switching"
           }
         }
@@ -32,7 +29,7 @@
       ],
       "settings": {
         "eyebrow": "MIG Flash for Switch",
-        "heading": "BACK UP.\nSWITCH.\nKEEP PLAYING.",
+        "heading": "BACK UP. SWITCH. KEEP PLAYING.",
         "text": "<p>Manage personal Switch game backups with a compact card-based setup designed for simpler switching.</p>",
         "image": "shopify://shop_images/ChatGPT_Image_2026_6_14_20_39_32.png",
         "primary_label": "Shop MIG Flash V2",
@@ -41,34 +38,37 @@
         "secondary_link": "shopify://products/mig-flash-dumper"
       }
     },
-    "mig_brand_home": {
-      "type": "mig-brand-home",
-      "blocks": {
-        "trust_safe": { "type": "trust", "settings": { "title": "100% focused", "text": "A purpose-built workflow for your personal game backups." } },
-        "trust_fast": { "type": "trust", "settings": { "title": "Lightning fast", "text": "Move from cartridge to organized library in minutes." } },
-        "trust_storage": { "type": "trust", "settings": { "title": "Mass storage", "text": "Keep more of your collection together in one compact setup." } },
-        "trust_switch": { "type": "trust", "settings": { "title": "Built for Switch", "text": "Designed around the hardware you already own." } },
-        "product_flash": { "type": "product", "settings": { "product": "mig-flash-v2", "kicker": "Core hardware", "title": "MIG Flash V2", "text": "Compact card-based access to your personal library.", "badge": "Bestseller" } },
-        "product_dumper": { "type": "product", "settings": { "product": "mig-flash-dumper", "kicker": "USB-C backup", "title": "MIG Dumper", "text": "Create personal backups from your original cartridges.", "badge": "Essential" } },
-        "product_bundle": { "type": "product", "settings": { "kicker": "Complete setup", "title": "Starter bundle", "text": "Everything you need to build your streamlined backup workflow.", "badge": "Best value", "link": "shopify://collections/all" } },
-        "product_accessories": { "type": "product", "settings": { "kicker": "Add-ons", "title": "Accessories", "text": "Storage and essentials selected for the MIG ecosystem.", "link": "shopify://collections/all" } },
-        "step_insert": { "type": "step", "settings": { "title": "Insert cartridge", "text": "Connect your original game cartridge to the MIG Dumper." } },
-        "step_backup": { "type": "step", "settings": { "title": "Back up games", "text": "Create and organize a personal backup of your physical library." } },
-        "step_switch": { "type": "step", "settings": { "title": "Switch instantly", "text": "Keep your collection close and move between your games with less friction." } },
-        "compare_portable": { "type": "comparison", "settings": { "title": "Portable setup", "mig_value": "Pocket-sized", "other_value": "Desk-bound" } },
-        "compare_steps": { "type": "comparison", "settings": { "title": "Daily workflow", "mig_value": "3 simple steps", "other_value": "Multi-device" } },
-        "compare_library": { "type": "comparison", "settings": { "title": "Library access", "mig_value": "One compact system", "other_value": "Manual swapping" } },
-        "compare_design": { "type": "comparison", "settings": { "title": "Hardware design", "mig_value": "Purpose-built", "other_value": "General tools" } },
-        "review_alex": { "type": "review", "settings": { "quote": "The setup was straightforward, and my physical library finally feels organized.", "name": "Alex R.", "meta": "Verified owner" } },
-        "review_morgan": { "type": "review", "settings": { "quote": "Small enough to keep in my case, fast enough that I actually use it every week.", "name": "Morgan T.", "meta": "MIG Flash V2 owner" } },
-        "review_jamie": { "type": "review", "settings": { "quote": "The Dumper and Flash feel like one complete system instead of separate accessories.", "name": "Jamie K.", "meta": "Bundle customer" } }
-      },
-      "block_order": ["trust_safe", "trust_fast", "trust_storage", "trust_switch", "product_flash", "product_dumper", "product_bundle", "product_accessories", "step_insert", "step_backup", "step_switch", "compare_portable", "compare_steps", "compare_library", "compare_design", "review_alex", "review_morgan", "review_jamie"],
-      "settings": {}
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "frontpage",
+        "products_to_show": 6,
+        "title": "MIG essentials",
+        "heading_size": "h1",
+        "description": "<p>Start with MIG Flash V2 and the USB-C Dumper, then complete your setup.</p>",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
     "mig_hero",
-    "mig_brand_home"
+    "featured_collection"
   ]
 }
