@@ -1,0 +1,334 @@
+{% doc %}
+Renders the MIG email-gated discount trigger and dialog.
+{% enddoc %}
+
+{%- assign mig_discount_code = 'F9VPVX2JG9KZ' -%}
+
+<a class="mig-discount-trigger" href="#discount-code" data-mig-discount-trigger>
+  <span>GET 5% OFF</span>
+</a>
+
+<div
+  class="mig-discount-modal"
+  data-mig-discount-modal
+  hidden
+>
+  <button class="mig-discount-backdrop" type="button" data-mig-discount-close aria-label="Close discount popup"></button>
+  <div class="mig-discount-dialog" role="dialog" aria-modal="true" aria-labelledby="MigDiscountTitle">
+    <button class="mig-discount-close" type="button" data-mig-discount-close aria-label="Close discount popup">&times;</button>
+    <p class="mig-discount-eyebrow">GET 5% OFF</p>
+
+    {% form 'customer', id: 'MigDiscountForm', class: 'mig-discount-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter, discount-5">
+      <input type="hidden" name="contact[accepts_marketing]" value="true">
+      <input type="hidden" name="return_to" value="{{ request.path }}#discount-code">
+
+      {% if form.posted_successfully? %}
+        <h2 id="MigDiscountTitle" data-mig-discount-success>Your discount code</h2>
+        <button class="mig-discount-code" type="button" data-mig-discount-copy data-code="{{ mig_discount_code }}">
+          <span>{{ mig_discount_code }}</span>
+          <small>Copy</small>
+        </button>
+        <p class="mig-discount-note">5% off your entire order. One use per customer.</p>
+        <a class="mig-discount-shop" href="{{ routes.all_products_collection_url }}">Shop now</a>
+      {% else %}
+        <h2 id="MigDiscountTitle">Get 5% off your order</h2>
+        <p class="mig-discount-note">Enter your email to receive the discount code.</p>
+        {% if form.errors %}
+          <div class="mig-discount-error" role="alert">{{ form.errors | default_errors }}</div>
+        {% endif %}
+        <label class="visually-hidden" for="MigDiscountEmail">Email</label>
+        <input
+          id="MigDiscountEmail"
+          class="mig-discount-input"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          autocomplete="email"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="Email address"
+          required
+        >
+        <button class="mig-discount-submit" type="submit">Get discount code</button>
+        <p class="mig-discount-legal">By signing up, you agree to receive marketing emails. Unsubscribe anytime.</p>
+      {% endif %}
+    {% endform %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .mig-discount-trigger {
+    position: fixed;
+    z-index: 45;
+    bottom: max(2rem, env(safe-area-inset-bottom));
+    left: clamp(1.6rem, 2.4vw, 3.2rem);
+    display: inline-flex;
+    min-height: 5.2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2.2rem;
+    border: 0.1rem solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    color: #fff;
+    background: #e31c2b;
+    box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.3);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-decoration: none;
+    transition: transform 180ms ease, background 180ms ease;
+  }
+
+  .mig-discount-trigger:hover {
+    color: #fff;
+    background: #bd1020;
+    transform: translateY(-0.2rem);
+  }
+
+  .mig-discount-trigger:focus-visible {
+    outline: 0.3rem solid #fff;
+    outline-offset: 0.3rem;
+  }
+
+  .mig-discount-modal[hidden] {
+    display: none;
+  }
+
+  .mig-discount-modal {
+    position: fixed;
+    z-index: 110;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+  }
+
+  .mig-discount-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(0.4rem);
+    cursor: default;
+  }
+
+  .mig-discount-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(44rem, 100%);
+    padding: 4.2rem 3.4rem 3.4rem;
+    border-radius: 2rem;
+    color: #141414;
+    background: #fff;
+    box-shadow: 0 2.8rem 8rem rgba(0, 0, 0, 0.38);
+    text-align: center;
+  }
+
+  .mig-discount-close {
+    position: absolute;
+    top: 1.4rem;
+    right: 1.6rem;
+    width: 4.4rem;
+    height: 4.4rem;
+    padding: 0;
+    border: 0;
+    color: #4b4b4b;
+    background: transparent;
+    font-size: 3.2rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .mig-discount-eyebrow {
+    margin: 0 0 1.2rem;
+    color: #e31c2b;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  .mig-discount-dialog h2 {
+    margin: 0 0 1.8rem;
+    color: #141414;
+    font-size: clamp(2.8rem, 5vw, 3.6rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .mig-discount-form {
+    margin: 0;
+  }
+
+  .mig-discount-note {
+    margin: 0 0 2.2rem;
+    color: #515151;
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .mig-discount-input {
+    width: 100%;
+    min-height: 5.8rem;
+    margin-bottom: 1.2rem;
+    padding: 0 1.8rem;
+    border: 0.1rem solid #cfcfcf;
+    border-radius: 1.2rem;
+    color: #141414;
+    background: #fff;
+    font-size: 1.6rem;
+  }
+
+  .mig-discount-input:focus {
+    outline: 0.2rem solid #e31c2b;
+    outline-offset: 0.2rem;
+  }
+
+  .mig-discount-submit,
+  .mig-discount-shop {
+    display: inline-flex;
+    width: 100%;
+    min-height: 5.8rem;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 1.2rem;
+    color: #fff;
+    background: #141414;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .mig-discount-code {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.4rem;
+    padding: 1.6rem 1.8rem;
+    border: 0.1rem solid #dedede;
+    border-radius: 1.2rem;
+    color: #e31c2b;
+    background: #f7f7f7;
+    cursor: pointer;
+  }
+
+  .mig-discount-code span {
+    font-size: clamp(1.9rem, 5vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+  }
+
+  .mig-discount-code small {
+    color: #555;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .mig-discount-code.is-copied small {
+    color: #087a45;
+  }
+
+  .mig-discount-legal {
+    margin: 1.4rem 0 0;
+    color: #666;
+    font-size: 1.15rem;
+    line-height: 1.45;
+  }
+
+  .mig-discount-error {
+    margin-bottom: 1.4rem;
+    color: #a01818;
+    font-size: 1.35rem;
+    text-align: left;
+  }
+
+  .mig-discount-modal-open {
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 749px) {
+    .mig-discount-trigger {
+      min-height: 4.8rem;
+      padding: 0 1.7rem;
+      font-size: 1.2rem;
+    }
+
+    .mig-discount-dialog {
+      padding: 4rem 2rem 2.4rem;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  function initMigDiscountPopup() {
+    var modal = document.querySelector('[data-mig-discount-modal]');
+    if (!modal || modal.dataset.initialized === 'true') return;
+
+    modal.dataset.initialized = 'true';
+    var lastTrigger = null;
+
+    function openModal(trigger) {
+      lastTrigger = trigger || null;
+      modal.hidden = false;
+      document.body.classList.add('mig-discount-modal-open');
+      var focusTarget = modal.querySelector('[data-mig-discount-copy], .mig-discount-input, [data-mig-discount-close]');
+      if (focusTarget) focusTarget.focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove('mig-discount-modal-open');
+      if (lastTrigger) lastTrigger.focus();
+    }
+
+    document.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-mig-discount-trigger]');
+      if (trigger) {
+        event.preventDefault();
+        openModal(trigger);
+        return;
+      }
+
+      if (event.target.closest('[data-mig-discount-close]')) {
+        event.preventDefault();
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
+    });
+
+    var copyButton = modal.querySelector('[data-mig-discount-copy]');
+    if (copyButton) {
+      copyButton.addEventListener('click', function () {
+        var code = copyButton.dataset.code;
+        var label = copyButton.querySelector('small');
+        function markCopied() {
+          copyButton.classList.add('is-copied');
+          if (label) label.textContent = 'Copied';
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(markCopied).catch(markCopied);
+        } else {
+          markCopied();
+        }
+      });
+    }
+
+    if (window.location.hash === '#discount-code' || modal.querySelector('[data-mig-discount-success]')) openModal();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMigDiscountPopup);
+  } else {
+    initMigDiscountPopup();
+  }
+{% endjavascript %}
