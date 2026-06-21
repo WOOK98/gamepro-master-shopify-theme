@@ -234,10 +234,6 @@
     }
   },
   "templates": {
-    "404": {
-      "title": "Strani ni mogoče najti",
-      "subtext": "404"
-    },
     "search": {
       "no_results": "Za »{{ terms }}« ni bil najden noben rezultat. Preverite črkovanje ali uporabite drugo besedo ali frazo.",
       "page": "Stran",
@@ -291,6 +287,10 @@
         "error_heading": "Prilagodite naslednje:",
         "title": "Obrazec za stik"
       }
+    },
+    "404": {
+      "title": "Strani ni mogoče najti",
+      "subtext": "404"
     }
   },
   "sections": {
