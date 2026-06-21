@@ -1,0 +1,40 @@
+{% doc %}
+Renders a decorative MIG feature icon.
+
+@param {string} icon - Icon name: plug, box, zap, shield, database, or gamepad.
+
+@example
+{% render 'mig-icon', icon: 'plug' %}
+{% enddoc %}
+
+{%- case icon -%}
+  {%- when 'box' -%}
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="m4.5 7.8 7.5 4.3 7.5-4.3M12 12.1V21" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    </svg>
+  {%- when 'zap' -%}
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="m13.2 2.8-8 11h6.2l-.6 7.4 8-11h-6.2l.6-7.4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    </svg>
+  {%- when 'shield' -%}
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="M12 2.8 4.5 6v5.5c0 4.5 3 8.2 7.5 9.7 4.5-1.5 7.5-5.2 7.5-9.7V6L12 2.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="m8.8 12 2.1 2.1 4.4-4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  {%- when 'database' -%}
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <ellipse cx="12" cy="5.5" rx="7.5" ry="3" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M4.5 5.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6M4.5 11.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6" stroke="currentColor" stroke-width="1.6"/>
+    </svg>
+  {%- when 'gamepad' -%}
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="M7.2 7.2h9.6c2.1 0 3.8 1.5 4.2 3.5l1 5.5c.4 2.3-2.1 3.9-4 2.5l-2.2-1.7H8.2L6 18.7c-1.9 1.4-4.4-.2-4-2.5l1-5.5c.4-2 2.1-3.5 4.2-3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M7.3 10.2v4M5.3 12.2h4M16.9 11.1h.1M18.8 13h.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  {%- else -%}
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path d="M9 3v6M15 3v6M7 9h10v2a5 5 0 0 1-5 5 5 5 0 0 1-5-5V9Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 16v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+{%- endcase -%}
