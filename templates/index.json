@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "mig_hero": {
@@ -28,12 +37,12 @@
         "feature_switch"
       ],
       "settings": {
-        "eyebrow": "MIG Flash for Switch",
-        "heading": "MIG FLASH V2 & MIG DUMPER FOR SWITCH",
-        "text": "<p>Shop MIG Flash V2 and the USB-C MIG Dumper for managing personal backups of Nintendo Switch games you own.</p>",
+        "eyebrow": "MIG MASTER",
+        "heading": "MIG FLASH V2 & MIG FLASH DUMPER",
+        "text": "<p>Shop MIG Flash V2 and the MIG Flash Dumper for managing personal backups of  games you own.</p>",
         "primary_label": "Shop MIG Flash V2",
         "primary_link": "shopify://products/mig-flash-v2",
-        "secondary_label": "View MIG Dumper",
+        "secondary_label": "Shop MIG Dumper",
         "secondary_link": "shopify://products/mig-flash-dumper"
       }
     },
