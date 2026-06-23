@@ -2,6 +2,12 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
+{%- if collection.handle == 'all' and collection.sort_by == blank -%}
+  <script>
+    window.location.replace('{{ collection.url }}?sort_by=best-selling');
+  </script>
+{%- endif -%}
+
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
