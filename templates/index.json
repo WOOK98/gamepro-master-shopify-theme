@@ -21,7 +21,7 @@
         "feature_backup": {
           "type": "feature",
           "settings": {
-            "text": "USB-C backup"
+            "text": "Backup"
           }
         },
         "feature_switch": {
