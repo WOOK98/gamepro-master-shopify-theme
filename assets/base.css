@@ -3610,3 +3610,16 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* Keep Shopify Inbox clear of the discount trigger and mobile purchase controls. */
+#ShopifyChat {
+  bottom: 7rem !important;
+  right: 1.5rem !important;
+}
+
+@media screen and (max-width: 749px) {
+  #ShopifyChat {
+    bottom: 8rem !important;
+    right: 1rem !important;
+  }
+}
