@@ -55,6 +55,18 @@
     return String(value || '').toLowerCase();
   }
 
+  function escapeHTML(value) {
+    return String(value || '').replace(/[&<>"']/g, function (char) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char];
+    });
+  }
+
   function initDirectory(root) {
     if (!root || root.dataset.migGameDirectoryReady === "true") return;
     root.dataset.migGameDirectoryReady = "true";
@@ -193,9 +205,10 @@
         row.className = "mig-directory__row" + (state.selected.has(game.id) ? " is-selected" : "");
         row.dataset.gameId = String(game.id);
         const hotBadge = hotPattern.test(game.name) ? '<span class="mig-directory__badge">热门</span>' : "";
-        const categoryTag = '<span class="mig-directory__category-tag">' + game.category + '</span>';
+        const categoryTag = '<span class="mig-directory__category-tag">' + escapeHTML(game.category) + '</span>';
+        const gameTitle = '<span class="mig-directory__game-title">' + escapeHTML(game.name) + '</span>';
         row.innerHTML = '<td><span class="mig-directory__game-id">#' + game.id + '</span></td>' +
-          '<td><span class="mig-directory__game-name">' + categoryTag + game.name + hotBadge + '</span></td>' +
+          '<td><span class="mig-directory__game-name">' + categoryTag + gameTitle + hotBadge + '</span></td>' +
           '<td><span class="mig-directory__game-size">' + game.size.toFixed(2) + '</span></td>';
         fragment.appendChild(row);
       });
