@@ -1,0 +1,46 @@
+{% doc %}
+Renders a targeted companion-product offer for MIG Flash and MIG Dumper product pages.
+
+@param {product} product - Current product.
+{% enddoc %}
+
+{%- liquid
+  assign companion_product = blank
+  assign companion_heading = blank
+  assign companion_copy = blank
+  assign companion_cta = blank
+  assign bundle_product = all_products['mig-flash-v2-dumper-bundle']
+
+  if product.handle == 'mig-flash-v2'
+    assign companion_product = all_products['mig-flash-dumper']
+    assign companion_heading = 'Complete your backup setup'
+    assign companion_copy = 'Add the USB-C Dumper to create personal backups from compatible cartridges you own.'
+    assign companion_cta = 'View MIG Dumper'
+  elsif product.handle == 'mig-flash-dumper'
+    assign companion_product = all_products['mig-flash-v2']
+    assign companion_heading = 'Pair it with MIG Flash V2'
+    assign companion_copy = 'Use MIG Flash V2 to manage compatible personal backups after preparing files with the Dumper.'
+    assign companion_cta = 'View MIG Flash V2'
+  endif
+-%}
+
+{%- if companion_product != blank -%}
+  <aside class="product-companion-offer" aria-label="Recommended companion product">
+    <div class="product-companion-offer__content">
+      <p class="product-companion-offer__eyebrow">Recommended add-on</p>
+      <h2 class="product-companion-offer__heading">{{ companion_heading }}</h2>
+      <p class="product-companion-offer__copy">{{ companion_copy }}</p>
+    </div>
+
+    <div class="product-companion-offer__actions">
+      <a class="product-companion-offer__button" href="{{ companion_product.url }}">
+        {{ companion_cta }}
+      </a>
+      {%- if bundle_product != blank -%}
+        <a class="product-companion-offer__link" href="{{ bundle_product.url }}">
+          Shop the bundle
+        </a>
+      {%- endif -%}
+    </div>
+  </aside>
+{%- endif -%}

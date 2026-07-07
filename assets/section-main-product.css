@@ -317,6 +317,72 @@ a.product__text {
   box-shadow: 0 0 0 0.3rem rgba(var(--color-button), 0.14);
 }
 
+.product-companion-offer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.6rem;
+  align-items: center;
+  max-width: 44rem;
+  margin: 2.2rem 0;
+  padding: 1.6rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  border-radius: 0.8rem;
+  background: rgba(var(--color-foreground), 0.035);
+}
+
+.product-companion-offer__eyebrow {
+  margin: 0 0 0.5rem;
+  color: rgb(var(--color-button));
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.product-companion-offer__heading {
+  margin: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+.product-companion-offer__copy {
+  margin: 0.6rem 0 0;
+  color: rgba(var(--color-foreground), 0.72);
+  font-size: 1.3rem;
+  line-height: 1.45;
+}
+
+.product-companion-offer__actions {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: end;
+}
+
+.product-companion-offer__button {
+  display: inline-flex;
+  min-height: 4.2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.4rem;
+  border-radius: var(--buttons-radius-outset);
+  color: rgb(var(--color-button-text));
+  background: rgb(var(--color-button));
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.product-companion-offer__link {
+  color: rgba(var(--color-foreground), 0.78);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-underline-offset: 0.3rem;
+}
+
 @media screen and (min-width: 750px) {
   .product__info-container {
     max-width: 60rem;
@@ -497,6 +563,18 @@ a.product__text {
     min-height: 3.6rem;
     padding: 0.7rem 0.8rem;
     text-align: center;
+  }
+
+  .product-companion-offer {
+    grid-template-columns: 1fr;
+  }
+
+  .product-companion-offer__actions {
+    justify-items: stretch;
+  }
+
+  .product-companion-offer__button {
+    width: 100%;
   }
 
   .product__media-list {
