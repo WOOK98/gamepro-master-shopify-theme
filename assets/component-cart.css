@@ -176,6 +176,38 @@ cart-items {
   margin-top: 1rem;
 }
 
+.cart-conversion-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  max-width: 42rem;
+  margin: 0 auto 1.2rem;
+}
+
+.cart-conversion-strip li {
+  display: inline-flex;
+  min-height: 3.2rem;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 1rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  border-radius: 0.6rem;
+  color: rgba(var(--color-foreground), 0.78);
+  background: rgba(var(--color-foreground), 0.035);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cart-conversion-strip__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: rgb(var(--color-button));
+  box-shadow: 0 0 0 0.3rem rgba(var(--color-button), 0.14);
+}
+
 .cart-note__label {
   display: inline-block;
   margin-bottom: 1rem;
@@ -213,6 +245,11 @@ cart-items {
 
   [data-shopify-buttoncontainer] {
     justify-content: flex-end;
+  }
+
+  .cart-conversion-strip {
+    justify-content: flex-end;
+    margin-right: 0;
   }
 
   .cart__ctas {

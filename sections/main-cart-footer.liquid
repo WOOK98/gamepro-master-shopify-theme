@@ -104,6 +104,20 @@
                 </small>
               </div>
             {%- else -%}
+              <ul class="cart-conversion-strip list-unstyled" aria-label="Checkout confidence">
+                <li>
+                  <span class="cart-conversion-strip__dot" aria-hidden="true"></span>
+                  Secure checkout
+                </li>
+                <li>
+                  <span class="cart-conversion-strip__dot" aria-hidden="true"></span>
+                  Tracked delivery
+                </li>
+                <li>
+                  <span class="cart-conversion-strip__dot" aria-hidden="true"></span>
+                  Discounts calculated at checkout
+                </li>
+              </ul>
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <button
                   type="submit"
@@ -115,7 +129,7 @@
                   {% endif %}
                   form="cart"
                 >
-                  {{ 'sections.cart.checkout' | t }}
+                  Secure checkout
                 </button>
               </div>
 

@@ -45,9 +45,10 @@
         </a>
         <form action="{{ routes.cart_url }}" method="post" id="cart-notification-form">
           <button class="button button--primary button--full-width" name="checkout">
-            {{ 'sections.cart.checkout' | t }}
+            Secure checkout
           </button>
         </form>
+        <p class="cart-notification__trust">Discounts, shipping, and taxes are calculated at checkout.</p>
         <button type="button" class="link button-label">{{ 'general.continue_shopping' | t }}</button>
       </div>
     </div>
