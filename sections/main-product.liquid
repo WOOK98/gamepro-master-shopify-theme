@@ -141,6 +141,24 @@
                       {{ form | payment_terms }}
                     {%- endform -%}
                   </div>
+                  <ul class="product-conversion-strip list-unstyled" aria-label="Purchase confidence">
+                    <li>
+                      <span class="product-conversion-strip__dot" aria-hidden="true"></span>
+                      {%- if product.selected_or_first_available_variant.available -%}
+                        Ready to ship
+                      {%- else -%}
+                        Currently sold out
+                      {%- endif -%}
+                    </li>
+                    <li>
+                      <span class="product-conversion-strip__dot" aria-hidden="true"></span>
+                      Tracked delivery
+                    </li>
+                    <li>
+                      <span class="product-conversion-strip__dot" aria-hidden="true"></span>
+                      Secure checkout
+                    </li>
+                  </ul>
                 {%- when 'inventory' -%}
                   <p
                     class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -585,6 +603,7 @@
                             >
                               {% assign skip_card_product_styles = false %}
                               {%- for i in (1..number_of_slides) -%}
+                                {%- assign product_offset = forloop.index0 | times: block.settings.products_per_page -%}
                                 <div
                                   id="Slide-{{ block.id }}-{{ forloop.index }}"
                                   class="complementary-slide complementary-slide--{{ settings.card_style }} grid__item slider__slide slideshow__slide"
@@ -598,7 +617,7 @@
                                   <ul class="list-unstyled" role="list">
                                     {%- for product in recommendations.products
                                       limit: block.settings.products_per_page
-                                      offset: continue
+                                      offset: product_offset
                                     -%}
                                       <li>
                                         {%- if block.settings.enable_quick_add -%}
@@ -738,19 +757,27 @@
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
       {%- endif -%}
 
-      {%- liquid
-        if product.selected_or_first_available_variant.featured_media
-          assign seo_media = product.selected_or_first_available_variant.featured_media
-        else
-          assign seo_media = product.featured_media
-        endif
-      -%}
-
       <script type="application/ld+json">
         {{ product | structured_data }}
       </script>
     </div>
   </product-component>
+
+  <div class="product-mobile-cta" aria-label="Product purchase shortcut">
+    <div class="product-mobile-cta__summary">
+      <span class="product-mobile-cta__title">{{ product.title | escape }}</span>
+      <span class="product-mobile-cta__price">
+        {{ product.selected_or_first_available_variant.price | money_with_currency }}
+      </span>
+    </div>
+    {%- if product.selected_or_first_available_variant.available -%}
+      <a class="product-mobile-cta__button" href="#ProductSubmitButton-{{ section.id }}">Buy now</a>
+    {%- else -%}
+      <span class="product-mobile-cta__button product-mobile-cta__button--disabled">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {%- endif -%}
+  </div>
 </product-info>
 
 {% schema %}
