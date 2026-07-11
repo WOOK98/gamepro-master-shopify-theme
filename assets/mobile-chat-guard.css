@@ -1,0 +1,44 @@
+.mig-mobile-chat-close {
+  display: none;
+  position: fixed;
+  top: var(--mig-chat-close-top, calc(12px + env(safe-area-inset-top)));
+  right: var(--mig-chat-close-right, 12px);
+  z-index: 2147483647;
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.94);
+  color: #fff;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+  font: 700 24px/1 Arial, sans-serif;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mig-mobile-chat-close--visible:not([hidden]) {
+  display: flex !important;
+}
+
+.mig-mobile-chat-close:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 749px) {
+  html.mig-mobile-chat-open,
+  body.mig-mobile-chat-open {
+    overflow: hidden !important;
+  }
+
+  body.mig-mobile-chat-open .mig-directory__footer,
+  body.mig-mobile-chat-open .mig-discount-trigger,
+  body.mig-mobile-chat-open .shopify-section-group-footer-group .mig-discount-trigger {
+    opacity: 0.22;
+    pointer-events: none;
+  }
+}
