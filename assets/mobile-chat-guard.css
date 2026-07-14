@@ -30,15 +30,29 @@
 }
 
 @media screen and (max-width: 749px) {
-  html.mig-mobile-chat-open,
-  body.mig-mobile-chat-open {
-    overflow: hidden !important;
-  }
-
-  body.mig-mobile-chat-open .mig-directory__footer,
-  body.mig-mobile-chat-open .mig-discount-trigger,
-  body.mig-mobile-chat-open .shopify-section-group-footer-group .mig-discount-trigger {
-    opacity: 0.22;
-    pointer-events: none;
+  .mig-mobile-chat-close,
+  .mig-mobile-chat-close--visible:not([hidden]),
+  #ShopifyChat,
+  iframe#ShopifyChat,
+  iframe#dummy-chat-button-iframe,
+  iframe[name='dummy-chat-button-iframe'],
+  iframe[name*='chat' i],
+  iframe[name*='inbox' i],
+  iframe[title*='Shopify Inbox' i],
+  iframe[title*='chat' i],
+  iframe[title*='inbox' i],
+  iframe[src*='shopifychat' i],
+  iframe[src*='shopify-chat' i],
+  iframe[src*='shopifyinbox' i],
+  iframe[src*='inbox' i],
+  [id*='ShopifyChat' i],
+  [id*='shopify-chat' i],
+  [class*='shopify-chat' i],
+  [class*='shopify-inbox' i],
+  [data-mig-mobile-chat-disabled='true'] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }

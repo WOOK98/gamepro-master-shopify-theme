@@ -18,7 +18,6 @@
     '[id*="shopify-chat" i]',
     '[class*="shopify-chat" i]',
     '[class*="shopify-inbox" i]',
-    '[class*="inbox" i]',
   ];
 
   const media = window.matchMedia(MOBILE_QUERY);
@@ -50,9 +49,13 @@
       .join(' ')
       .toLowerCase();
 
+  const getAllCandidates = () => unique(CHAT_SELECTORS.flatMap(safeQuery)).filter((element) => element !== closeButton);
+
   const getCandidates = () =>
-    unique(CHAT_SELECTORS.flatMap(safeQuery)).filter(
-      (element) => element !== closeButton && !element.hasAttribute('data-mig-chat-hidden')
+    getAllCandidates().filter(
+      (element) =>
+        !element.hasAttribute('data-mig-chat-hidden') &&
+        !element.hasAttribute('data-mig-mobile-chat-disabled')
     );
 
   const isVisible = (element) => {
@@ -124,13 +127,30 @@
     button.style.setProperty('--mig-chat-close-right', `${right}px`);
   };
 
+  const restorePageScroll = () => {
+    if (!document.body) return;
+
+    document.documentElement.classList.remove('mig-mobile-chat-open');
+    document.body.classList.remove('mig-mobile-chat-open');
+
+    ['overflow', 'position', 'height', 'width', 'top', 'touch-action'].forEach((property) => {
+      document.documentElement.style.removeProperty(property);
+      document.body.style.removeProperty(property);
+    });
+  };
+
   const setOpenState = (open, panel) => {
     const button = ensureButton();
     button.hidden = !open;
     button.classList.toggle('mig-mobile-chat-close--visible', open);
     positionCloseButton(open ? panel : null);
-    document.documentElement.classList.toggle('mig-mobile-chat-open', open);
-    document.body.classList.toggle('mig-mobile-chat-open', open);
+
+    if (open) {
+      document.documentElement.classList.add('mig-mobile-chat-open');
+      document.body.classList.add('mig-mobile-chat-open');
+    } else {
+      restorePageScroll();
+    }
   };
 
   const shouldPositionLauncher = () =>
@@ -154,12 +174,14 @@
 
     ensureButton();
 
-    const candidates = getCandidates();
-
     if (shouldPositionLauncher()) {
-      candidates.forEach(positionLauncher);
+      hideMobileChat();
+      return;
     }
 
+    restoreDesktopChat();
+
+    const candidates = getCandidates();
     const openPanels = candidates.filter(isOpenPanel);
     setOpenState(openPanels.length > 0, openPanels[0]);
   }
@@ -201,6 +223,45 @@
         // Cross-origin iframe messaging can fail in some preview contexts.
       }
     });
+  };
+
+  function hideElement(element) {
+    element.setAttribute('data-mig-mobile-chat-disabled', 'true');
+    element.style.setProperty('display', 'none', 'important');
+    element.style.setProperty('visibility', 'hidden', 'important');
+    element.style.setProperty('pointer-events', 'none', 'important');
+    element.style.setProperty('opacity', '0', 'important');
+  }
+
+  function showElement(element) {
+    if (!element.hasAttribute('data-mig-mobile-chat-disabled')) return;
+
+    element.removeAttribute('data-mig-mobile-chat-disabled');
+    element.style.removeProperty('display');
+    element.style.removeProperty('visibility');
+    element.style.removeProperty('pointer-events');
+    element.style.removeProperty('opacity');
+  }
+
+  function hideMobileChat() {
+    const targets = getAllCandidates();
+
+    if (targets.length > 0) {
+      requestNativeClose();
+    }
+
+    targets.forEach(hideElement);
+
+    if (closeButton) {
+      closeButton.hidden = true;
+      closeButton.classList.remove('mig-mobile-chat-close--visible');
+    }
+
+    restorePageScroll();
+  }
+
+  function restoreDesktopChat() {
+    safeQuery('[data-mig-mobile-chat-disabled="true"]').forEach(showElement);
   }
 
   function closeChat() {
@@ -216,6 +277,7 @@
         element.style.setProperty('display', 'none', 'important');
         element.style.setProperty('visibility', 'hidden', 'important');
         element.style.setProperty('pointer-events', 'none', 'important');
+        element.style.setProperty('opacity', '0', 'important');
       });
 
       setOpenState(false);
