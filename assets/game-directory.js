@@ -3,6 +3,11 @@
   const capacities = { 128: 107, 256: 232, 512: 465 };
   const categories = ['全部', '动作冒险', '角色扮演', '平台动作', '体育运动', '派对聚会', '格斗对战', '竞速赛车', '射击', '策略模拟', '恐怖', '儿童', '独立解谜', '其他'];
   const hotPattern = /塞尔达|马里奥|宝可梦|最终幻想|火焰纹章|异度之刃|怪物猎人/;
+  const pinyinCollator = new Intl.Collator('zh-CN-u-co-pinyin', {
+    usage: 'sort',
+    sensitivity: 'base',
+    numeric: true
+  });
 
   function $(root, selector) { return root.querySelector(selector); }
   function $$(root, selector) { return Array.from(root.querySelectorAll(selector)); }
@@ -164,7 +169,10 @@
       if (state.sort === 'size-desc') return copy.sort((a, b) => b.size - a.size);
       if (state.sort === 'size-asc') return copy.sort((a, b) => a.size - b.size);
       if (state.sort === 'name') return copy.sort((a, b) => a.name.localeCompare(b.name, 'zh-Hans-CN'));
-      return copy.sort((a, b) => a.id - b.id);
+      return copy.sort((a, b) => {
+        const byPinyin = pinyinCollator.compare(a.name, b.name);
+        return byPinyin || a.id - b.id;
+      });
     }
 
     function filteredGames() {
