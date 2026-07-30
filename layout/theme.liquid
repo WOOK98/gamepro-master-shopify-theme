@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-<!-- DeepLumen Bidirectional Canonical v1 START -->
+<!-- dl-bc-v1 -->
 {%- if template contains 'product' and product.metafields.deeplumen.ap_deployed.value == true -%}
   <link rel="canonical" href="https://{{ request.host }}/a/shop/products/{{ product.handle }}">
 {%- elsif template contains 'collection' and collection.metafields.deeplumen.ap_deployed.value == true -%}
@@ -15,7 +15,7 @@
 {%- else -%}
   <link rel="canonical" href="{{ canonical_url }}">
 {%- endif -%}
-<!-- DeepLumen Bidirectional Canonical END -->
+<!-- /dl-bc -->
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
