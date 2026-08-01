@@ -50,7 +50,7 @@
       "type": "featured-collection",
       "settings": {
         "collection": "frontpage",
-        "products_to_show": 6,
+        "products_to_show": 8,
         "title": "MIG essentials",
         "heading_size": "h1",
         "description": "<p>Start with MIG Flash V2 and the USB-C Dumper, then complete your setup.</p>",
