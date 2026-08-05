@@ -6,6 +6,11 @@
 {%- endcomment -%}
 
 {%- liquid
+  assign country_selector_in_header = false
+  if localPosition contains 'HeaderCountry'
+    assign country_selector_in_header = true
+  endif
+
   assign currencies = localization.available_countries | map: 'currency' | map: 'iso_code' | uniq
   assign popular_countries = localization.available_countries | where: 'popular?' | sort: 'name'
 
@@ -25,6 +30,7 @@
   endif
 %}
 
+{%- unless country_selector_in_header -%}
 <div class="disclosure">
   <button
     type="button"
@@ -153,4 +159,5 @@
   </div>
   <div class="country-selector__overlay"></div>
 </div>
+{%- endunless -%}
 <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
