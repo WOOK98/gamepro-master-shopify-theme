@@ -170,10 +170,6 @@
               assign show_mobile_country_selector = false
               assign show_mobile_language_selector = false
 
-              if section.settings.enable_country_selector and localization.available_countries.size > 1
-                assign show_mobile_country_selector = true
-              endif
-
               if section.settings.enable_language_selector and localization.available_languages.size > 1
                 assign show_mobile_language_selector = true
               endif
