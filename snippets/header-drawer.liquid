@@ -166,9 +166,21 @@
                 -%}
               </a>
             {%- endif -%}
-            {%- if localization.available_countries or localization.available_languages -%}
+            {%- liquid
+              assign show_mobile_country_selector = false
+              assign show_mobile_language_selector = false
+
+              if section.settings.enable_country_selector and localization.available_countries.size > 1
+                assign show_mobile_country_selector = true
+              endif
+
+              if section.settings.enable_language_selector and localization.available_languages.size > 1
+                assign show_mobile_language_selector = true
+              endif
+            -%}
+            {%- if show_mobile_country_selector or show_mobile_language_selector -%}
               <div class="menu-drawer__localization header-localization">
-                {%- if localization.available_countries and localization.available_countries.size > 1 -%}
+                {%- if show_mobile_country_selector -%}
                   <localization-form>
                     {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
                       <div>
@@ -181,7 +193,7 @@
                   </localization-form>
                 {% endif %}
 
-                {%- if localization.available_languages and localization.available_languages.size > 1 -%}
+                {%- if show_mobile_language_selector -%}
                   <localization-form>
                     {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
                       <div>
