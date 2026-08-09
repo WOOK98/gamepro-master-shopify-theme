@@ -1,20 +1,20 @@
 {%- liquid
   assign og_title = page_title | default: shop.name
-  assign og_url = canonical_url | replace: '/a/shop', '' | default: request.origin
+  assign og_url = canonical_url | append: '' | replace: '/a/shop', '' | default: request.origin
   assign og_type = 'website'
   assign og_description = page_description | default: shop.description | default: shop.name
 
-  if request.page_type == 'product'
+  if template contains 'product'
     assign og_type = 'product'
-    assign og_url = request.origin | append: product.url
-  elsif request.page_type == 'article'
+    assign og_url = request.origin | append: '/products/' | append: product.handle
+  elsif template contains 'article'
     assign og_type = 'article'
     assign og_url = request.origin | append: article.url
-  elsif request.page_type == 'collection'
-    assign og_url = request.origin | append: collection.url
-  elsif request.page_type == 'page'
-    assign og_url = request.origin | append: page.url
-  elsif request.page_type == 'password'
+  elsif template contains 'collection'
+    assign og_url = request.origin | append: '/collections/' | append: collection.handle
+  elsif template contains 'page'
+    assign og_url = request.origin | append: '/pages/' | append: page.handle
+  elsif template contains 'password'
     assign og_url = request.origin
   endif
 

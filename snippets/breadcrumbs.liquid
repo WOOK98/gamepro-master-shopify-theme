@@ -3,17 +3,17 @@ Renders visible breadcrumbs and matching BreadcrumbList structured data.
 {% enddoc %}
 
 {%- liquid
-  assign clean_canonical_url = canonical_url | replace: '/a/shop', ''
-  if request.page_type == 'product' and product != blank
-    assign clean_canonical_url = request.origin | append: product.url
-  elsif request.page_type == 'collection' and collection != blank
-    assign clean_canonical_url = request.origin | append: collection.url
-  elsif request.page_type == 'page' and page != blank
-    assign clean_canonical_url = request.origin | append: page.url
-  elsif request.page_type == 'article' and article != blank
+  assign clean_canonical_url = canonical_url | append: '' | replace: '/a/shop', ''
+  if template contains 'product' and product.handle != blank
+    assign clean_canonical_url = request.origin | append: '/products/' | append: product.handle
+  elsif template contains 'collection' and collection.handle != blank
+    assign clean_canonical_url = request.origin | append: '/collections/' | append: collection.handle
+  elsif template contains 'page' and page.handle != blank
+    assign clean_canonical_url = request.origin | append: '/pages/' | append: page.handle
+  elsif template contains 'article' and article.handle != blank
     assign clean_canonical_url = request.origin | append: article.url
-  elsif request.page_type == 'blog' and blog != blank
-    assign clean_canonical_url = request.origin | append: blog.url
+  elsif template contains 'blog' and blog.handle != blank
+    assign clean_canonical_url = request.origin | append: '/blogs/' | append: blog.handle
   endif
 -%}
 

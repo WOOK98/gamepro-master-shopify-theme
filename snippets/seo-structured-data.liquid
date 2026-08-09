@@ -3,9 +3,9 @@ Renders store-level and collection-level structured data for search engines.
 {% enddoc %}
 
 {%- liquid
-  assign clean_canonical_url = canonical_url | replace: '/a/shop', ''
-  if request.page_type == 'collection' and collection != blank
-    assign clean_canonical_url = request.origin | append: collection.url
+  assign clean_canonical_url = canonical_url | append: '' | replace: '/a/shop', ''
+  if template contains 'collection' and collection.handle != blank
+    assign clean_canonical_url = request.origin | append: '/collections/' | append: collection.handle
   endif
 -%}
 
