@@ -5,17 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-{%- comment -%}dl-bc-v2{%- endcomment -%}
-{%- if template contains 'product' and product.metafields.deeplumen.ap_deployed.value == true -%}
-  <link rel="canonical" href="https://{{ request.host }}/a/shop/products/{{ product.handle }}">
-{%- elsif template contains 'collection' and collection.metafields.deeplumen.ap_deployed.value == true -%}
-  <link rel="canonical" href="https://{{ request.host }}/a/shop/collections/{{ collection.handle }}">
-{%- elsif template contains 'article' and article.metafields.deeplumen.ap_deployed.value == true -%}
-  <link rel="canonical" href="https://{{ request.host }}/a/shop/blogs/{{ blog.handle }}/{{ article.handle }}">
-{%- else -%}
-  <link rel="canonical" href="{{ canonical_url }}">
-{%- endif -%}
-{%- comment -%}/dl-bc{%- endcomment -%}
+    <link rel="canonical" href="{{ canonical_url }}">
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
