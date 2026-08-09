@@ -3,9 +3,10 @@ Renders store-level and collection-level structured data for search engines.
 {% enddoc %}
 
 {%- liquid
+  assign canonical_origin = 'https://migmaster.shop'
   assign clean_canonical_url = canonical_url | append: '' | replace: '/a/shop', ''
   if template contains 'collection' and collection.handle != blank
-    assign clean_canonical_url = request.origin | append: '/collections/' | append: collection.handle
+    assign clean_canonical_url = canonical_origin | append: '/collections/' | append: collection.handle
   endif
 -%}
 
