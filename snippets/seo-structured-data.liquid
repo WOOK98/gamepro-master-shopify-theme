@@ -2,7 +2,12 @@
 Renders store-level and collection-level structured data for search engines.
 {% enddoc %}
 
-{%- assign clean_canonical_url = canonical_url | replace: '/a/shop', '' -%}
+{%- liquid
+  assign clean_canonical_url = canonical_url | replace: '/a/shop', ''
+  if request.page_type == 'collection' and collection != blank
+    assign clean_canonical_url = request.origin | append: collection.url
+  endif
+-%}
 
 {%- capture social_profiles -%}
   {%- assign first_profile = true -%}

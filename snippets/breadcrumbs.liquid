@@ -2,7 +2,20 @@
 Renders visible breadcrumbs and matching BreadcrumbList structured data.
 {% enddoc %}
 
-{%- assign clean_canonical_url = canonical_url | replace: '/a/shop', '' -%}
+{%- liquid
+  assign clean_canonical_url = canonical_url | replace: '/a/shop', ''
+  if request.page_type == 'product' and product != blank
+    assign clean_canonical_url = request.origin | append: product.url
+  elsif request.page_type == 'collection' and collection != blank
+    assign clean_canonical_url = request.origin | append: collection.url
+  elsif request.page_type == 'page' and page != blank
+    assign clean_canonical_url = request.origin | append: page.url
+  elsif request.page_type == 'article' and article != blank
+    assign clean_canonical_url = request.origin | append: article.url
+  elsif request.page_type == 'blog' and blog != blank
+    assign clean_canonical_url = request.origin | append: blog.url
+  endif
+-%}
 
 {%- liquid
   assign breadcrumb_title = blank

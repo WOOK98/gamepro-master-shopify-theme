@@ -6,8 +6,14 @@
 
   if request.page_type == 'product'
     assign og_type = 'product'
+    assign og_url = request.origin | append: product.url
   elsif request.page_type == 'article'
     assign og_type = 'article'
+    assign og_url = request.origin | append: article.url
+  elsif request.page_type == 'collection'
+    assign og_url = request.origin | append: collection.url
+  elsif request.page_type == 'page'
+    assign og_url = request.origin | append: page.url
   elsif request.page_type == 'password'
     assign og_url = request.origin
   endif

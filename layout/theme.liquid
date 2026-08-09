@@ -5,7 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    {%- assign clean_canonical_url = canonical_url | replace: '/a/shop', '' -%}
+    {%- liquid
+      assign clean_canonical_url = canonical_url | replace: '/a/shop', ''
+      if request.page_type == 'product' and product != blank
+        assign clean_canonical_url = request.origin | append: product.url
+      elsif request.page_type == 'collection' and collection != blank
+        assign clean_canonical_url = request.origin | append: collection.url
+      elsif request.page_type == 'page' and page != blank
+        assign clean_canonical_url = request.origin | append: page.url
+      elsif request.page_type == 'article' and article != blank
+        assign clean_canonical_url = request.origin | append: article.url
+      elsif request.page_type == 'blog' and blog != blank
+        assign clean_canonical_url = request.origin | append: blog.url
+      endif
+    -%}
     <link rel="canonical" href="{{ clean_canonical_url }}">
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
