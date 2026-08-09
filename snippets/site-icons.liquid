@@ -1,0 +1,14 @@
+{%- liquid
+  assign favicon_32 = 'mig-flash-favicon-32.png' | asset_url
+  assign apple_icon = 'mig-flash-apple-touch-icon.png' | asset_url
+  assign icon_192 = 'mig-flash-icon-192.png' | asset_url
+  assign icon_512 = 'mig-flash-icon-512.png' | asset_url
+-%}
+
+<link rel="icon" type="image/png" sizes="32x32" href="{{ favicon_32 }}">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ icon_192 }}">
+<link rel="shortcut icon" type="image/png" href="{{ favicon_32 }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ apple_icon }}">
+<link rel="manifest" href="{{ routes.root_url }}manifest.json">
+<meta name="msapplication-TileImage" content="{{ icon_512 }}">
+<meta name="msapplication-TileColor" content="#d92d27">
