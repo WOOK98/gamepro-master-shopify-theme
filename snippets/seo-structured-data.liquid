@@ -2,6 +2,8 @@
 Renders store-level and collection-level structured data for search engines.
 {% enddoc %}
 
+{%- assign clean_canonical_url = canonical_url | replace: '/a/shop', '' -%}
+
 {%- capture social_profiles -%}
   {%- assign first_profile = true -%}
   {%- if settings.social_twitter_link != blank -%}
@@ -70,8 +72,8 @@ Renders store-level and collection-level structured data for search engines.
     {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      "@id": {{ canonical_url | append: '#collection' | json }},
-      "url": {{ canonical_url | json }},
+      "@id": {{ clean_canonical_url | append: '#collection' | json }},
+      "url": {{ clean_canonical_url | json }},
       "name": {{ collection.title | json }},
       "description": {{ collection.description | strip_html | strip_newlines | json }},
       "mainEntity": {

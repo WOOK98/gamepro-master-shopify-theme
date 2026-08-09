@@ -2,6 +2,8 @@
 Renders visible breadcrumbs and matching BreadcrumbList structured data.
 {% enddoc %}
 
+{%- assign clean_canonical_url = canonical_url | replace: '/a/shop', '' -%}
+
 {%- liquid
   assign breadcrumb_title = blank
   assign breadcrumb_parent_title = blank
@@ -64,7 +66,7 @@ Renders visible breadcrumbs and matching BreadcrumbList structured data.
           "@type": "ListItem",
           "position": {%- if breadcrumb_parent_title != blank -%}3{%- else -%}2{%- endif -%},
           "name": {{ breadcrumb_title | json }},
-          "item": {{ canonical_url | json }}
+          "item": {{ clean_canonical_url | json }}
         }
       ]
     }
