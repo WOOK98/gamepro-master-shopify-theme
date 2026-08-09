@@ -1,0 +1,24 @@
+{
+  "name": "MIG Master",
+  "short_name": "MIG Flash",
+  "description": "MIG Master gaming accessories and product guides.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#d92d27",
+  "theme_color": "#d92d27",
+  "icons": [
+    {
+      "src": "mig-flash-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "mig-flash-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
