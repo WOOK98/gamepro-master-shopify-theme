@@ -13,13 +13,13 @@ Renders a targeted companion-product offer for MIG Flash and MIG Dumper product 
 
   if product.handle == 'mig-flash-v2'
     assign companion_product = all_products['mig-flash-dumper']
-    assign companion_heading = 'Complete your backup setup'
-    assign companion_copy = 'Add the USB-C Dumper to create personal backups from compatible cartridges you own.'
+    assign companion_heading = 'Complete your cartridge workflow'
+    assign companion_copy = 'Add the USB-C Dumper as a companion reader for compatible physical cartridges you own.'
     assign companion_cta = 'View MIG Dumper'
   elsif product.handle == 'mig-flash-dumper'
     assign companion_product = all_products['mig-flash-v2']
     assign companion_heading = 'Pair it with MIG Flash V2'
-    assign companion_copy = 'Use MIG Flash V2 to manage compatible personal backups after preparing files with the Dumper.'
+    assign companion_copy = 'Use MIG Flash V2 as the cartridge management accessory in a lawful personal collection workflow.'
     assign companion_cta = 'View MIG Flash V2'
   endif
 -%}

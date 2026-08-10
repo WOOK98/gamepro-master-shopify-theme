@@ -94,28 +94,28 @@
           "type": "question",
           "settings": {
             "question": "What is the difference between MIG Flash and MIG Dumper?",
-            "answer": "<p>MIG Flash is the card used to access compatible personal game backups. MIG Dumper is the USB-C reader used to create backups from original Nintendo Switch cartridges you own.</p>"
+            "answer": "<p>MIG Flash V2 is the cartridge management accessory. MIG Dumper is the USB-C reader accessory used with a supported computer for lawful personal collection workflows involving original physical cartridges you own.</p>"
           }
         },
         "required": {
           "type": "question",
           "settings": {
             "question": "Do I need the MIG Dumper to use MIG Flash?",
-            "answer": "<p>No. The MIG Dumper is an optional companion that provides a convenient way to back up your own physical game cartridges.</p>"
+            "answer": "<p>No. The MIG Dumper is an optional companion reader for customers who want a desktop-friendly workflow with compatible physical cartridges they own.</p>"
           }
         },
         "compatibility": {
           "type": "question",
           "settings": {
             "question": "How can I confirm current compatibility?",
-            "answer": "<p>Review the compatibility notes and requirements in the product description before ordering. Console firmware and product firmware can change, so use the latest information shown on this page.</p>"
+            "answer": "<p>Review the compatibility notes and requirements in the product description before ordering. Hardware firmware and platform updates can change behavior, so use the latest information shown on this page.</p>"
           }
         },
         "responsible-use": {
           "type": "question",
           "settings": {
             "question": "How should these products be used?",
-            "answer": "<p>Use them only with games you legally own and follow local law and platform terms. Rules for personal backups vary by location.</p>"
+            "answer": "<p>Use them only with original physical cartridges you legally own and follow local law and platform terms. No games, software licenses, or protected materials are included.</p>"
           }
         }
       },
