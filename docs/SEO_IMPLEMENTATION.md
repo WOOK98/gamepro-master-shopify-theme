@@ -7,17 +7,17 @@ Theme-level SEO is implemented in code. Complete the following content and merch
 ### Mig Flash Dumper
 
 - URL: keep `/products/mig-flash-dumper`
-- SEO title: `Mig Flash Dumper — USB-C Switch Cartridge Reader`
-- Meta description: `Shop the Mig Flash Dumper, a USB-C cartridge reader for creating personal backups of compatible Switch games you own. Check setup requirements.`
-- Product title/H1: `Mig Flash Dumper — USB-C Switch Game Cartridge Reader`
-- Add 400–600 words covering what it does, setup steps, specifications, product differences, compatibility, package contents, shipping, and responsible use.
+- SEO title: `Mig Flash Dumper — USB-C Cartridge Reader`
+- Meta description: `Shop Mig Flash Dumper, a USB-C reader accessory for lawful personal collection workflows with compatible cartridges you own.`
+- Product title/H1: `Mig Flash Dumper — USB-C Cartridge Reader Accessory`
+- Add 400–600 words covering what it is, specifications, product differences, compatibility notes, package contents, shipping, returns, and responsible use.
 
 ### Mig Flash V2
 
 - URL: keep `/products/mig-flash-v2`
-- SEO title: `Mig Flash V2 — Switch Game Backup Cartridge`
-- Meta description: `Shop Mig Flash V2 with a toggle button for managing personal backups of compatible Switch games you own. Check current compatibility and shipping.`
-- Add 400–600 words covering V2 improvements, setup, specifications, compatibility, package contents, shipping, and responsible use.
+- SEO title: `Mig Flash V2 — Cartridge Management Accessory`
+- Meta description: `Shop Mig Flash V2 hardware for lawful personal collection workflows with compatible cartridges you own. No games, licenses, or protected materials included.`
+- Add 400–600 words covering V2 improvements, specifications, compatibility notes, package contents, shipping, returns, and responsible use.
 
 ### Reviews and Product schema
 
@@ -28,7 +28,7 @@ Theme-level SEO is implemented in code. Complete the following content and merch
 
 ## This week's target
 
-- Create `/collections/mig-dumper` with the SEO title `Mig Flash Dumper & V2 Backup Accessories`.
+- Create `/collections/mig-dumper` with the SEO title `Mig Flash Dumper & V2 Cartridge Accessories`.
 - Add 200–300 words of unique buying-guide copy to the collection description.
 - Create `/products/mig-flash-v2-dumper-bundle` with the SEO title `Mig Flash V2 + Dumper Bundle — Save on the Complete Kit`.
 - Link the collection, both products, and bundle to one another with descriptive anchor text.
@@ -37,8 +37,8 @@ Theme-level SEO is implemented in code. Complete the following content and merch
 
 ## Long-term construction
 
-- Publish `/blogs/guides/what-is-the-mig-dumper` as a 1,000–1,500 word guide covering setup, product differences, compatibility, responsible use, and common questions.
-- Build supporting guides for V1 versus V2, setup, firmware, compatibility, and store trust questions.
+- Publish `/blogs/guides/what-is-the-mig-dumper` as a 1,000–1,500 word guide covering product differences, compatibility notes, responsible use, package contents, and common buyer questions.
+- Build supporting guides for V1 versus V2, firmware notes, compatibility, troubleshooting, and store trust questions.
 - Earn relevant editorial mentions and links from legitimate gaming and hardware publications.
 - Review Google Search Console every week by query, landing page, average position, and CTR.
 - Re-test Core Web Vitals after app installs; third-party review, chat, analytics, and popup apps can become the main performance bottleneck.
