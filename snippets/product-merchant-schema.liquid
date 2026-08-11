@@ -15,7 +15,7 @@
     "@type": "Product",
     "@id": {{ product_url | append: '#product' | json }},
     "name": {{ product.title | json }},
-    {%- if product.handle == 'mig-flash-v2' %}
+    {%- if product_url contains '/products/mig-flash-v2' %}
     "alternateName": [
       "MigFlash V2",
       "MIGFlash V2",
