@@ -19,7 +19,58 @@
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
+    {%- if page.handle == 'mig-flash-v2-buying-guide' -%}
+      <p class="lead">This buying guide helps shoppers compare Mig Flash V2, also searched as MigFlash V2 or migflashv2, before ordering from MIG Master. It focuses on hardware details, package contents, compatibility notes, shipping, returns, and responsible-use boundaries.</p>
+      <h2>What is Mig Flash V2?</h2>
+      <p>Mig Flash V2 is a compact cartridge accessory for customers who maintain a legally owned physical cartridge collection and want a cleaner way to organize their personal setup. The V2 version includes a top-mounted toggle button for easier item selection during normal use.</p>
+      <p>This page uses the product name <a href="/products/mig-flash-v2">Mig Flash V2</a>. Some customers type the name as MigFlash V2, MIGFlash V2, migflashv2, or migflash v2. These search variants refer to the same product listing on this store.</p>
+
+      <h2>Package contents</h2>
+      <ul>
+        <li>Mig Flash V2 hardware shown on the product page.</li>
+        <li>Retail packaging or protective packaging as shown in the current listing photos.</li>
+        <li>No games, digital products, software licenses, microSD card, cartridges, or protected materials are included.</li>
+        <li>A separate USB-C reader accessory is not included unless a bundle explicitly states otherwise.</li>
+      </ul>
+
+      <h2>Compatibility notes before ordering</h2>
+      <ul>
+        <li>Check the current product description before ordering, because compatibility can change with firmware versions, hardware revisions, setup requirements, and future platform updates.</li>
+        <li>Use only original physical cartridges that you legally own and keep those originals.</li>
+        <li>Confirm that your intended use is allowed by local law and platform terms in your region.</li>
+        <li>If you need related reader hardware, review the relevant product page and package list before ordering.</li>
+      </ul>
+
+      <h2>Shipping</h2>
+      <p>MIG Master normally processes orders within 1–2 business days. Standard delivery is generally estimated at 10–18 business days after processing, although delivery times can vary by destination, carrier workload, customs, and local conditions. Check the checkout page for the current shipping method and final address-specific details.</p>
+
+      <h2>Returns</h2>
+      <p>MIG Master accepts eligible returns within 14 days after delivery according to the store refund policy. Items should be returned in line with the current policy requirements. Customers are responsible for reviewing the <a href="/policies/refund-policy">Refund Policy</a> and <a href="/policies/shipping-policy">Shipping Policy</a> before ordering.</p>
+
+      <h2>Responsible-use boundary</h2>
+      <p>MIG Master sells Mig Flash V2 as a lawful hardware accessory for preservation, organization, testing, and personal collection-management scenarios. It is not offered for unlawful activity, third-party content, sharing of protected works, or any use that violates applicable law or platform terms.</p>
+
+      <h2>Quick buyer checklist</h2>
+      <ul>
+        <li>Confirm the exact product title: Mig Flash V2 — Cartridge Management Accessory.</li>
+        <li>Review package contents and product photos.</li>
+        <li>Check compatibility notes before updating related hardware.</li>
+        <li>Review shipping time, returns, and support scope.</li>
+        <li>Visit the <a href="/products/mig-flash-v2">Mig Flash V2 product page</a> to check price and availability.</li>
+      </ul>
+
+      <h2>FAQ</h2>
+      <h3>Is MigFlash V2 the same as Mig Flash V2?</h3>
+      <p>Yes. Some shoppers search for this model as MigFlash V2, MIGFlash V2, migflashv2, or migflash v2. On MIG Master, the product page uses the name Mig Flash V2.</p>
+      <h3>Does the package include a microSD card or cartridges?</h3>
+      <p>No. The product page sells the hardware accessory only unless a bundle explicitly says otherwise.</p>
+      <h3>Where should I check current compatibility?</h3>
+      <p>Review the current Mig Flash V2 product page and any linked support resources before ordering or updating related hardware.</p>
+      <h3>How long does shipping usually take?</h3>
+      <p>Orders are generally processed within 1–2 business days, with standard delivery commonly estimated at 10–18 business days after processing. Actual delivery can vary.</p>
+    {%- else -%}
+      {{ page.content }}
+    {%- endif -%}
   </div>
 </div>
 
