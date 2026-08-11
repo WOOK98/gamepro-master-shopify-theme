@@ -99,3 +99,50 @@ Renders store-level and collection-level structured data for search engines.
     }
   </script>
 {%- endif -%}
+
+{%- if request.page_type == 'page' and page.handle == 'mig-flash-v2-buying-guide' -%}
+  {%- assign buying_guide_url = request.origin | append: '/pages/mig-flash-v2-buying-guide' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": {{ buying_guide_url | append: '#faq' | json }},
+      "url": {{ buying_guide_url | json }},
+      "name": "Mig Flash V2 Buying Guide FAQ",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is MigFlash V2 the same as Mig Flash V2?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Some shoppers search for this model as MigFlash V2, MIGFlash V2, migflashv2, or migflash v2. On MIG Master, the product page uses the name Mig Flash V2."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the package include a microSD card or cartridges?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The product page sells the hardware accessory only unless a bundle explicitly says otherwise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where should I check current compatibility?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Review the current Mig Flash V2 product page and any linked support resources before ordering or updating related hardware."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does shipping usually take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Orders are generally processed within 1 to 2 business days, with standard delivery commonly estimated at 10 to 18 business days after processing. Actual delivery can vary."
+          }
+        }
+      ]
+    }
+  </script>
+{%- endif -%}
