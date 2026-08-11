@@ -15,6 +15,14 @@
     "@type": "Product",
     "@id": {{ product_url | append: '#product' | json }},
     "name": {{ product.title | json }},
+    {%- if product.handle == 'mig-flash-v2' %}
+    "alternateName": [
+      "MigFlash V2",
+      "MIGFlash V2",
+      "migflashv2",
+      "migflash v2"
+    ],
+    {%- endif %}
     "url": {{ product_url | json }},
     "description": {{ product_description | json }},
     "sku": {{ product_schema_sku | json }},

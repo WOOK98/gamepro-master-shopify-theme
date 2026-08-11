@@ -117,13 +117,21 @@
             "question": "How should these products be used?",
             "answer": "<p>Use them only with original physical cartridges you legally own and follow local law and platform terms. No games, software licenses, or protected materials are included.</p>"
           }
+        },
+        "aliases": {
+          "type": "question",
+          "settings": {
+            "question": "Is MigFlash V2 the same product as Mig Flash V2?",
+            "answer": "<p>Some customers search for this model as MigFlash V2, MIGFlash V2, migflashv2, or migflash v2. On this store, the product is listed as Mig Flash V2, with details focused on hardware specifications, package contents, compatibility notes, shipping, returns, and responsible-use boundaries.</p>"
+          }
         }
       },
       "block_order": [
         "difference",
         "required",
         "compatibility",
-        "responsible-use"
+        "responsible-use",
+        "aliases"
       ],
       "settings": {
         "heading": "MIG Flash & MIG Dumper FAQ",
