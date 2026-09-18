@@ -118,6 +118,7 @@
                   Discounts calculated at checkout
                 </li>
               </ul>
+              {% render 'purchase-policy-notice', context: 'cart', form_id: 'cart', id_suffix: 'page' %}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <button
                   type="submit"
@@ -133,11 +134,6 @@
                 </button>
               </div>
 
-              {%- if additional_checkout_buttons -%}
-                <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
-                  {{ content_for_additional_checkout_buttons }}
-                </div>
-              {%- endif -%}
           {%- endcase -%}
         {% endfor %}
 

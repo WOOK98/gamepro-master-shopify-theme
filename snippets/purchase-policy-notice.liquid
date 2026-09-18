@@ -1,0 +1,181 @@
+{% doc %}
+  Renders policy links on product pages or a required policy acknowledgement before checkout.
+
+  @param {string} context - Either 'product' or 'cart'.
+  @param {string} [form_id] - Cart form associated with the acknowledgement inputs.
+  @param {string} [id_suffix] - Unique suffix for control ids.
+
+  @example
+  {% render 'purchase-policy-notice', context: 'cart', form_id: 'cart', id_suffix: 'page' %}
+{% enddoc %}
+
+{%- liquid
+  assign policy_count = 0
+  if shop.refund_policy.body != blank
+    assign policy_count = policy_count | plus: 1
+  endif
+  if shop.shipping_policy.body != blank
+    assign policy_count = policy_count | plus: 1
+  endif
+  if shop.terms_of_service.body != blank
+    assign policy_count = policy_count | plus: 1
+  endif
+-%}
+
+{%- if policy_count > 0 -%}
+  {%- if context == 'cart' -%}
+    <policy-consent class="purchase-policy purchase-policy--consent" data-policy-consent>
+      <input
+        type="checkbox"
+        id="PolicyConsent-{{ id_suffix | escape }}"
+        class="purchase-policy__checkbox"
+        name="attributes[Policy agreement]"
+        value="Accepted before checkout"
+        form="{{ form_id | escape }}"
+        required
+        aria-describedby="PolicyConsentHelp-{{ id_suffix | escape }} PolicyConsentError-{{ id_suffix | escape }}"
+      >
+      <label for="PolicyConsent-{{ id_suffix | escape }}" class="purchase-policy__label">
+        I have reviewed and agree to the
+        {%- if shop.refund_policy.body != blank -%}
+          <a href="{{ shop.refund_policy.url }}" target="_blank" rel="noopener">{{ shop.refund_policy.title | escape }}</a>
+        {%- endif -%}
+        {%- if shop.shipping_policy.body != blank -%}
+          {%- if shop.refund_policy.body != blank -%}, {% endif -%}
+          <a href="{{ shop.shipping_policy.url }}" target="_blank" rel="noopener">{{ shop.shipping_policy.title | escape }}</a>
+        {%- endif -%}
+        {%- if shop.terms_of_service.body != blank -%}
+          {%- if shop.refund_policy.body != blank or shop.shipping_policy.body != blank -%}, {% endif -%}
+          <a href="{{ shop.terms_of_service.url }}" target="_blank" rel="noopener">{{ shop.terms_of_service.title | escape }}</a>
+        {%- endif -%}.
+      </label>
+      <input
+        type="hidden"
+        name="attributes[Policy agreement recorded at]"
+        value=""
+        form="{{ form_id | escape }}"
+        data-policy-consent-time
+      >
+      <p id="PolicyConsentHelp-{{ id_suffix | escape }}" class="purchase-policy__help">
+        Return eligibility, deadlines, return address, and return-shipping responsibility are governed by the published policies.
+      </p>
+      <p id="PolicyConsentError-{{ id_suffix | escape }}" class="purchase-policy__error" role="alert" hidden>
+        Please review and accept the policies before checkout.
+      </p>
+    </policy-consent>
+  {%- else -%}
+    <aside class="purchase-policy purchase-policy--summary" aria-label="Shipping and returns">
+      <strong class="purchase-policy__heading">Shipping and returns</strong>
+      <p>Review return eligibility, deadlines, the return address, return-shipping responsibility, and delivery terms before ordering.</p>
+      <p class="purchase-policy__links">
+        {%- if shop.refund_policy.body != blank -%}
+          <a href="{{ shop.refund_policy.url }}">{{ shop.refund_policy.title | escape }}</a>
+        {%- endif -%}
+        {%- if shop.shipping_policy.body != blank -%}
+          {%- if shop.refund_policy.body != blank -%}<span aria-hidden="true"> · </span>{%- endif -%}
+          <a href="{{ shop.shipping_policy.url }}">{{ shop.shipping_policy.title | escape }}</a>
+        {%- endif -%}
+        {%- if shop.terms_of_service.body != blank -%}
+          {%- if shop.refund_policy.body != blank or shop.shipping_policy.body != blank -%}<span aria-hidden="true"> · </span>{%- endif -%}
+          <a href="{{ shop.terms_of_service.url }}">{{ shop.terms_of_service.title | escape }}</a>
+        {%- endif -%}
+      </p>
+    </aside>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  .purchase-policy {
+    margin-top: 1.2rem;
+    padding: 1.2rem 1.4rem;
+    border: 0.1rem solid rgba(var(--color-foreground), 0.18);
+    border-radius: 0.8rem;
+    background: rgba(var(--color-foreground), 0.035);
+    color: rgba(var(--color-foreground), 0.82);
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+
+  .purchase-policy--consent {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.4rem 0.8rem;
+    text-align: left;
+  }
+
+  .purchase-policy__checkbox {
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0.2rem 0 0;
+    accent-color: rgb(var(--color-button));
+  }
+
+  .purchase-policy__label,
+  .purchase-policy p {
+    margin: 0;
+  }
+
+  .purchase-policy a {
+    color: rgb(var(--color-link));
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+  }
+
+  .purchase-policy__heading {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  .purchase-policy__links {
+    margin-top: 0.6rem !important;
+  }
+
+  .purchase-policy__help,
+  .purchase-policy__error {
+    grid-column: 2;
+    font-size: 1.2rem;
+  }
+
+  .purchase-policy__error {
+    color: rgb(var(--color-error, 180, 0, 0));
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('policy-consent')) {
+    customElements.define('policy-consent', class extends HTMLElement {
+      connectedCallback() {
+        this.checkbox = this.querySelector('input[type="checkbox"]');
+        this.timestamp = this.querySelector('[data-policy-consent-time]');
+        this.error = this.querySelector('[role="alert"]');
+        this.form = document.getElementById(this.checkbox?.getAttribute('form'));
+        this.checkoutButtons = this.form
+          ? Array.from(document.querySelectorAll(`[name="checkout"][form="${this.form.id}"], #${this.form.id} [name="checkout"]`))
+          : [];
+
+        if (!this.checkbox || !this.form) return;
+
+        this.updateState();
+        this.checkbox.addEventListener('change', () => this.updateState());
+        this.form.addEventListener('submit', (event) => {
+          if (!this.checkbox.checked) {
+            event.preventDefault();
+            this.error.hidden = false;
+            this.checkbox.focus();
+          }
+        });
+      }
+
+      updateState() {
+        const accepted = this.checkbox.checked;
+        this.checkoutButtons.forEach((button) => {
+          button.disabled = !accepted;
+          button.setAttribute('aria-disabled', String(!accepted));
+        });
+        this.error.hidden = true;
+        this.timestamp.value = accepted ? new Date().toISOString() : '';
+      }
+    });
+  }
+{% endjavascript %}

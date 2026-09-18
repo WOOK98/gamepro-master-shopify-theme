@@ -574,6 +574,7 @@
 
         <!-- CTAs -->
 
+        {% render 'purchase-policy-notice', context: 'cart', form_id: 'CartDrawer-Form', id_suffix: 'drawer' %}
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <button
             type="submit"
